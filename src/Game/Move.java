@@ -2,6 +2,8 @@ package Game;
 
 import Var.Var;
 
+import java.awt.*;
+
 public class Move {
 
     public static boolean right() {

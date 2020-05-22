@@ -1,6 +1,7 @@
 import Game.Box;
 import Game.Gravity;
 import Game.KeyHandler;
+import Gui.DrawArea;
 import Var.Var;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class Main {
         Gravity grav = new Gravity();
         grav.start();
 
-        DrawArea DA = new DrawArea();
+        Gui.DrawArea DA = new DrawArea();
 
         JFrame jf = new JFrame();
         jf.setSize(800, 1000);
