@@ -32,6 +32,10 @@ public class KeyHandler implements KeyListener {
                 //siehe oben
                 Move.down();
                 break;
+            case KeyEvent.VK_ENTER:
+                System.out.println("Rotieren");
+                Move.rotate();
+                break;
         }
     }
 

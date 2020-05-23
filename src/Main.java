@@ -1,6 +1,7 @@
 import Game.Box;
 import Game.Gravity;
 import Game.KeyHandler;
+import Game.Tetromino;
 import Gui.DrawArea;
 import Var.Var;
 
@@ -17,10 +18,17 @@ public class Main {
             }
         }
 
-        Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, false);
-        Var.spielfeld[2][6] = new Box(new Color(221, 38, 35),1, false);
-        Var.spielfeld[1][6] = new Box(new Color(221, 38, 35),1, false);
-        Var.spielfeld[1][5] = new Box(new Color(221, 38, 35), 1, false);
+        /*Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);
+        Var.spielfeld[2][6] = new Box(new Color(221, 38, 35),1);
+        Var.spielfeld[1][6] = new Box(new Color(221, 38, 35),1);
+        Var.spielfeld[4][6] = new Box(new Color(221, 38, 35),1);
+        Var.spielfeld[1][5] = new Box(new Color(221, 38, 35), 1 );
+        Var.spielfeld[5][7] = new Box(new Color(221, 38, 35), 1);
+        Var.spielfeld[5][6] = new Box(new Color(221, 38, 35), 1);
+        Var.spielfeld[5][8] = new Box(new Color(221, 38, 35), 1);
+        Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);*/
+
+        Tetromino.spawnL(new Color(249, 13, 255));
 
         //Gravitation anmachen
         Gravity grav = new Gravity();

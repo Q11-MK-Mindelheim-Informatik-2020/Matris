@@ -1,5 +1,7 @@
 package Game;
 
+import Var.Var;
+
 import java.awt.*;
 
 public class Box {
@@ -13,12 +15,30 @@ public class Box {
         this.id = id;
         this.rotationpoint = rotationpoint;
     }
+    public Box(Color c, int id) {
+        this.c = c;
+        this.id = id;
+        this.rotationpoint = false;
+    }
+    public Box(Color c) {
+        this.c = c;
+        this.id = Var.currentid;
+        this.rotationpoint = false;
+    }
+    public Box(Color c, boolean rotationpoint) {
+        this.c = c;
+        this.id = Var.currentid;
+        this.rotationpoint = rotationpoint;
+    }
 
     public Color getC() {
         return c;
     }
     public int getId() {
         return id;
+    }
+    public boolean getRotationpoint() {
+        return rotationpoint;
     }
 
 
