@@ -17,7 +17,7 @@ public class Main {
                 Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
             }
         }
-        Effects.Sounds.playSound("tetris.wav");
+        Effects.Sounds.playSound("tetris99.wav", 1.022, 278.73, 0.5);
 
         /*Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);
         Var.spielfeld[2][6] = new Box(new Color(221, 38, 35),1);
@@ -29,7 +29,7 @@ public class Main {
         Var.spielfeld[5][8] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);*/
 
-        Tetromino.spawnL(new Color(249, 13, 255));
+        Tetromino.spawnT(new Color(249, 13, 255));
 
         //Gravitation anmachen
         Gravity grav = new Gravity();

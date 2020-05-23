@@ -19,7 +19,7 @@ public class Main {
                 }
             }
         });
-        Effects.Sounds.playSound("tetris.wav");
+        Effects.Sounds.playSound("tetris99.wav", 1.022, 278.73, 0.5);
         Timer timer = new Timer();
     }
 }
