@@ -18,6 +18,12 @@ public class Move {
     public static boolean up() {
         return move(0,1);
     }
+    public static void downdown() {
+        int y = Var.m-1;
+        while (!move(0,-y)) {
+            y--;
+        }
+    }
 
     private static boolean move(int x, int y) { //Stein mit currentid wird versucht zu verschieben
         boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
@@ -30,7 +36,7 @@ public class Move {
                     tempspielfeld[i][j] = Var.spielfeld[i][j];
                 }
                 else {
-                    tempspielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
+                    tempspielfeld[i][j] = new Box(new Color(0,0,0), 0);
                 }
             }
         }
@@ -39,13 +45,14 @@ public class Move {
         for(int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
                 if(Var.spielfeld[i][j].getId() == Var.currentid) {
-                    if(i+x < 0 || j+y < 0 || i+x >= Var.n || j+y >= Var.m) { //wird geschaut ob es irgendwo an der wand ist
-                        System.out.println("Kann nicht bewegt werden!");
+                    //System.out.println(i + "|" + j);
+                    if(i+x < 0 || j+y < 0 || i+x >= Var.n || j+y >= Var.m || (Var.spielfeld[i+x][j+y].getId() != 0 && Var.spielfeld[i+x][j+y].getId() != Var.currentid)) { //wird geschaut ob es irgendwo an der wand ist oder ein stein im weg ist
+                        //System.out.println("Kann nicht bewegt werden!");
                         bool = false;
                         break loop;
                     }
                     else {
-                        System.out.println(i + "|" + j + " wird verschoben");
+                        //System.out.println(i + "|" + j + " wird verschoben");
                         tempspielfeld[i+x][j+y] = Var.spielfeld[i][j];
                     }
                 }
@@ -86,13 +93,13 @@ public class Move {
         for(int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
                 if(Var.spielfeld[i][j].getId() == Var.currentid) {
-                    if(a+b-j < 0 || i-a+b < 0 || a+b-j >= Var.n || i-a+b >= Var.m) { //wird geschaut ob es irgendwo an der wand ist
-                        System.out.println("Kann nicht bewegt werden!");
+                    if(a+b-j < 0 || i-a+b < 0 || a+b-j >= Var.n || i-a+b >= Var.m || (Var.spielfeld[a+b-j][i-a+b].getId() != 0 && Var.spielfeld[a+b-j][i-a+b].getId() != Var.currentid)) { //wird geschaut ob es irgendwo an der wand ist oder beim drehen ein stein im weg ist
+                        //System.out.println("Kann nicht bewegt werden!");
                         bool = false;
                         break loop;
                     }
                     else {
-                        System.out.println(i + "|" + j + " wird gedreht");
+                        //System.out.println(i + "|" + j + " wird gedreht");
                         tempspielfeld[a+b-j][i-a+b] = Var.spielfeld[i][j];
                     }
                 }

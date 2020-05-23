@@ -29,7 +29,7 @@ public class Main {
         Var.spielfeld[5][8] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);*/
 
-        Tetromino.spawnT(new Color(249, 13, 255));
+        //Tetromino.spawnT(new Color(249, 13, 255));
 
         //Gravitation anmachen
         Gravity grav = new Gravity();

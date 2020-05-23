@@ -25,7 +25,8 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_UP:
                 System.out.println("Hoch");
-                Move.up();
+                Move.downdown();
+                //Move.up();
                 break;
             case KeyEvent.VK_DOWN:
                 System.out.println("Runter");

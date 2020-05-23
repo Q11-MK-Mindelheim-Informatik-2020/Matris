@@ -1,15 +1,24 @@
 package Game;
 
+import Var.Var;
+
 public class Gravity extends Thread {
     public void run() {
+        Tetromino.spawnRandom();
         while (true)  {
             //jede sekunde wird versucht den stein mit der currentid nachunten zu bewegen
-            Move.down();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            sleep(1000); //verzögerung
+            if(!Move.down()) {
+                Var.currentid++; //erhöhen der currentid
+                Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
             }
+        }
+    }
+    private void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
