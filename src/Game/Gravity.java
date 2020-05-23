@@ -9,7 +9,6 @@ public class Gravity extends Thread {
             //jede sekunde wird versucht den stein mit der currentid nachunten zu bewegen
             sleep(1000); //verzögerung
             if(!Move.down()) {
-                sleep(1000);
                 Var.currentid++; //erhöhen der currentid
                 Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
             }
