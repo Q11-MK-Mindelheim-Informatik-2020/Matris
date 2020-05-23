@@ -18,6 +18,12 @@ public class Move {
     public static boolean up() {
         return move(0,1);
     }
+    public static void downdown() {
+        int y = Var.m-1;
+        while (!move(0,-y)) {
+            y--;
+        }
+    }
 
     private static boolean move(int x, int y) { //Stein mit currentid wird versucht zu verschieben
         boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
@@ -34,7 +40,6 @@ public class Move {
                 }
             }
         }
-        System.out.println();
 
         loop:
         for(int i = 0; i < Var.n; i++) {
