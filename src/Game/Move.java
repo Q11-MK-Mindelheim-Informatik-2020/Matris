@@ -40,7 +40,7 @@ public class Move {
         for(int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
                 if(Var.spielfeld[i][j].getId() == Var.currentid) {
-                    System.out.println(i + "|" + j);
+                    //System.out.println(i + "|" + j);
                     if(i+x < 0 || j+y < 0 || i+x >= Var.n || j+y >= Var.m || (Var.spielfeld[i+x][j+y].getId() != 0 && Var.spielfeld[i+x][j+y].getId() != Var.currentid)) { //wird geschaut ob es irgendwo an der wand ist oder ein stein im weg ist
                         //System.out.println("Kann nicht bewegt werden!");
                         bool = false;
