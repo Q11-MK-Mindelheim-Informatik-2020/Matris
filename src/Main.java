@@ -17,6 +17,7 @@ public class Main {
                 Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
             }
         }
+        Effects.Sounds.playSound("tetris.wav");
 
         /*Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);
         Var.spielfeld[2][6] = new Box(new Color(221, 38, 35),1);
