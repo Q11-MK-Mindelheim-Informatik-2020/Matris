@@ -14,7 +14,7 @@ public class Main {
         //Initialisieren des Spielfeldes
         for(int i = 0; i < Var.n; i++) {
             for(int j = 0; j < Var.m; j++) {
-                Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
+                Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0);
             }
         }
 
@@ -28,7 +28,7 @@ public class Main {
         Var.spielfeld[5][8] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);*/
 
-        Tetromino.spawnL(new Color(249, 13, 255));
+        //Tetromino.spawnT(new Color(249, 13, 255));
 
         //Gravitation anmachen
         Gravity grav = new Gravity();
@@ -47,4 +47,3 @@ public class Main {
 
     }
 }
-//hallo 123
