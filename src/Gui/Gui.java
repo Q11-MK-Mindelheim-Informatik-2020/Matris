@@ -1,6 +1,7 @@
 package Gui;
 import javax.swing.*;
 
+import Game.KeyHandler;
 import Var.Var;
 import Gui.Label;
 
@@ -17,5 +18,6 @@ public class Gui extends JFrame {
         lb = new Label();
         lb.setBounds(0, 0, Var.width, Var.height);
         add(lb);
+        addKeyListener(new KeyHandler());
     }
 }

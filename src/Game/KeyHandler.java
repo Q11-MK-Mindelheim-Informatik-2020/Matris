@@ -37,6 +37,14 @@ public class KeyHandler implements KeyListener {
                 System.out.println("Rotieren");
                 Move.rotate();
                 break;
+            case KeyEvent.VK_0:
+                System.out.println("state 0 (startup)");
+                Game.GameStateHandler.changeGameState("startup");
+                break;
+            case KeyEvent.VK_1:
+                System.out.println("state 1 (menu)");
+                Game.GameStateHandler.changeGameState("menu");
+                break;
         }
     }
 

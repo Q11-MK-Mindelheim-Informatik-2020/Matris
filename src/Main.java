@@ -19,15 +19,17 @@ public class Main {
         }
         Effects.Sounds.playSound("tetris99.wav", 1.022, 278.73, 0.5);
 
-        /*Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);
+        /*
+        Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);
         Var.spielfeld[2][6] = new Box(new Color(221, 38, 35),1);
         Var.spielfeld[1][6] = new Box(new Color(221, 38, 35),1);
         Var.spielfeld[4][6] = new Box(new Color(221, 38, 35),1);
-        Var.spielfeld[1][5] = new Box(new Color(221, 38, 35), 1 );
+        Var.spielfeld[1][5] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[5][7] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[5][6] = new Box(new Color(221, 38, 35), 1);
         Var.spielfeld[5][8] = new Box(new Color(221, 38, 35), 1);
-        Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);*/
+        Var.spielfeld[1][4] = new Box(new Color(221, 38, 35), 1);
+        */
 
         //Tetromino.spawnT(new Color(249, 13, 255));
 
