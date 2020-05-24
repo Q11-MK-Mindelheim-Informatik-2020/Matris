@@ -3,6 +3,7 @@ package Game;
 import Var.Var;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Move {
 
@@ -111,5 +112,33 @@ public class Move {
             }
         }
         return bool;
+    }
+
+    public static void removeLines(ArrayList<Integer> lines) {
+        //Linien löschen
+        for (int j : lines) {
+            for (int i = 0; i < Var.n; i++) {
+                Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0);
+            }
+        }
+        //linien runtermoven
+        for (int j = 1; j < Var.m; j++) {
+            int z = 0;
+            for (int k : lines) {
+                if (j > k) {
+                    z++;
+                }
+                else {
+                    break;
+                }
+            }
+            if(z !=0) {
+                for (int i = 0; i < Var.n; i++) {
+                    Var.spielfeld[i][j-z] = Var.spielfeld[i][j];
+                    Var.spielfeld[i][j] = new Box(new Color(0,0,0),0);
+                }
+            }
+        }
+
     }
 }
