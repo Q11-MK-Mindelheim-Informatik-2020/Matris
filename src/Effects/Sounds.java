@@ -22,15 +22,14 @@ public class Sounds {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-                double gain = volume;
-                float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+                float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
                 gainControl.setValue(dB);
                 clip.start();
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 clip.setLoopPoints(startLoopFrame, endLoopFrame);
                 Thread handler = new Thread(new SoundHandler(clip));
                 handler.start();
-                System.out.println("started");
+                //System.out.println("started");
             }else{
                 System.out.println("Datei existiert nicht!");
             }

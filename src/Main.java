@@ -1,7 +1,6 @@
 import Game.Box;
-import Game.Gravity;
+import Game.Mechanics;
 import Game.KeyHandler;
-import Game.Tetromino;
 import Gui.DrawArea;
 import Var.Var;
 
@@ -34,7 +33,7 @@ public class Main {
         //Tetromino.spawnT(new Color(249, 13, 255));
 
         //Gravitation anmachen
-        Gravity grav = new Gravity();
+        Mechanics grav = new Mechanics();
         grav.start();
 
         Gui.DrawArea DA = new DrawArea();

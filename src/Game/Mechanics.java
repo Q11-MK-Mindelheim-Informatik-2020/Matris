@@ -5,7 +5,7 @@ import Var.Var;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Gravity extends Thread {
+public class Mechanics extends Thread {
     public void run() {
         Tetromino.spawnRandom();
         while (true)  {
@@ -25,12 +25,14 @@ public class Gravity extends Thread {
                     }
                     if (bool) {
                         lines.add(j);
+                        Var.linecounter++;
                     }
                 }
 
                 Move.removeLines(lines);
 
                 System.out.println("Folgende Linien sind fertig: " + lines);
+                System.out.println("Linien: " + Var.linecounter);
 
                 Var.currentid++; //erhöhen der currentid
                 Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
