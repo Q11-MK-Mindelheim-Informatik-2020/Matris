@@ -13,10 +13,11 @@ public class Main {
         //Initialisieren des Spielfeldes
         for(int i = 0; i < Var.n; i++) {
             for(int j = 0; j < Var.m; j++) {
-                Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
+                Var.spielfeld[i][j] = new Box(Var.imgBlockI, 0, false);
+                System.out.println(Var.spielfeld[i][j].getId());
             }
         }
-        Effects.Sounds.playSound("tetris99.wav", 1.022, 278.73, 0.5);
+        Effects.Sounds.playSound("tetris99.wav", 1.022, 278.73, 0.2);
 
         /*
         Var.spielfeld[3][6] = new Box(new Color(221, 38, 35),1, true);

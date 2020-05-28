@@ -16,7 +16,7 @@ public class DrawArea extends JPanel {
 
         for(int i = 0; i < Var.n; i++) {
             for(int j = Var.m-1; j >= 0; j--) {
-                g2.setColor(Var.spielfeld[i][j].getC());
+//                g2.setColor(Var.spielfeld[i][j].getC());
                 g2.fillRect(i*40,(Var.m-1-j)*40, 40,40);
             }
         }

@@ -37,7 +37,7 @@ public class Move {
                     tempspielfeld[i][j] = Var.spielfeld[i][j];
                 }
                 else {
-                    tempspielfeld[i][j] = new Box(new Color(0,0,0), 0);
+                    tempspielfeld[i][j] = new Box(null, 0);
                 }
             }
         }
@@ -85,7 +85,7 @@ public class Move {
                         a = i;
                         b = j;
                     }
-                    tempspielfeld[i][j] = new Box(new Color(0,0,0), 0, false);
+                    tempspielfeld[i][j] = new Box(null, 0, false);
                 }
             }
         }
@@ -118,7 +118,7 @@ public class Move {
         //Linien löschen
         for (int j : lines) {
             for (int i = 0; i < Var.n; i++) {
-                Var.spielfeld[i][j] = new Box(new Color(0,0,0), 0);
+                Var.spielfeld[i][j] = new Box(null, 0);
             }
         }
         //linien runtermoven
@@ -135,7 +135,7 @@ public class Move {
             if(z !=0) {
                 for (int i = 0; i < Var.n; i++) {
                     Var.spielfeld[i][j-z] = Var.spielfeld[i][j];
-                    Var.spielfeld[i][j] = new Box(new Color(0,0,0),0);
+                    Var.spielfeld[i][j] = new Box(null,0);
                 }
             }
         }

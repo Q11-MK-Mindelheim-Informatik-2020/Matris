@@ -1,12 +1,10 @@
 package Effects;
 
-import Var.Var;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import javax.swing.*;
 import java.io.File;
 
 public class Sounds {
@@ -50,8 +48,7 @@ public class Sounds {
 
                 // Lautstärke einstellen
                 FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-                double gain = volume;
-                float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+                float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
                 gainControl.setValue(dB);
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
                 Thread handler = new Thread(new SoundHandler(clip));
@@ -83,7 +80,5 @@ public class Sounds {
         }
         return framePos;
     }
-    public static void stopMusic() {
 
-    }
 }

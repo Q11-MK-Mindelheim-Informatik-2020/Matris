@@ -3,47 +3,48 @@ package Game;
 import Var.Var;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Tetromino {
     static int k = (int) Math.ceil(Var.n/2.0);
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
-    public static void spawnI(Color c) {
+    public static void spawnI(BufferedImage c) {
         Var.spielfeld[k-2][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k][Var.m-1] = new Box(c);
         Var.spielfeld[k+1][Var.m-1] = new Box(c);
     }
-    public static void spawnO(Color c) {
+    public static void spawnO(BufferedImage c) {
         Var.spielfeld[k-1][Var.m-1] = new Box(c);
         Var.spielfeld[k][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-2] = new Box(c);
         Var.spielfeld[k][Var.m-2] = new Box(c);
     }
-    public static void spawnT(Color c) {
+    public static void spawnT(BufferedImage c) {
         Var.spielfeld[k-2][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-2] = new Box(c);
     }
-    public static void spawnS(Color c) {
+    public static void spawnS(BufferedImage c) {
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-2] = new Box(c);
         Var.spielfeld[k-2][Var.m-2] = new Box(c);
     }
-    public static void spawnZ(Color c) {
+    public static void spawnZ(BufferedImage c) {
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k-2][Var.m-1] = new Box(c);
         Var.spielfeld[k-1][Var.m-2] = new Box(c);
         Var.spielfeld[k][Var.m-2] = new Box(c);
     }
-    public static void spawnJ(Color c) {
+    public static void spawnJ(BufferedImage c) {
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k-2][Var.m-1] = new Box(c);
         Var.spielfeld[k][Var.m-1] = new Box(c);
         Var.spielfeld[k][Var.m-2] = new Box(c);
     }
-    public static void spawnL(Color c) {
+    public static void spawnL(BufferedImage c) {
         Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
         Var.spielfeld[k-2][Var.m-1] = new Box(c);
         Var.spielfeld[k][Var.m-1] = new Box(c);
@@ -53,25 +54,25 @@ public class Tetromino {
         int random = (int) (7*Math.random());
         switch (random) {
             case 0:
-                spawnI(new Color(15, 223, 255));
+                spawnI((BufferedImage)Var.imgBlockI);
                 break;
             case 1:
-                spawnO(new Color(249, 13, 255));
+                spawnO((BufferedImage)Var.imgBlockO);
                 break;
             case 2:
-                spawnT(new Color(69, 255, 81));
+                spawnT((BufferedImage)Var.imgBlockT);
                 break;
             case 3:
-                spawnS(new Color(179, 221,0));
+                spawnS((BufferedImage)Var.imgBlockS);
                 break;
             case 4:
-                spawnZ(new Color(153, 133, 255));
+                spawnZ((BufferedImage)Var.imgBlockZ);
                 break;
             case 5:
-                spawnJ(new Color(221, 38, 35));
+                spawnJ((BufferedImage)Var.imgBlockJ);
                 break;
             case 6:
-                spawnL(new Color(2,0, 221));
+                spawnL((BufferedImage)Var.imgBlockL);
                 break;
         }
     }

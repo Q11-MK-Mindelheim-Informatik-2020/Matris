@@ -19,7 +19,6 @@ public class SoundHandler implements Runnable{
         }
         Var.stopSignal = false;
         while(true) {
-                    //System.out.println(Var.stopSignal);
                     if(Var.stopSignal){
                         clip.stop();
                         clip.flush();

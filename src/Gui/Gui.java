@@ -13,7 +13,7 @@ public class Gui extends JFrame {
         setResizable(false);
         setTitle("justTetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, Var.width, Var.height);
+        setBounds(100, 100, Var.width, Var.height+25);
         setLocationRelativeTo(null);
         lb = new Label();
         lb.setBounds(0, 0, Var.width, Var.height);

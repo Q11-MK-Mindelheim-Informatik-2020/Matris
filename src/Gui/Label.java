@@ -16,8 +16,17 @@ public class Label extends JLabel implements ActionListener {
 
         switch(Var.gameState) {
             case "startup":
-                g.setColor(Var.backgroundColor); // Hintergrundfarbe setzen
-                g.fillRect(0, 0, Var.width, Var.height); // Hintergrund zeichnen
+                g.drawImage(Var.imgBackgroundSingleplayer, 0,0,Var.width, Var.height,null);
+                for(int x = 0; x<Var.tilesX; x++) {
+                    for (int y = 0; y<Var.tilesY; y++) {
+                        if(Var.spielfeld[x][y].getTileTexture()!=null) {
+//                            System.out.println((Var.tileStartY + y * (Var.tileSize + Var.tilePadding)));
+                            g.drawImage(Var.spielfeld[x][y].getTileTexture(), Var.tileStartX + x * (Var.tileSize + Var.tilePadding), Var.tileStartY + Var.tilesY-(y * (Var.tileSize + Var.tilePadding)), Var.tileSize, Var.tileSize, null);
+
+                        }
+
+                    }
+                }
                 break;
             case "menu":
                 g.setColor(Color.CYAN); // Hintergrundfarbe setzen
