@@ -94,14 +94,14 @@ public class Move {
         for(int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
                 if(Var.spielfeld[i][j].getId() == Var.currentid) {
-                    if(a+b-j < 0 || i-a+b < 0 || a+b-j >= Var.n || i-a+b >= Var.m || (Var.spielfeld[a+b-j][i-a+b].getId() != 0 && Var.spielfeld[a+b-j][i-a+b].getId() != Var.currentid)) { //wird geschaut ob es irgendwo an der wand ist oder beim drehen ein stein im weg ist
+                    if(a-b+j < 0 || a+b-i < 0 || a-b+j >= Var.n || a+b-i >= Var.m || (Var.spielfeld[a-b+j][a+b-i].getId() != 0 && Var.spielfeld[a-b+j][a+b-i].getId() != Var.currentid)) { //wird geschaut ob es irgendwo an der wand ist oder beim drehen ein stein im weg ist
                         //System.out.println("Kann nicht bewegt werden!");
                         bool = false;
                         break loop;
                     }
                     else {
                         //System.out.println(i + "|" + j + " wird gedreht");
-                        tempspielfeld[a+b-j][i-a+b] = Var.spielfeld[i][j];
+                        tempspielfeld[a-b+j][a+b-i] = Var.spielfeld[i][j];
                     }
                 }
             }
