@@ -39,10 +39,10 @@ public class Box {
     public BufferedImage getTileTexture() {
         return tileTexture;
     }
-    public int getId() {
+    int getId() {
         return id;
     }
-    public boolean getRotationpoint() {
+    boolean getRotationpoint() {
         return rotationpoint;
     }
 
