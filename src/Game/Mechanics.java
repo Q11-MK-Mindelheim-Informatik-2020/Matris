@@ -2,7 +2,6 @@ package Game;
 
 import Var.Var;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Mechanics extends Thread {
@@ -13,7 +12,7 @@ public class Mechanics extends Thread {
             sleep(1000); //verzögerung
             if(!Move.down()) {
 
-                ArrayList<Integer> lines = new ArrayList<Integer>();
+                ArrayList<Integer> lines = new ArrayList<>();
 
                 for (int j = 0; j < Var.m; j++) {
                     boolean bool = true;

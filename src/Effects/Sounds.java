@@ -62,7 +62,7 @@ public class Sounds {
         }
 
     }
-    public static int getSampleFrame(String fileName, int microsec) {
+    private static int getSampleFrame(String fileName, int microsec) {
         int framePos = 0;
         try {
             File audioFile = new File("rsc/Sounds/" + fileName);

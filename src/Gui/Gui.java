@@ -3,7 +3,6 @@ import javax.swing.*;
 
 import Game.KeyHandler;
 import Var.Var;
-import Gui.Label;
 
 @SuppressWarnings("serial")
 public class Gui extends JFrame {

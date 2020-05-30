@@ -6,29 +6,26 @@ import Gui.Gui;
 import Var.Var;
 
 import java.awt.*;
-import java.util.Timer;
+
 
 public class Main {
     public static void main(String[] args) {
-        Var v = new Var();
+        new Var();
         for(int i = 0; i < Var.n; i++) {
             for(int j = 0; j < Var.m; j++) {
-                Var.spielfeld[i][j] = new Box(null, 0);
+                Var.spielfeld[i][j] = new Box(0);
             }
         }
-        Mechanics grav = new Mechanics();
-        grav.start();
+        Mechanics mechanics = new Mechanics();
+        mechanics.start();
         Game.GameStateHandler.changeGameState("startup");
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Gui frame = new Gui();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                Gui frame = new Gui();
+                frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
-        Timer timer = new Timer();
     }
 }

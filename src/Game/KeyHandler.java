@@ -13,42 +13,36 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
-                //System.out.println("Rechts");
                 //es wird versucht den Spielstein mit currentid nach rechts zu verschieben
                 //Move.right() liefert einen Boolean wert zurück: true wenn erfolgreich, false falls irgendwas dazwischen ist
                 Move.right();
                 break;
             case KeyEvent.VK_LEFT:
-                //System.out.println("Links");
                 //siehe oben
                 Move.left();
                 break;
             case KeyEvent.VK_UP:
-                //System.out.println("Hoch");
                 Move.downdown();
                 //Move.up();
                 break;
             case KeyEvent.VK_DOWN:
-                if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
+                if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) { //mit strg + unten kann gecheatet werden ;)
                     Move.up();
                 }
                 else {
                     Move.down();
                 }
-                //System.out.println("Runter");
-                //siehe oben
                 break;
             case KeyEvent.VK_ENTER:
-                System.out.println("Rotieren");
                 Move.rotate();
                 break;
             case KeyEvent.VK_0:
                 System.out.println("state 0 (startup)");
-                Game.GameStateHandler.changeGameState("startup");
+                GameStateHandler.changeGameState("startup");
                 break;
             case KeyEvent.VK_1:
                 System.out.println("state 1 (menu)");
-                Game.GameStateHandler.changeGameState("menu");
+                GameStateHandler.changeGameState("menu");
                 break;
         }
     }
