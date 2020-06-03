@@ -6,7 +6,7 @@ import javax.sound.sampled.Clip;
 
 public class SoundHandler implements Runnable{
     private Clip clip;
-    public SoundHandler(Clip clip) {
+    SoundHandler(Clip clip) {
         this.clip = clip;
     }
     @Override
@@ -19,16 +19,16 @@ public class SoundHandler implements Runnable{
         }
         Var.stopSignal = false;
         while(true) {
-                    if(Var.stopSignal){
-                        clip.stop();
-                        clip.flush();
-                        clip.close();
-                        return;
-                    }
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            if(Var.stopSignal){
+                clip.stop();
+                clip.flush();
+                clip.close();
+                return;
+            }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

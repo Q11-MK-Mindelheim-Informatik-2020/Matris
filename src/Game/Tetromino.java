@@ -2,77 +2,75 @@ package Game;
 
 import Var.Var;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
-public class Tetromino {
-    static int k = (int) Math.ceil(Var.n/2.0);
+class Tetromino {
+    private static int k = (int) Math.ceil(Var.n/2.0);
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
-    public static void spawnI(BufferedImage c) {
-        Var.spielfeld[k-2][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k+1][Var.m-1] = new Box(c);
+    private static void spawnI() {
+        Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockI);
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockI, true);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockI);
+        Var.spielfeld[k+1][Var.tilesY-1] = new Box(Var.imgBlockI);
     }
-    public static void spawnO(BufferedImage c) {
-        Var.spielfeld[k-1][Var.m-1] = new Box(c);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-2] = new Box(c);
-        Var.spielfeld[k][Var.m-2] = new Box(c);
+    private static void spawnO() {
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockO);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockO);
+        Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockO);
+        Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockO);
     }
-    public static void spawnT(BufferedImage c) {
-        Var.spielfeld[k-2][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-2] = new Box(c);
+    private static void spawnT() {
+        Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockT);
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockT, true);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockT);
+        Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockT);
     }
-    public static void spawnS(BufferedImage c) {
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-2] = new Box(c);
-        Var.spielfeld[k-2][Var.m-2] = new Box(c);
+    private static void spawnS() {
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockS, true);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockS);
+        Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockS);
+        Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockS);
     }
-    public static void spawnZ(BufferedImage c) {
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k-2][Var.m-1] = new Box(c);
-        Var.spielfeld[k-1][Var.m-2] = new Box(c);
-        Var.spielfeld[k][Var.m-2] = new Box(c);
+    private static void spawnZ() {
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockZ, true);
+        Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockZ);
+        Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockZ);
+        Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockZ);
     }
-    public static void spawnJ(BufferedImage c) {
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k-2][Var.m-1] = new Box(c);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k][Var.m-2] = new Box(c);
+    private static void spawnJ() {
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockJ, true);
+        Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockJ);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockJ);
+        Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockJ);
     }
-    public static void spawnL(BufferedImage c) {
-        Var.spielfeld[k-1][Var.m-1] = new Box(c, true);
-        Var.spielfeld[k-2][Var.m-1] = new Box(c);
-        Var.spielfeld[k][Var.m-1] = new Box(c);
-        Var.spielfeld[k-2][Var.m-2] = new Box(c);
+    private static void spawnL() {
+        Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockL, true);
+        Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockL);
+        Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockL);
+        Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockL);
     }
-    public static void spawnRandom() {
+    static void spawnRandom() {
         int random = (int) (7*Math.random());
         switch (random) {
             case 0:
-                spawnI((BufferedImage)Var.imgBlockI);
+                spawnI();
                 break;
             case 1:
-                spawnO((BufferedImage)Var.imgBlockO);
+                spawnO();
                 break;
             case 2:
-                spawnT((BufferedImage)Var.imgBlockT);
+                spawnT();
                 break;
             case 3:
-                spawnS((BufferedImage)Var.imgBlockS);
+                spawnS();
                 break;
             case 4:
-                spawnZ((BufferedImage)Var.imgBlockZ);
+                spawnZ();
                 break;
             case 5:
-                spawnJ((BufferedImage)Var.imgBlockJ);
+                spawnJ();
                 break;
             case 6:
-                spawnL((BufferedImage)Var.imgBlockL);
+                spawnL();
                 break;
         }
     }
