@@ -7,7 +7,6 @@ import java.util.*;
 
 class Tetromino {
     private static int k = (int) Math.ceil(Var.n/2.0);
-    private static List<Character> bag = new ArrayList<>();
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
     private static void spawnI() {
         Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockI);
@@ -52,12 +51,16 @@ class Tetromino {
         Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockL);
     }
     static void spawnRandom() {
-
-        if(bag.isEmpty()) {
-            bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
-            Collections.shuffle(bag);
+        if (Var.bag.isEmpty()) {
+            Var.bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
+            Collections.shuffle(Var.bag);
         }
-        switch (bag.get(0)) {
+        if(Var.bag.size() <= 7) {
+            List<Character> bag2 = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
+            Collections.shuffle(bag2);
+            Var.bag.addAll(bag2);
+        }
+        switch (Var.bag.get(0)) {
             case 'I':
                 spawnI();
                 break;
@@ -80,6 +83,6 @@ class Tetromino {
                 spawnL();
                 break;
         }
-        bag.remove(0);
+        Var.bag.remove(0);
     }
 }

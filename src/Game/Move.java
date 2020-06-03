@@ -2,42 +2,51 @@ package Game;
 
 import Var.Var;
 
-import java.awt.*;
 import java.util.ArrayList;
 
-public class Move {
+class Move {
 
-    public static boolean right() {
+    static boolean right() {
         return move(1,0);
     }
-    public static boolean left() {
+    static boolean left() {
         return move(-1,0);
     }
-    public static boolean down() {
+    static boolean down() {
         return move(0,-1);
     }
-    public static boolean up() {
+    static boolean up() {
         return move(0,1);
     }
-    public static void downdown() {
-        int y = Var.m-1;
+    static void downdown() {
+        /*int y = Var.m-1;
         while (!move(0,-y)) {
             y--;
+        }*/
+        int y = 0;
+        while (move(0,-y,false)) {
+            y++;
         }
+        move(0,-y+1);
     }
 
-    private static boolean move(int x, int y) { //Stein mit currentid wird versucht zu verschieben
-        boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
+    private static boolean move(int x, int y) {
+        return move(x,y,true);
+    }
 
+    private static boolean move(int x, int y, boolean handle) { //Stein mit currentid wird versucht zu verschieben
+        boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
         Box[][] tempspielfeld = new Box[Var.n][Var.m]; //zwischenspielfeld
 
-        for (int i = 0; i < Var.n; i++) {
-            for (int j = 0; j < Var.m; j++) {
-                if(Var.spielfeld[i][j].getId() != Var.currentid) {
-                    tempspielfeld[i][j] = Var.spielfeld[i][j];
-                }
-                else {
-                    tempspielfeld[i][j] = new Box(null, 0);
+        if(handle) {
+            for (int i = 0; i < Var.n; i++) {
+                for (int j = 0; j < Var.m; j++) {
+                    if(Var.spielfeld[i][j].getId() != Var.currentid) {
+                        tempspielfeld[i][j] = Var.spielfeld[i][j];
+                    }
+                    else {
+                        tempspielfeld[i][j] = new Box(null, 0);
+                    }
                 }
             }
         }
@@ -52,14 +61,14 @@ public class Move {
                         bool = false;
                         break loop;
                     }
-                    else {
+                    else if(handle) {
                         //System.out.println(i + "|" + j + " wird verschoben");
                         tempspielfeld[i+x][j+y] = Var.spielfeld[i][j];
                     }
                 }
             }
         }
-        if(bool) {
+        if(bool && handle) {
             for (int i = 0; i < Var.n; i++) {
                 if (Var.m >= 0) System.arraycopy(tempspielfeld[i], 0, Var.spielfeld[i], 0, Var.m);
             }
@@ -67,7 +76,7 @@ public class Move {
         return bool;
     }
 
-    public static boolean rotate() {
+    static boolean rotate() {
         boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
 
         int a = 0;
@@ -114,7 +123,7 @@ public class Move {
         return bool;
     }
 
-    public static void removeLines(ArrayList<Integer> lines) {
+    static void removeLines(ArrayList<Integer> lines) {
         //Linien löschen
         for (int j : lines) {
             for (int i = 0; i < Var.n; i++) {

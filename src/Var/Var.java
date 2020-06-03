@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import Game.Box;
 import Main.Main;
@@ -26,6 +28,7 @@ public class Var {
     public static boolean stopSignal = false;
     public static int linecounter = 0;
     public static BufferedImage imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer;
+    public static List<Character> bag = new ArrayList<>();
 
     public Var() {
         //Open Images
