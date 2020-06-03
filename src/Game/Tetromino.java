@@ -2,9 +2,12 @@ package Game;
 
 import Var.Var;
 
+import java.util.*;
+
 
 class Tetromino {
     private static int k = (int) Math.ceil(Var.n/2.0);
+    private static List<Character> bag = new ArrayList<>();
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
     private static void spawnI() {
         Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockI);
@@ -49,29 +52,34 @@ class Tetromino {
         Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockL);
     }
     static void spawnRandom() {
-        int random = (int) (7*Math.random());
-        switch (random) {
-            case 0:
+
+        if(bag.isEmpty()) {
+            bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
+            Collections.shuffle(bag);
+        }
+        switch (bag.get(0)) {
+            case 'I':
                 spawnI();
                 break;
-            case 1:
+            case 'O':
                 spawnO();
                 break;
-            case 2:
+            case 'T':
                 spawnT();
                 break;
-            case 3:
+            case 'S':
                 spawnS();
                 break;
-            case 4:
+            case 'Z':
                 spawnZ();
                 break;
-            case 5:
+            case 'J':
                 spawnJ();
                 break;
-            case 6:
+            case 'L':
                 spawnL();
                 break;
         }
+        bag.remove(0);
     }
 }
