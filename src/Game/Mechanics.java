@@ -30,8 +30,8 @@ public class Mechanics extends Thread {
 
                 Move.removeLines(lines);
 
-                System.out.println("Folgende Linien sind fertig: " + lines);
-                System.out.println("Linien: " + Var.linecounter);
+                //System.out.println("Folgende Linien sind fertig: " + lines);
+                //System.out.println("Linien: " + Var.linecounter);
 
                 Var.currentid++; //erhöhen der currentid
                 Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen

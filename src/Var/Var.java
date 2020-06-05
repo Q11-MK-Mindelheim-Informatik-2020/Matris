@@ -29,6 +29,7 @@ public class Var {
     public static int linecounter = 0;
     public static BufferedImage imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer;
     public static List<Character> bag = new ArrayList<>();
+    public static char storedTetromino;
 
     public Var() {
         //Open Images

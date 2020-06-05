@@ -4,6 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+
+    int lastkey = -1;
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -34,7 +37,10 @@ public class KeyHandler implements KeyListener {
                 }
                 break;
             case KeyEvent.VK_ENTER:
-                Move.rotate();
+                if (e.getKeyCode() != lastkey) {
+                    lastkey = e.getKeyCode();
+                    Move.rotate();
+                }
                 break;
             case KeyEvent.VK_0:
                 System.out.println("state 0 (startup)");
@@ -44,11 +50,15 @@ public class KeyHandler implements KeyListener {
                 System.out.println("state 1 (menu)");
                 GameStateHandler.changeGameState("menu");
                 break;
+            case KeyEvent.VK_M:
+
+                break;
         }
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        lastkey = -1;
     }
 }
