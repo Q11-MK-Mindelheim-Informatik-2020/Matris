@@ -16,18 +16,19 @@ public class Var {
     public static String gameState = "startup";
     public static int fps = 60;
     public static int m = 24; //Größe des Spielfeld-arrays: [n][m]
-    public static int n = 10;
+    public static int n = 4;
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
     public static int tileStartX = 472, tileStartY = 646; //Startposition Spielfeld
     public static int tileSize = 31; //Kantenlänge der Felder
+    public static double bgBoardPaddingPercent = 1;
     public static Box spielfeld[][] = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33);
     public static boolean stopSignal = false;
     public static int linecounter = 0;
-    public static BufferedImage imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer;
+    public static BufferedImage imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown;
     public static List<Character> bag = new ArrayList<>();
     public static char storedTetromino;
 
@@ -45,6 +46,15 @@ public class Var {
 
             //Backgrounds
             imgBackgroundSingleplayer = loadImageAsStream("Backgrounds/Singleplayer.png");
+            imgBackgroundTileCornerLeft = loadImageAsStream("Backgrounds/bg_corner_1.png");
+            imgBackgroundTileCornerUp = loadImageAsStream("Backgrounds/bg_corner_2.png");
+            imgBackgroundTileCornerRight = loadImageAsStream("Backgrounds/bg_corner_3.png");
+            imgBackgroundTileCornerDown = loadImageAsStream("Backgrounds/bg_corner_4.png");
+            imgBackgroundTileInside = loadImageAsStream("Backgrounds/bg_inside.png");
+            imgBackgroundTileSideLeft = loadImageAsStream("Backgrounds/bg_side_1.png");
+            imgBackgroundTileSideUp = loadImageAsStream("Backgrounds/bg_side_2.png");
+            imgBackgroundTileSideRight = loadImageAsStream("Backgrounds/bg_side_3.png");
+            imgBackgroundTileSideDown = loadImageAsStream("Backgrounds/bg_side_4.png");
 
         } catch (IOException e) {
             e.printStackTrace();
