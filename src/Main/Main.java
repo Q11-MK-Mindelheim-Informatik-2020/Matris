@@ -18,7 +18,7 @@ public class Main {
         }
         Mechanics mechanics = new Mechanics();
         mechanics.start();
-        Game.GameStateHandler.changeGameState("startup");
+        Game.GameStateHandler.changeGameState("homescreen");
         EventQueue.invokeLater(() -> {
             try {
                 Gui frame = new Gui();

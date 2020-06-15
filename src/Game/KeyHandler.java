@@ -43,12 +43,10 @@ public class KeyHandler implements KeyListener {
                 }
                 break;
             case KeyEvent.VK_0:
-                System.out.println("state 0 (startup)");
-                GameStateHandler.changeGameState("startup");
+                GameStateHandler.changeGameState("homescreen");
                 break;
             case KeyEvent.VK_1:
-                System.out.println("state 1 (menu)");
-                GameStateHandler.changeGameState("menu");
+                GameStateHandler.changeGameState("singleplayer");
                 break;
             case KeyEvent.VK_M:
 
