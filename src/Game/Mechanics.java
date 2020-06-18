@@ -39,11 +39,4 @@ public class Mechanics extends TimerTask {
         Var.timer.schedule(new Mechanics(),1000);
 
     }
-    private void sleep(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }
