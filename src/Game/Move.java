@@ -3,6 +3,7 @@ package Game;
 import Var.Var;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 class Move {
 
@@ -23,11 +24,17 @@ class Move {
         while (!move(0,-y)) {
             y--;
         }*/
+
         int y = 0;
         while (move(0,-y,false)) {
             y++;
         }
         move(0,-y+1);
+
+        Var.timer.cancel();
+        Var.timer.purge();
+        Var.timer = new Timer();
+        Var.timer.schedule(new Mechanics(), 0);
     }
 
     private static boolean move(int x, int y) {

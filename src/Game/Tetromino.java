@@ -5,7 +5,7 @@ import Var.Var;
 import java.util.*;
 
 
-class Tetromino {
+public class Tetromino {
     private static int k = (int) Math.ceil(Var.n/2.0);
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
     private static void spawnI() {
@@ -50,7 +50,7 @@ class Tetromino {
         Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockL);
         Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockL);
     }
-    static void spawnRandom() {
+    public static void spawnRandom() {
         if (Var.bag.isEmpty()) {
             Var.bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
             Collections.shuffle(Var.bag);

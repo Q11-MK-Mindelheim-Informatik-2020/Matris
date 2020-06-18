@@ -16,8 +16,10 @@ public class Main {
                 Var.spielfeld[i][j] = new Box(0);
             }
         }
-        Mechanics mechanics = new Mechanics();
-        mechanics.start();
+
+        Game.Tetromino.spawnRandom();
+        Var.timer.schedule(new Mechanics(), 10);
+
         Game.GameStateHandler.changeGameState("homescreen");
         EventQueue.invokeLater(() -> {
             try {
