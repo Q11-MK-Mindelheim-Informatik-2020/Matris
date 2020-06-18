@@ -40,23 +40,17 @@ public class Sounds {
     }
     public static void playSound(String fileName, double volume) {
         try {
-            //File audioFile = new File("rsc/Sounds/" + fileName); // Erstelle File Objekt
-            //if(audioFile.exists()) {
-                //Erstelle und öffne Audio-Clip Objekt mithilfe eines audioInputStreams
-                Clip clip = AudioSystem.getClip();
-                //clip.open(AudioSystem.getAudioInputStream(audioFile));
-                clip.open(AudioSystem.getAudioInputStream(Sounds.class.getResource("/Sounds/" + fileName)));
+            //Erstelle und öffne Audio-Clip Objekt mithilfe eines audioInputStreams
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Sounds.class.getResource("/Sounds/" + fileName)));
 
-                // Lautstärke einstellen
-                FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-                float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-                gainControl.setValue(dB);
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-                Thread handler = new Thread(new SoundHandler(clip));
-                handler.start();
-            /*}else{
-                System.out.println("Datei existiert nicht!");
-            }*/
+            // Lautstärke einstellen
+            FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            Thread handler = new Thread(new SoundHandler(clip));
+            handler.start();
 
         } catch(Exception e) {
             e.printStackTrace();

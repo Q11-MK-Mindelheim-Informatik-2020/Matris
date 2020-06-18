@@ -3,7 +3,6 @@ package Game;
 import Var.Var;
 
 import java.util.ArrayList;
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class Mechanics extends TimerTask {
