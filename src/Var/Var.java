@@ -28,7 +28,7 @@ public class Var {
     public static int tileSize = 31; //Kantenlänge der Felder
     public static double bgBoardPaddingPercent = 1;
     public static boolean startButtonPressed = false;
-    public static int startButtonWidth = 300, startButtonY = 400, getStartButtonImageWidth = getImgDimensions("rsc/Pictures/Buttons/btn_startgame.png", "x"), getStartButtonImageHeight = getImgDimensions("rsc/Pictures/Buttons/btn_startgame.png", "y");
+    public static int startButtonWidth = 300, startButtonY = 400, getStartButtonImageWidth = getImgDimensions("/Pictures/Buttons/btn_startgame.png", "x"), getStartButtonImageHeight = getImgDimensions("/Pictures/Buttons/btn_startgame.png", "y");
     public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33);
@@ -82,7 +82,7 @@ public class Var {
     public static int getImgDimensions(String path, String axis){
         BufferedImage buffImg = null;
         try {
-            buffImg = ImageIO.read(new File(path));
+            buffImg = ImageIO.read(Var.class.getResourceAsStream(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
