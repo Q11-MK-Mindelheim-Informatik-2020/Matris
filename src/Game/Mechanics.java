@@ -34,9 +34,9 @@ public class Mechanics extends TimerTask {
 
             Var.currentid++; //erhöhen der currentid
             Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
-
-            Var.timer.schedule(new Mechanics(),1000);
         }
+
+        Var.timer.schedule(new Mechanics(),1000);
 
     }
     private void sleep(int ms) {
