@@ -24,20 +24,23 @@ public class Var {
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
+    public static int itemBoxPadding = 20, itemBoxSize = 90, itemBoxCount = 5;
+    public static double secondaryItemBoxScalingFactor = 0.7, itemScalingFactor = 0.8;
     public static int tileStartX = 472, tileStartY = 646; //Startposition Spielfeld
     public static int tileSize = 31; //Kantenlänge der Felder
     public static double bgBoardPaddingPercent = 1;
     public static boolean startButtonPressed = false;
-    public static int startButtonWidth = 300, startButtonY = 400, getStartButtonImageWidth = getImgDimensions("/Pictures/Buttons/btn_startgame.png", "x"), getStartButtonImageHeight = getImgDimensions("/Pictures/Buttons/btn_startgame.png", "y");
+    public static int startButtonWidth = 300, startButtonY = 400, getStartButtonImageWidth = getImgDimensions("Buttons/btn_startgame.png", "x"), getStartButtonImageHeight = getImgDimensions("Buttons/btn_startgame.png", "y");
     public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33);
     public static boolean stopSignal = false;
     public static int linecounter = 0;
-    public static BufferedImage imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown;
+    public static BufferedImage imgBackgroundItemBox, imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown, imgWholeBrickI, imgWholeBrickJ, imgWholeBrickL, imgWholeBrickO, imgWholeBrickS, imgWholeBrickT, imgWholeBrickZ;
     public static List<Character> bag = new ArrayList<>();
     public static char storedTetromino;
     public static Timer timer = new Timer();
+    public static BufferedImage[] imgWholeBricks = new BufferedImage[91];
 
     public Var() {
         //Open Images
@@ -51,6 +54,15 @@ public class Var {
             imgBlockT = loadImageAsStream("Tetrominos/T.png");
             imgBlockZ = loadImageAsStream("Tetrominos/Z.png");
 
+            //Tetromino Bricks
+            imgWholeBricks[73] = loadImageAsStream("Tetrominos/I_Brick.png");
+            imgWholeBricks[74] = loadImageAsStream("Tetrominos/J_Brick.png");
+            imgWholeBricks[76] = loadImageAsStream("Tetrominos/L_Brick.png");
+            imgWholeBricks[79] = loadImageAsStream("Tetrominos/O_Brick.png");
+            imgWholeBricks[83] = loadImageAsStream("Tetrominos/S_Brick.png");
+            imgWholeBricks[84] = loadImageAsStream("Tetrominos/T_Brick.png");
+            imgWholeBricks[90] = loadImageAsStream("Tetrominos/Z_Brick.png");
+
             //Backgrounds
             imgBackgroundSingleplayer = loadImageAsStream("Backgrounds/Singleplayer.png");
             imgBackgroundTileCornerLeft = loadImageAsStream("Backgrounds/bg_corner_1.png");
@@ -63,6 +75,7 @@ public class Var {
             imgBackgroundTileSideRight = loadImageAsStream("Backgrounds/bg_side_3.png");
             imgBackgroundTileSideDown = loadImageAsStream("Backgrounds/bg_side_4.png");
             imgBackgroundHomescreen = loadImageAsStream("Backgrounds/Startscreen.png");
+            imgBackgroundItemBox = loadImageAsStream("Backgrounds/item_box.png");
 
             //Buttons
             imgButtonStartGame = loadImageAsStream(("Buttons/btn_startgame.png"));
@@ -82,7 +95,7 @@ public class Var {
     public static int getImgDimensions(String path, String axis){
         BufferedImage buffImg = null;
         try {
-            buffImg = ImageIO.read(Var.class.getResourceAsStream(path));
+            buffImg = ImageIO.read(Var.class.getResourceAsStream("/Pictures/" + path));
         } catch (IOException e) {
             e.printStackTrace();
         }
