@@ -157,4 +157,20 @@ class Move {
         }
 
     }
+
+    static void removeTetromino() {
+        int c = 0;
+        loop:
+        for (int i = 0; i < Var.n; i++) {
+            for (int j = 0; j < Var.m; j++) {
+                if(Var.spielfeld[i][j].getId() == Var.currentid) {
+                    Var.spielfeld[i][j] = new Box(null,0);
+                    c++;
+                    if(c == 4) {
+                        break loop;
+                    }
+                }
+            }
+        }
+    }
 }

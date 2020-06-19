@@ -36,7 +36,9 @@ public class Var {
     public static int linecounter = 0;
     public static BufferedImage imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown;
     public static List<Character> bag = new ArrayList<>();
-    public static char storedTetromino;
+    public static char storedTetromino = 'x';
+    public static char currentTetrominoshape;
+    public static boolean stored = false;
     public static Timer timer = new Timer();
 
     public Var() {

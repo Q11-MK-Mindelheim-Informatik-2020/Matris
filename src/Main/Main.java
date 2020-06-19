@@ -17,10 +17,10 @@ public class Main {
             }
         }
 
-        Game.Tetromino.spawnRandom();
-        Var.timer.schedule(new Mechanics(), 10);
+        //Game.Tetromino.spawnRandom();
+        //Var.timer.schedule(new Mechanics(), 10);
 
-        Game.GameStateHandler.changeGameState("homescreen");
+        Game.GameStateHandler.changeGameState("singleplayer");
         EventQueue.invokeLater(() -> {
             try {
                 Gui frame = new Gui();

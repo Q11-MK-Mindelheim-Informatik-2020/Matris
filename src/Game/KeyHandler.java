@@ -1,7 +1,10 @@
 package Game;
 
+import Var.Var;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Timer;
 
 public class KeyHandler implements KeyListener {
 
@@ -29,7 +32,7 @@ public class KeyHandler implements KeyListener {
                 //Move.up();
                 break;
             case KeyEvent.VK_DOWN:
-                if((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) { //mit strg + unten kann gecheatet werden ;)
+                if((e.getModifiers() & KeyEvent.VK_C) != 0) { //mit c + unten kann gecheatet werden ;)
                     Move.up();
                 }
                 else {
@@ -48,8 +51,31 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_1:
                 GameStateHandler.changeGameState("singleplayer");
                 break;
-            case KeyEvent.VK_M:
-
+            case KeyEvent.VK_CONTROL:
+                if (!Var.stored) {
+                    Var.timer.cancel();
+                    Var.timer.purge();
+                    char shape = Var.currentTetrominoshape;
+                    Move.removeTetromino();
+                    if (Var.storedTetromino == 'x') {
+                        Tetromino.spawnRandom();
+                    }
+                    else {
+                        Tetromino.spawn(Var.storedTetromino);
+                    }
+                    Var.storedTetromino = shape;
+                    Var.timer = new Timer();
+                    Var.timer.schedule(new Mechanics(), 1000);
+                    Var.stored = true;
+                }
+                break;
+            case KeyEvent.VK_ESCAPE:
+                if (Var.gameState.equals("pause")) {
+                    GameStateHandler.changeGameState("singleplayer");
+                }
+                else {
+                    GameStateHandler.changeGameState("pause");
+                }
                 break;
         }
 
