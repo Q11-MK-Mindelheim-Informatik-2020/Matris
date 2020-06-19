@@ -41,26 +41,51 @@ public class Label extends JLabel implements ActionListener {
                 for(int x = 0; x<Var.tilesX; x++) {
                     for (int y = 0; y<Var.tilesY; y++) {
                         int bgBoardTilePositionX = Var.width/2-(Var.tilesX/2)*bgTilesize+x*bgTilesize;
-                        int bgBoardTilePositionY = (int)(y*bgTilesize+(Var.bgBoardPaddingPercent/100)*Var.height);
-                        if(x==0 && y==0){
-                            g.drawImage(Var.imgBackgroundTileCornerLeft,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(y==0 && x==Var.tilesX-1) {
-                            g.drawImage(Var.imgBackgroundTileCornerUp,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(y==Var.tilesY-1 && x==0) {
-                            g.drawImage(Var.imgBackgroundTileCornerDown,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(y==Var.tilesY-1 && x==Var.tilesX-1) {
-                            g.drawImage(Var.imgBackgroundTileCornerRight,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(x==0) {
-                            g.drawImage(Var.imgBackgroundTileSideLeft,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(x==Var.tilesX-1) {
-                            g.drawImage(Var.imgBackgroundTileSideRight,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(y==0) {
-                            g.drawImage(Var.imgBackgroundTileSideUp,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
-                        }else if(y==Var.tilesY-1) {
+                            int bgBoardTilePositionY = (int)(y*bgTilesize+(Var.bgBoardPaddingPercent/100)*Var.height);
+                            if(x==0 && y==0){
+                                g.drawImage(Var.imgBackgroundTileCornerLeft,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(y==0 && x==Var.tilesX-1) {
+                                g.drawImage(Var.imgBackgroundTileCornerUp,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(y==Var.tilesY-1 && x==0) {
+                                g.drawImage(Var.imgBackgroundTileCornerDown,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(y==Var.tilesY-1 && x==Var.tilesX-1) {
+                                g.drawImage(Var.imgBackgroundTileCornerRight,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(x==0) {
+                                g.drawImage(Var.imgBackgroundTileSideLeft,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(x==Var.tilesX-1) {
+                                g.drawImage(Var.imgBackgroundTileSideRight,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(y==0) {
+                                g.drawImage(Var.imgBackgroundTileSideUp,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
+                            }else if(y==Var.tilesY-1) {
                             g.drawImage(Var.imgBackgroundTileSideDown,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
                         } else {
                             g.drawImage(Var.imgBackgroundTileInside,bgBoardTilePositionX,bgBoardTilePositionY,bgTilesize,bgTilesize,null);
                         }
+                    }
+                }
+                for(int i = 0;i<Var.itemBoxCount;i++) {
+                    if(i==0) {
+                        g.drawImage(Var.imgBackgroundItemBox,
+                                 Var.width/2+((Var.tilesX/2)*bgTilesize)+Var.itemBoxPadding,
+                                    (int)((Var.bgBoardPaddingPercent/100)*Var.height),
+                                    Var.itemBoxSize,
+                                    Var.itemBoxSize, null);
+                        g.drawImage(Var.imgWholeBricks[Var.bag.get(i)],
+                                 Var.width/2+((Var.tilesX/2)*bgTilesize)+Var.itemBoxPadding+(Var.itemBoxSize/2-(int)(Var.itemBoxSize*Var.itemScalingFactor)/2),
+                                 (int)((Var.bgBoardPaddingPercent/100)*Var.height)+(Var.itemBoxSize/2-(int)(Var.itemBoxSize*Var.itemScalingFactor)/2),
+                                    (int)(Var.itemBoxSize*Var.itemScalingFactor),
+                                    (int)(Var.itemBoxSize*Var.itemScalingFactor), null);
+                    } else {
+                        g.drawImage(Var.imgBackgroundItemBox,
+                                 Var.width/2+((Var.tilesX/2)*bgTilesize)+Var.itemBoxPadding,
+                                 (int)((Var.bgBoardPaddingPercent/100)*Var.height)+Var.itemBoxSize+(i-1)*(int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor)+i*Var.itemBoxPadding,
+                                    (int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor),
+                                    (int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor), null);
+                        g.drawImage(Var.imgWholeBricks[Var.bag.get(i)],
+                                   (int)(Var.width/2+((Var.tilesX/2)*bgTilesize)+Var.itemBoxPadding+(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor/2-(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor*Var.itemScalingFactor)/2)),
+                                   (int)(((Var.bgBoardPaddingPercent/100)*Var.height)+Var.itemBoxSize+(i-1)*(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor)+i*Var.itemBoxPadding+(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor/2-(int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor*Var.itemScalingFactor)/2)),
+                                   (int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor*Var.itemScalingFactor),
+                                   (int)(Var.itemBoxSize*Var.secondaryItemBoxScalingFactor*Var.itemScalingFactor), null);
                     }
                 }
                 for(int x = 0; x<Var.tilesX; x++) {
