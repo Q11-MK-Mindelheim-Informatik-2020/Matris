@@ -1,12 +1,11 @@
 package Gui;
 import javax.swing.*;
 
+import Game.GameStateHandler;
 import Game.KeyHandler;
 import Var.Var;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class Gui extends JFrame implements MouseListener, MouseMotionListener {
@@ -24,6 +23,21 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyListener(new KeyHandler());
         addMouseListener(this);
         addMouseMotionListener(this);
+        addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                if(Var.gameState.equals("pause")) {
+                    GameStateHandler.changeGameState("singleplayer");
+                }
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                if(Var.gameState.equals("singleplayer")) {
+                    GameStateHandler.changeGameState("pause");
+                }
+            }
+        });
     }
 
 
