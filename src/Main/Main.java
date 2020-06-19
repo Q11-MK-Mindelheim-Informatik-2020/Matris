@@ -18,7 +18,7 @@ public class Main {
         }
 
         //Game.Tetromino.spawnRandom();
-        //Var.timer.schedule(new Mechanics(), 10);
+        //jVar.timer.schedule(new Mechanics(), 10);
 
         Game.GameStateHandler.changeGameState("singleplayer");
         EventQueue.invokeLater(() -> {
