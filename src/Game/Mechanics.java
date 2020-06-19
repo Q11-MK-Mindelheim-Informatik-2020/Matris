@@ -3,7 +3,6 @@ package Game;
 import Var.Var;
 
 import java.util.ArrayList;
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class Mechanics extends TimerTask {
@@ -34,16 +33,9 @@ public class Mechanics extends TimerTask {
 
             Var.currentid++; //erhöhen der currentid
             Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
-
-            Var.timer.schedule(new Mechanics(),1000);
         }
 
-    }
-    private void sleep(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Var.timer.schedule(new Mechanics(),1000);
+
     }
 }
