@@ -36,7 +36,7 @@ public class Var {
     public static Color backgroundColor = new Color(24, 21, 33);
     public static boolean stopSignal = false;
     public static int linecounter = 0;
-    public static BufferedImage imgBackgroundItemBox, imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown, imgWholeBrickI, imgWholeBrickJ, imgWholeBrickL, imgWholeBrickO, imgWholeBrickS, imgWholeBrickT, imgWholeBrickZ;
+    public static BufferedImage imgBackgroundPausescreen, imgBackgroundItemBox, imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown, imgWholeBrickI, imgWholeBrickJ, imgWholeBrickL, imgWholeBrickO, imgWholeBrickS, imgWholeBrickT, imgWholeBrickZ;
     public static List<Character> bag = new ArrayList<>();
     public static char storedTetromino = 'x';
     public static char currentTetrominoshape;
@@ -78,6 +78,7 @@ public class Var {
             imgBackgroundTileSideDown = loadImageAsStream("Backgrounds/bg_side_4.png");
             imgBackgroundHomescreen = loadImageAsStream("Backgrounds/Startscreen.png");
             imgBackgroundItemBox = loadImageAsStream("Backgrounds/item_box.png");
+            imgBackgroundPausescreen = loadImageAsStream("Backgrounds/Pausescreen.png");
 
             //Buttons
             imgButtonStartGame = loadImageAsStream(("Buttons/btn_startgame.png"));
