@@ -2,6 +2,7 @@ package Game;
 
 import Var.Var;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 
@@ -10,6 +11,7 @@ public class Tetromino {
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
     public static void spawn(char c) {
         Var.currentTetrominoshape = c;
+
         switch (c) {
             case 'I':
                 Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockI);
@@ -55,7 +57,6 @@ public class Tetromino {
                 break;
             default:
                 System.out.println("Ungültiger Tetromino");
-
         }
 
     }

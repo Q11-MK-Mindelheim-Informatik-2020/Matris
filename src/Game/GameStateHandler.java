@@ -24,6 +24,9 @@ public class GameStateHandler {
                 Var.timer.cancel();
                 Var.timer.purge();
                 break;
+            case "gameover":
+                System.out.println("Ende!");
+                break;
         }
         System.out.println("Gamestate: "+state);
     }

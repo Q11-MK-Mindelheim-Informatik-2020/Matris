@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 
 public class Label extends JLabel implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -39,6 +40,7 @@ public class Label extends JLabel implements ActionListener {
                 for (int y = 0; y < Var.tilesY; y++) {
                     int bgBoardTilePositionX = Var.width / 2 - (Var.tilesX / 2) * bgTilesize + x * bgTilesize;
                     int bgBoardTilePositionY = (int) (y * bgTilesize + (Var.bgBoardPaddingPercent / 100) * Var.height);
+
                     if (x == 0 && y == 0) {
                         g.drawImage(Var.imgBackgroundTileCornerLeft, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == 0 && x == Var.tilesX - 1) {
