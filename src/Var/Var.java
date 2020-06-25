@@ -4,9 +4,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.security.CodeSource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import Game.Box;
 import Main.Main;
@@ -43,10 +49,29 @@ public class Var {
     public static boolean stored = false;
     public static Timer timer = new Timer();
     public static BufferedImage[] imgWholeBricks = new BufferedImage[91];
+    public static HashMap<String, BufferedImage> images = new HashMap<>();
 
     public Var() {
         //Open Images
         try {
+            CodeSource src = Var.class.getProtectionDomain().getCodeSource();
+
+            if( src != null ) {
+                URL jar = src.getLocation();
+                ZipInputStream zip = new ZipInputStream(jar.openStream());
+                ZipEntry ze;
+
+                while((ze = zip.getNextEntry() ) != null ) {
+                    String entryName = ze.getName();
+                    if(entryName.startsWith("Pictures") &&  entryName.endsWith(".png") ) {
+                        int index = entryName.lastIndexOf("/");
+                        String filename = entryName.substring(index+1, entryName.length()-4);
+                        images.put(filename, ImageIO.read(Var.class.getResourceAsStream("/" + entryName)));
+                        System.out.println(filename);
+                    }
+                }
+            }
+
             //Tetrominos
             imgBlockI = loadImageAsStream("Tetrominos/I.png");
             imgBlockJ = loadImageAsStream("Tetrominos/J.png");
@@ -115,6 +140,4 @@ public class Var {
         }
         return dimension;
     }
-
-
 }
