@@ -19,7 +19,7 @@ public class Label extends JLabel implements ActionListener {
             int buttonX = Var.width / 2 - Var.startButtonWidth / 2;
             int buttonY = Var.startButtonY;
             int buttonWidth = Var.startButtonWidth;
-            int buttonHeight = Var.getStartButtonImageHeight * Var.startButtonWidth / Var.getStartButtonImageWidth;
+            int buttonHeight = Var.images.get("btn_startgame").getHeight() * Var.startButtonWidth / Var.images.get("btn_startgame").getWidth();
             g.drawImage(Var.images.get("Startscreen"), 0, 0, Var.width, Var.height, null);
             if (isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, buttonWidth, buttonHeight) && Var.mouseClicked) {
                 g.drawImage(Var.images.get("btn_startgame_pressed"), buttonX, buttonY, buttonWidth, buttonHeight, null);

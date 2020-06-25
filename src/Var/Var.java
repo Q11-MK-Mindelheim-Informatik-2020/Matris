@@ -2,11 +2,9 @@ package Var;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.security.CodeSource;
 import java.util.*;
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import Game.Box;
-import Main.Main;
 import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
@@ -36,7 +33,7 @@ public class Var {
     public static int tileSize = 31; //Kantenlänge der Felder
     public static double bgBoardPaddingPercent = 1;
     public static boolean startButtonPressed = false;
-    public static int startButtonWidth = 300, startButtonY = 400, getStartButtonImageWidth = getImgDimensions("Buttons/btn_startgame.png", "x"), getStartButtonImageHeight = getImgDimensions("Buttons/btn_startgame.png", "y");
+    public static int startButtonWidth = 300, startButtonY = 400;
     public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33);
@@ -53,13 +50,12 @@ public class Var {
         //Open Images
         try {
             CodeSource src = Var.class.getProtectionDomain().getCodeSource();
+            String protocol = this.getClass().getResource("").getProtocol();
 
-            if(src != null && new File(src.getLocation().getPath()).isFile()) { //Code für jar
+            if(src != null && Objects.equals(protocol, "jar")) { //Code für jar
                 URL jar = src.getLocation();
                 ZipInputStream zip = new ZipInputStream(jar.openStream());
                 ZipEntry ze;
-                System.out.println(zip.getNextEntry());
-
                 while((ze = zip.getNextEntry() ) != null ) {
                     String entryName = ze.getName();
                     if(entryName.startsWith("Pictures") &&  entryName.endsWith(".png") ) {
@@ -79,7 +75,7 @@ public class Var {
                             for (File image : Objects.requireNonNull(subfolder.listFiles())) {
                                 String imagename = image.getName();
                                 images.put(imagename.substring(0,imagename.length()-4), ImageIO.read(image));
-                                System.out.println(imagename.substring(0,imagename.length()-4));
+                                //System.out.println(imagename.substring(0,imagename.length()-4));
                             }
                         }
                     } catch (URISyntaxException e) {
@@ -92,30 +88,5 @@ public class Var {
             e.printStackTrace();
             System.out.println("Fehler beim laden der Bilder!");
         }
-    }
-
-    private static BufferedImage loadImageAsStream(String fileName) throws IOException {
-        return ImageIO.read(Var.class.getResourceAsStream("/Pictures/" + fileName));
-    }
-
-    private static int getImgDimensions(String path, String axis){
-        BufferedImage buffImg = null;
-        try {
-            buffImg = ImageIO.read(Var.class.getResourceAsStream("/Pictures/" + path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int dimension = 0;
-        switch (axis) {
-            case "x":
-                assert buffImg != null;
-                dimension = buffImg.getWidth();
-                break;
-            case "y":
-                assert buffImg != null;
-                dimension = buffImg.getHeight();
-                break;
-        }
-        return dimension;
     }
 }
