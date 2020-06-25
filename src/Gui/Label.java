@@ -85,6 +85,19 @@ public class Label extends JLabel implements ActionListener {
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor), null);
                 }
             }
+            g.drawImage(Var.imgBackgroundItemBox,
+                    Var.width / 2 - ((Var.tilesX / 2) * bgTilesize) - Var.itemBoxPadding - Var.itemBoxSize,
+                    (int) ((Var.bgBoardPaddingPercent / 100) * Var.height),
+                    Var.itemBoxSize,
+                    Var.itemBoxSize, null);
+            if(Var.storedTetromino != 'x') {
+                g.drawImage(Var.imgWholeBricks[Var.storedTetromino],
+                        Var.width / 2 - ((Var.tilesX / 2) * bgTilesize) - Var.itemBoxPadding - Var.itemBoxSize + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
+                        (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
+                        (int) (Var.itemBoxSize * Var.itemScalingFactor),
+                        (int) (Var.itemBoxSize * Var.itemScalingFactor), null);
+            }
+
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     if (Var.spielfeld[x][y].getTileTexture() != null) {

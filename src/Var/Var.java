@@ -57,13 +57,13 @@ public class Var {
             imgBlockZ = loadImageAsStream("Tetrominos/Z.png");
 
             //Tetromino Bricks
-            imgWholeBricks[73] = loadImageAsStream("Tetrominos/I_Brick.png");
-            imgWholeBricks[74] = loadImageAsStream("Tetrominos/J_Brick.png");
-            imgWholeBricks[76] = loadImageAsStream("Tetrominos/L_Brick.png");
-            imgWholeBricks[79] = loadImageAsStream("Tetrominos/O_Brick.png");
-            imgWholeBricks[83] = loadImageAsStream("Tetrominos/S_Brick.png");
-            imgWholeBricks[84] = loadImageAsStream("Tetrominos/T_Brick.png");
-            imgWholeBricks[90] = loadImageAsStream("Tetrominos/Z_Brick.png");
+            imgWholeBricks['I'] = loadImageAsStream("Tetrominos/I_Brick.png");
+            imgWholeBricks['J'] = loadImageAsStream("Tetrominos/J_Brick.png");
+            imgWholeBricks['L'] = loadImageAsStream("Tetrominos/L_Brick.png");
+            imgWholeBricks['O'] = loadImageAsStream("Tetrominos/O_Brick.png");
+            imgWholeBricks['S'] = loadImageAsStream("Tetrominos/S_Brick.png");
+            imgWholeBricks['T'] = loadImageAsStream("Tetrominos/T_Brick.png");
+            imgWholeBricks['Z'] = loadImageAsStream("Tetrominos/Z_Brick.png");
 
             //Backgrounds
             imgBackgroundSingleplayer = loadImageAsStream("Backgrounds/Singleplayer.png");
