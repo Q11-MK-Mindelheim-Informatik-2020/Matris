@@ -4,18 +4,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.security.CodeSource;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Timer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import Game.Box;
 import Main.Main;
+import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
 
@@ -56,10 +56,11 @@ public class Var {
         try {
             CodeSource src = Var.class.getProtectionDomain().getCodeSource();
 
-            if( src != null ) {
+            if(src != null && new File(src.getLocation().getPath()).isFile()) {
                 URL jar = src.getLocation();
                 ZipInputStream zip = new ZipInputStream(jar.openStream());
                 ZipEntry ze;
+                System.out.println(zip.getNextEntry());
 
                 while((ze = zip.getNextEntry() ) != null ) {
                     String entryName = ze.getName();
@@ -68,6 +69,23 @@ public class Var {
                         String filename = entryName.substring(index+1, entryName.length()-4);
                         images.put(filename, ImageIO.read(Var.class.getResourceAsStream("/" + entryName)));
                         System.out.println(filename);
+                    }
+                }
+            }
+            else {
+                URL url = Launcher.class.getResource("/Pictures");
+                if (url != null) {
+                    try {
+                        final File subfolders = new File(url.toURI());
+                        for (File subfolder : Objects.requireNonNull(subfolders.listFiles())) {
+                            for (File image : Objects.requireNonNull(subfolder.listFiles())) {
+                                String imagename = image.getName();
+                                images.put(imagename.substring(0,imagename.length()-4), ImageIO.read(image));
+                                System.out.println(imagename.substring(0,imagename.length()-4));
+                            }
+                        }
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
                     }
                 }
             }
