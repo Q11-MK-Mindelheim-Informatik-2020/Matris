@@ -42,13 +42,11 @@ public class Var {
     public static Color backgroundColor = new Color(24, 21, 33);
     public static boolean stopSignal = false;
     public static int linecounter = 0;
-    public static BufferedImage imgBackgroundPausescreen, imgBackgroundItemBox, imgButtonStartGame, imgButtonStartGameHover, imgButtonStartGamePressed, imgBackgroundHomescreen, imgBlockI, imgBlockJ, imgBlockL, imgBlockO, imgBlockS, imgBlockT, imgBlockZ, imgBackgroundSingleplayer, imgBackgroundTileCornerLeft, imgBackgroundTileCornerUp, imgBackgroundTileCornerRight, imgBackgroundTileCornerDown, imgBackgroundTileInside, imgBackgroundTileSide, imgBackgroundTileSideLeft, imgBackgroundTileSideUp, imgBackgroundTileSideRight, imgBackgroundTileSideDown, imgWholeBrickI, imgWholeBrickJ, imgWholeBrickL, imgWholeBrickO, imgWholeBrickS, imgWholeBrickT, imgWholeBrickZ;
     public static List<Character> bag = new ArrayList<>();
     public static char storedTetromino = 'x';
     public static char currentTetrominoshape;
     public static boolean stored = false;
     public static Timer timer = new Timer();
-    public static BufferedImage[] imgWholeBricks = new BufferedImage[91];
     public static HashMap<String, BufferedImage> images = new HashMap<>();
 
     public Var() {
@@ -56,7 +54,7 @@ public class Var {
         try {
             CodeSource src = Var.class.getProtectionDomain().getCodeSource();
 
-            if(src != null && new File(src.getLocation().getPath()).isFile()) {
+            if(src != null && new File(src.getLocation().getPath()).isFile()) { //Code für jar
                 URL jar = src.getLocation();
                 ZipInputStream zip = new ZipInputStream(jar.openStream());
                 ZipEntry ze;
@@ -68,11 +66,11 @@ public class Var {
                         int index = entryName.lastIndexOf("/");
                         String filename = entryName.substring(index+1, entryName.length()-4);
                         images.put(filename, ImageIO.read(Var.class.getResourceAsStream("/" + entryName)));
-                        System.out.println(filename);
+                        //System.out.println(filename);
                     }
                 }
             }
-            else {
+            else { //Code für IDE
                 URL url = Launcher.class.getResource("/Pictures");
                 if (url != null) {
                     try {
@@ -90,44 +88,6 @@ public class Var {
                 }
             }
 
-            //Tetrominos
-            imgBlockI = loadImageAsStream("Tetrominos/I.png");
-            imgBlockJ = loadImageAsStream("Tetrominos/J.png");
-            imgBlockL = loadImageAsStream("Tetrominos/L.png");
-            imgBlockO = loadImageAsStream("Tetrominos/O.png");
-            imgBlockS = loadImageAsStream("Tetrominos/S.png");
-            imgBlockT = loadImageAsStream("Tetrominos/T.png");
-            imgBlockZ = loadImageAsStream("Tetrominos/Z.png");
-
-            //Tetromino Bricks
-            imgWholeBricks['I'] = loadImageAsStream("Tetrominos/I_Brick.png");
-            imgWholeBricks['J'] = loadImageAsStream("Tetrominos/J_Brick.png");
-            imgWholeBricks['L'] = loadImageAsStream("Tetrominos/L_Brick.png");
-            imgWholeBricks['O'] = loadImageAsStream("Tetrominos/O_Brick.png");
-            imgWholeBricks['S'] = loadImageAsStream("Tetrominos/S_Brick.png");
-            imgWholeBricks['T'] = loadImageAsStream("Tetrominos/T_Brick.png");
-            imgWholeBricks['Z'] = loadImageAsStream("Tetrominos/Z_Brick.png");
-
-            //Backgrounds
-            imgBackgroundSingleplayer = loadImageAsStream("Backgrounds/Singleplayer.png");
-            imgBackgroundTileCornerLeft = loadImageAsStream("Backgrounds/bg_corner_1.png");
-            imgBackgroundTileCornerUp = loadImageAsStream("Backgrounds/bg_corner_2.png");
-            imgBackgroundTileCornerRight = loadImageAsStream("Backgrounds/bg_corner_3.png");
-            imgBackgroundTileCornerDown = loadImageAsStream("Backgrounds/bg_corner_4.png");
-            imgBackgroundTileInside = loadImageAsStream("Backgrounds/bg_inside.png");
-            imgBackgroundTileSideLeft = loadImageAsStream("Backgrounds/bg_side_1.png");
-            imgBackgroundTileSideUp = loadImageAsStream("Backgrounds/bg_side_2.png");
-            imgBackgroundTileSideRight = loadImageAsStream("Backgrounds/bg_side_3.png");
-            imgBackgroundTileSideDown = loadImageAsStream("Backgrounds/bg_side_4.png");
-            imgBackgroundHomescreen = loadImageAsStream("Backgrounds/Startscreen.png");
-            imgBackgroundItemBox = loadImageAsStream("Backgrounds/item_box.png");
-            imgBackgroundPausescreen = loadImageAsStream("Backgrounds/Pausescreen.png");
-
-            //Buttons
-            imgButtonStartGame = loadImageAsStream(("Buttons/btn_startgame.png"));
-            imgButtonStartGamePressed = loadImageAsStream(("Buttons/btn_startgame_pressed.png"));
-            imgButtonStartGameHover = loadImageAsStream(("Buttons/btn_startgame_hover.png"));
-
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Fehler beim laden der Bilder!");
@@ -138,7 +98,7 @@ public class Var {
         return ImageIO.read(Var.class.getResourceAsStream("/Pictures/" + fileName));
     }
 
-    public static int getImgDimensions(String path, String axis){
+    private static int getImgDimensions(String path, String axis){
         BufferedImage buffImg = null;
         try {
             buffImg = ImageIO.read(Var.class.getResourceAsStream("/Pictures/" + path));

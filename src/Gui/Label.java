@@ -20,80 +20,80 @@ public class Label extends JLabel implements ActionListener {
             int buttonY = Var.startButtonY;
             int buttonWidth = Var.startButtonWidth;
             int buttonHeight = Var.getStartButtonImageHeight * Var.startButtonWidth / Var.getStartButtonImageWidth;
-            g.drawImage(Var.imgBackgroundHomescreen, 0, 0, Var.width, Var.height, null);
+            g.drawImage(Var.images.get("Startscreen"), 0, 0, Var.width, Var.height, null);
             if (isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, buttonWidth, buttonHeight) && Var.mouseClicked) {
-                g.drawImage(Var.imgButtonStartGamePressed, buttonX, buttonY, buttonWidth, buttonHeight, null);
+                g.drawImage(Var.images.get("btn_startgame_pressed"), buttonX, buttonY, buttonWidth, buttonHeight, null);
                 Var.startButtonPressed = true;
             } else if (isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, buttonWidth, buttonHeight)) {
-                g.drawImage(Var.imgButtonStartGameHover, buttonX, buttonY, buttonWidth, buttonHeight, null);
+                g.drawImage(Var.images.get("btn_startgame_hover"), buttonX, buttonY, buttonWidth, buttonHeight, null);
                 if (Var.startButtonPressed) {
                     GameStateHandler.changeGameState("singleplayer");
                     Var.startButtonPressed = false;
                 }
             } else {
-                g.drawImage(Var.imgButtonStartGame, buttonX, buttonY, buttonWidth, buttonHeight, null);
+                g.drawImage(Var.images.get("btn_startgame"), buttonX, buttonY, buttonWidth, buttonHeight, null);
             }
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause")) {
             int bgTilesize = (int) ((Var.height * ((100 - (Var.bgBoardPaddingPercent * 2)) / 100)) / Var.tilesY);
-            g.drawImage(Var.imgBackgroundSingleplayer, 0, 0, Var.width, Var.height, null);
+            g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     int bgBoardTilePositionX = Var.width / 2 - (Var.tilesX / 2) * bgTilesize + x * bgTilesize;
                     int bgBoardTilePositionY = (int) (y * bgTilesize + (Var.bgBoardPaddingPercent / 100) * Var.height);
 
                     if (x == 0 && y == 0) {
-                        g.drawImage(Var.imgBackgroundTileCornerLeft, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_corner_1"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == 0 && x == Var.tilesX - 1) {
-                        g.drawImage(Var.imgBackgroundTileCornerUp, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_corner_2"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == Var.tilesY - 1 && x == 0) {
-                        g.drawImage(Var.imgBackgroundTileCornerDown, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_corner_4"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == Var.tilesY - 1 && x == Var.tilesX - 1) {
-                        g.drawImage(Var.imgBackgroundTileCornerRight, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_corner_3"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (x == 0) {
-                        g.drawImage(Var.imgBackgroundTileSideLeft, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_side_1"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (x == Var.tilesX - 1) {
-                        g.drawImage(Var.imgBackgroundTileSideRight, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_side_3"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == 0) {
-                        g.drawImage(Var.imgBackgroundTileSideUp, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_side_2"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else if (y == Var.tilesY - 1) {
-                        g.drawImage(Var.imgBackgroundTileSideDown, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_side_4"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     } else {
-                        g.drawImage(Var.imgBackgroundTileInside, bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
+                        g.drawImage(Var.images.get("bg_inside"), bgBoardTilePositionX, bgBoardTilePositionY, bgTilesize, bgTilesize, null);
                     }
                 }
             }
             for (int i = 0; i < Var.itemBoxCount; i++) {
                 if (i == 0) {
-                    g.drawImage(Var.imgBackgroundItemBox,
+                    g.drawImage(Var.images.get("item_box"),
                             Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding,
                             (int) ((Var.bgBoardPaddingPercent / 100) * Var.height),
                             Var.itemBoxSize,
                             Var.itemBoxSize, null);
-                    g.drawImage(Var.imgWholeBricks[Var.bag.get(i)],
+                    g.drawImage(Var.images.get(Var.bag.get(i) + "_Brick"),
                             Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
                             (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
                             (int) (Var.itemBoxSize * Var.itemScalingFactor),
                             (int) (Var.itemBoxSize * Var.itemScalingFactor), null);
                 } else {
-                    g.drawImage(Var.imgBackgroundItemBox,
+                    g.drawImage(Var.images.get("item_box"),
                             Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding,
                             (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding,
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor), null);
-                    g.drawImage(Var.imgWholeBricks[Var.bag.get(i)],
-                            (int) (Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
-                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
+                    g.drawImage(Var.images.get(Var.bag.get(i) + "_Brick"),
+                            (int) (Var.width / 2.0 + ((Var.tilesX / 2.0) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
+                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2.0)),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor), null);
                 }
             }
-            g.drawImage(Var.imgBackgroundItemBox,
+            g.drawImage(Var.images.get("item_box"),
                     Var.width / 2 - ((Var.tilesX / 2) * bgTilesize) - Var.itemBoxPadding - Var.itemBoxSize,
                     (int) ((Var.bgBoardPaddingPercent / 100) * Var.height),
                     Var.itemBoxSize,
                     Var.itemBoxSize, null);
             if(Var.storedTetromino != 'x') {
-                g.drawImage(Var.imgWholeBricks[Var.storedTetromino],
+                g.drawImage(Var.images.get(Var.storedTetromino + "_Brick"),
                         Var.width / 2 - ((Var.tilesX / 2) * bgTilesize) - Var.itemBoxPadding - Var.itemBoxSize + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
                         (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
                         (int) (Var.itemBoxSize * Var.itemScalingFactor),
@@ -111,7 +111,7 @@ public class Label extends JLabel implements ActionListener {
                 }
             }
             if (Var.gameState.equals("pause")) {
-                g.drawImage(Var.imgBackgroundPausescreen, 0, 0, Var.width, Var.height, null);
+                g.drawImage(Var.images.get("Pausescreen"), 0, 0, Var.width, Var.height, null);
             }
         }
 

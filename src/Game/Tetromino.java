@@ -9,51 +9,51 @@ import java.util.*;
 public class Tetromino {
     private static int k = (int) Math.ceil(Var.n/2.0);
     //Für die Namen (Buchstaben) siehe: https://tetris.wiki/Tetromino
-    public static void spawn(char c) {
+    static void spawn(char c) {
         Var.currentTetrominoshape = c;
 
         switch (c) {
             case 'I':
-                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockI);
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockI, true);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockI);
-                Var.spielfeld[k+1][Var.tilesY-1] = new Box(Var.imgBlockI);
+                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k+1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'O':
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockO);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockO);
-                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockO);
-                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockO);
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'T':
-                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockT);
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockT, true);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockT);
-                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockT);
+                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'S':
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockS, true);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockS);
-                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockS);
-                Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockS);
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'Z':
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockZ, true);
-                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockZ);
-                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.imgBlockZ);
-                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockZ);
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-1][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'J':
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockJ, true);
-                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockJ);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockJ);
-                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.imgBlockJ);
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             case 'L':
-                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.imgBlockL, true);
-                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.imgBlockL);
-                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.imgBlockL);
-                Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.imgBlockL);
+                Var.spielfeld[k-1][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)), true);
+                Var.spielfeld[k-2][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k][Var.tilesY-1] = new Box(Var.images.get(String.valueOf(c)));
+                Var.spielfeld[k-2][Var.tilesY-2] = new Box(Var.images.get(String.valueOf(c)));
                 break;
             default:
                 System.out.println("Ungültiger Tetromino");
