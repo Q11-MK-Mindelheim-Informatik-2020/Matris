@@ -155,7 +155,9 @@ class Move {
                 }
             }
         }
-
+        int l = lines.size();
+        Var.score += (Var.level+1)*(5*l*(l*(l*(11*l - 54) + 91) - 24))/3; //Polynom vierten Grades in Horner Form, das die Punkte für l linien berechnet. Siehe https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
+        System.out.println("Score: " + Var.score);
     }
 
     static void removeTetromino() {

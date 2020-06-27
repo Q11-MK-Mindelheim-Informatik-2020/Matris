@@ -28,6 +28,11 @@ public class Mechanics extends TimerTask {
 
             Move.removeLines(lines);
 
+            if (!lines.isEmpty() && Var.linecounter%10 == 0) {
+                Var.level++;
+                System.out.println("Neues Level: " + Var.level);
+            }
+
             //System.out.println("Folgende Linien sind fertig: " + lines);
             //System.out.println("Linien: " + Var.linecounter);
 
@@ -36,7 +41,11 @@ public class Mechanics extends TimerTask {
             Var.stored = false;
         }
 
-        Var.timer.schedule(new Mechanics(),1000);
+        Var.timer.schedule(new Mechanics(),getTime());
 
+    }
+
+    static int getTime() {
+        return (int) (50/3.0 * (1410.7/(Math.pow(Var.level, 2.34)+30) + 1));
     }
 }

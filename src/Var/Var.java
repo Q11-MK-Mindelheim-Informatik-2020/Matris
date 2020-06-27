@@ -45,6 +45,8 @@ public class Var {
     public static boolean stored = false;
     public static Timer timer = new Timer();
     public static HashMap<String, BufferedImage> images = new HashMap<>();
+    public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
+    public static int score, level;
 
     public Var() {
         //Open Images
@@ -88,5 +90,43 @@ public class Var {
             e.printStackTrace();
             System.out.println("Fehler beim laden der Bilder!");
         }
+
+        //Tetrominos
+        int k = (int) Math.ceil(Var.n/2.0);
+        Tetrominos.put('I', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k-2, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k+1, Var.tilesY-1}});
+        Tetrominos.put('O', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k-1, Var.tilesY-2},
+                {k, Var.tilesY-2}});
+        Tetrominos.put('T', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k-2, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k-1, Var.tilesY-2}});
+        Tetrominos.put('S', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k-1, Var.tilesY-2},
+                {k-2, Var.tilesY-2}});
+        Tetrominos.put('Z', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k-2, Var.tilesY-1},
+                {k-1, Var.tilesY-2},
+                {k, Var.tilesY-2}});
+        Tetrominos.put('J', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k-2, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k, Var.tilesY-2}});
+        Tetrominos.put('L', new int[][]{
+                {k-1, Var.tilesY-1},
+                {k-2, Var.tilesY-1},
+                {k, Var.tilesY-1},
+                {k-2, Var.tilesY-2}});
     }
 }

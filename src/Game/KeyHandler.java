@@ -8,7 +8,7 @@ import java.util.Timer;
 
 public class KeyHandler implements KeyListener {
 
-    int lastkey = -1;
+    private int lastkey = -1;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -21,26 +21,34 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_RIGHT:
                 //es wird versucht den Spielstein mit currentid nach rechts zu verschieben
                 //Move.right() liefert einen Boolean wert zurück: true wenn erfolgreich, false falls irgendwas dazwischen ist
-                Move.right();
+                if (Var.gameState.equals("singleplayer")) {
+                    Move.right();
+                }
                 break;
             case KeyEvent.VK_LEFT:
                 //siehe oben
-                Move.left();
+                if (Var.gameState.equals("singleplayer")) {
+                    Move.left();
+                }
                 break;
             case KeyEvent.VK_UP:
-                Move.downdown();
+                if (Var.gameState.equals("singleplayer")) {
+                    Move.downdown();
+                }
                 //Move.up();
                 break;
             case KeyEvent.VK_DOWN:
-                if((e.getModifiers() & KeyEvent.VK_C) != 0) { //mit c + unten kann gecheatet werden ;)
-                    Move.up();
-                }
-                else {
-                    Move.down();
+                if (Var.gameState.equals("singleplayer")) {
+                    if((e.getModifiers() & KeyEvent.VK_C) != 0) { //mit c + unten kann gecheatet werden ;)
+                        Move.up();
+                    }
+                    else {
+                        Move.down();
+                    }
                 }
                 break;
             case KeyEvent.VK_ENTER:
-                if (e.getKeyCode() != lastkey) {
+                if (Var.gameState.equals("singleplayer") && e.getKeyCode() != lastkey) {
                     lastkey = e.getKeyCode();
                     Move.rotate();
                 }
@@ -52,7 +60,7 @@ public class KeyHandler implements KeyListener {
                 GameStateHandler.changeGameState("singleplayer");
                 break;
             case KeyEvent.VK_CONTROL:
-                if (!Var.stored) {
+                if (Var.gameState.equals("singleplayer") && !Var.stored) {
                     Var.timer.cancel();
                     Var.timer.purge();
                     char shape = Var.currentTetrominoshape;
@@ -65,7 +73,7 @@ public class KeyHandler implements KeyListener {
                     }
                     Var.storedTetromino = shape;
                     Var.timer = new Timer();
-                    Var.timer.schedule(new Mechanics(), 1000);
+                    Var.timer.schedule(new Mechanics(), Mechanics.getTime());
                     Var.stored = true;
                 }
                 break;
@@ -73,7 +81,7 @@ public class KeyHandler implements KeyListener {
                 if (Var.gameState.equals("pause")) {
                     GameStateHandler.changeGameState("singleplayer");
                 }
-                else {
+                else if (Var.gameState.equals("singleplayer")) {
                     GameStateHandler.changeGameState("pause");
                 }
                 break;

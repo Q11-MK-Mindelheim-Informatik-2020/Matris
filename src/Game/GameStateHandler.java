@@ -16,8 +16,10 @@ public class GameStateHandler {
 //                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
             case "singleplayer":
+                Var.timer.cancel();
+                Var.timer.purge();
                 Var.timer = new Timer();
-                Var.timer.schedule(new Mechanics(), 1000);
+                Var.timer.schedule(new Mechanics(), Mechanics.getTime());
                 Effects.Sounds.playSound("tetris99.wav", 0.5);
                 break;
             case "pause":

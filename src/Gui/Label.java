@@ -33,7 +33,7 @@ public class Label extends JLabel implements ActionListener {
             } else {
                 g.drawImage(Var.images.get("btn_startgame"), buttonX, buttonY, buttonWidth, buttonHeight, null);
             }
-        } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause")) {
+        } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
             int bgTilesize = (int) ((Var.height * ((100 - (Var.bgBoardPaddingPercent * 2)) / 100)) / Var.tilesY);
             g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
             for (int x = 0; x < Var.tilesX; x++) {
@@ -111,6 +111,9 @@ public class Label extends JLabel implements ActionListener {
                 }
             }
             if (Var.gameState.equals("pause")) {
+                g.drawImage(Var.images.get("Pausescreen"), 0, 0, Var.width, Var.height, null);
+            }
+            else if (Var.gameState.equals("gameover")) {
                 g.drawImage(Var.images.get("Pausescreen"), 0, 0, Var.width, Var.height, null);
             }
         }
