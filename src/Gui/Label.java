@@ -16,23 +16,8 @@ public class Label extends JLabel implements ActionListener {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if(Var.gameState.equals("homescreen") || Var.gameState.equals("startup")) {
-            int buttonX = Var.width / 2 - Var.startButtonWidth / 2;
-            int buttonY = Var.startButtonY;
-            int buttonWidth = Var.startButtonWidth;
-            int buttonHeight = Var.images.get("btn_startgame").getHeight() * Var.startButtonWidth / Var.images.get("btn_startgame").getWidth();
             g.drawImage(Var.images.get("Startscreen"), 0, 0, Var.width, Var.height, null);
-            if (isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, buttonWidth, buttonHeight) && Var.mouseClicked) {
-                g.drawImage(Var.images.get("btn_startgame_pressed"), buttonX, buttonY, buttonWidth, buttonHeight, null);
-                Var.startButtonPressed = true;
-            } else if (isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, buttonWidth, buttonHeight)) {
-                g.drawImage(Var.images.get("btn_startgame_hover"), buttonX, buttonY, buttonWidth, buttonHeight, null);
-                if (Var.startButtonPressed) {
-                    GameStateHandler.changeGameState("singleplayer");
-                    Var.startButtonPressed = false;
-                }
-            } else {
-                g.drawImage(Var.images.get("btn_startgame"), buttonX, buttonY, buttonWidth, buttonHeight, null);
-            }
+            g.drawImage(Button.startButton.image(), Button.startButton.buttonX, Button.startButton.buttonY, Button.startButton.buttonWidth, Button.startButton.buttonHeight,null);
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
             int bgTilesize = (int) ((Var.height * ((100 - (Var.bgBoardPaddingPercent * 2)) / 100)) / Var.tilesY);
             g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
@@ -128,7 +113,5 @@ public class Label extends JLabel implements ActionListener {
         repaint();
     }
 
-    private boolean isInsideBox(int testX, int testY, int x, int y, int width, int height) {
-        return testX >= x && testX <= (x + width) && testY >= y && testY <= (y + height);
-    }
+
 }
