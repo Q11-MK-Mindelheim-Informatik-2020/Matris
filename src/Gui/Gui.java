@@ -15,10 +15,9 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         setResizable(false);
         setTitle("justTetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, Var.width, Var.height+25);
+        setBounds(100, 100, Var.width, Var.height+26);
         setLocationRelativeTo(null);
         lb = new Label();
-        lb.setBounds(0, 0, Var.width, Var.height);
         add(lb);
         addKeyListener(new KeyHandler());
         addMouseListener(this);
