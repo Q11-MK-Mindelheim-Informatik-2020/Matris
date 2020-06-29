@@ -47,6 +47,7 @@ public class Var {
     public static HashMap<String, BufferedImage> images = new HashMap<>();
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
     public static int score, level;
+    public static boolean ghostmode = true;
 
     public Var() {
         //Open Images

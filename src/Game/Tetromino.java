@@ -16,6 +16,7 @@ public class Tetromino {
         else {
             setBlocks(Var.Tetrominos.get(c), c, true);
         }
+        Move.showPreview();
     }
 
     public static void spawnRandom() {

@@ -20,14 +20,18 @@ class Move {
         return move(0,1);
     }
     static void downdown() {
-        /*int y = Var.m-1;
-        while (!move(0,-y)) {
-            y--;
-        }*/
-
-        int y = 0;
-        while (move(0,-y,false)) {
-            y++;
+        int y;
+        if (Var.ghostmode) {
+            y = Var.m-1;
+            while (!move(0,-y)) {
+                y--;
+            }
+        }
+        else {
+            y = 0;
+            while (move(0,-y,false)) {
+                y++;
+            }
         }
         move(0,-y+1);
 
@@ -48,7 +52,7 @@ class Move {
         if(handle) {
             for (int i = 0; i < Var.n; i++) {
                 for (int j = 0; j < Var.m; j++) {
-                    if(Var.spielfeld[i][j].getId() != Var.currentid) {
+                    if(Var.spielfeld[i][j].getId() != Var.currentid && Var.spielfeld[i][j].getId() != 0) {
                         tempspielfeld[i][j] = Var.spielfeld[i][j];
                     }
                     else {
@@ -79,6 +83,7 @@ class Move {
             for (int i = 0; i < Var.n; i++) {
                 if (Var.m >= 0) System.arraycopy(tempspielfeld[i], 0, Var.spielfeld[i], 0, Var.m);
             }
+            showPreview();
         }
         return bool;
     }
@@ -93,7 +98,7 @@ class Move {
 
         for (int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
-                if(Var.spielfeld[i][j].getId() != Var.currentid) {
+                if(Var.spielfeld[i][j].getId() != Var.currentid && Var.spielfeld[i][j].getId() != 0) {
                     tempspielfeld[i][j] = Var.spielfeld[i][j];
                 }
                 else {
@@ -126,6 +131,7 @@ class Move {
             for (int i = 0; i < Var.n; i++) {
                 if (Var.m >= 0) System.arraycopy(tempspielfeld[i], 0, Var.spielfeld[i], 0, Var.m);
             }
+            showPreview();
         }
         return bool;
     }
@@ -172,6 +178,36 @@ class Move {
                         break loop;
                     }
                 }
+            }
+        }
+    }
+
+    static void showPreview() {
+        int y;
+        if (Var.ghostmode) {
+            y = Var.m-1;
+            while (!move(0,-y, false) && y < Var.m) {
+                y--;
+            }
+        }
+        else {
+            y = 0;
+            while (move(0,-y,false) && y < Var.m) {
+                y++;
+            }
+            y--;
+        }
+
+        for (int i = 0; i < Var.n; i++) {
+            for (int j = 0; j < Var.m; j++) {
+                //System.out.println(y);
+                if(Var.spielfeld[i][j].getId() == Var.currentid && Var.spielfeld[i][j-y].getId() == 0) {
+                    Var.spielfeld[i][j-y] = new Box(Var.images.get("O_Brick"), 0);
+                }
+                else if (Var.spielfeld[i][j].getId() == 0 && Var.spielfeld[i][j].getTileTexture() != null) {
+                    Var.spielfeld[i][j] = new Box(null, 0);
+                }
+
             }
         }
     }
