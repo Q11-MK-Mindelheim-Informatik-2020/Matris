@@ -8,19 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 
-public class Label extends JLabel implements ActionListener {
+public class Label extends JLabel implements ActionListener
+{
     private static final long serialVersionUID = 1L;
+
     private Timer timer = new Timer(1000/Var.fps, this); //refresh-Zeit
+
     public void paintComponent(Graphics g) { //initialisiere paintComponent
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         if(Var.gameState.equals("homescreen") || Var.gameState.equals("startup")) {
             g.drawImage(Var.images.get("Startscreen"), 0, 0, Var.width, Var.height, null);
             g.drawImage(Button.startButton.image(), Button.startButton.buttonX, Button.startButton.buttonY, Button.startButton.buttonWidth, Button.startButton.buttonHeight,null);
-        } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
+        }
+        else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
             int bgTilesize = (int) ((Var.height * ((100 - (Var.bgBoardPaddingPercent * 2)) / 100)) / Var.tilesY);
             g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
+
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     int bgBoardTilePositionX = Var.width / 2 - (Var.tilesX / 2) * bgTilesize + x * bgTilesize;
@@ -59,15 +65,19 @@ public class Label extends JLabel implements ActionListener {
                             (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
                             (int) (Var.itemBoxSize * Var.itemScalingFactor),
                             (int) (Var.itemBoxSize * Var.itemScalingFactor), null);
-                } else {
+                }
+                else {
                     g.drawImage(Var.images.get("item_box"),
                             Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding,
-                            (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding,
+                            (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor)
+                                    + i * Var.itemBoxPadding,
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor), null);
                     g.drawImage(Var.images.get(Var.bag.get(i) + "_Brick"),
-                            (int) (Var.width / 2.0 + ((Var.tilesX / 2.0) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
-                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2.0)),
+                            (int) (Var.width / 2.0 + ((Var.tilesX / 2.0) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 -
+                                    (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
+                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i *
+                                    Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2.0)),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor), null);
                 }
@@ -77,6 +87,7 @@ public class Label extends JLabel implements ActionListener {
                     (int) ((Var.bgBoardPaddingPercent / 100) * Var.height),
                     Var.itemBoxSize,
                     Var.itemBoxSize, null);
+
             if(Var.storedTetromino != 'x') {
                 g.drawImage(Var.images.get(Var.storedTetromino + "_Brick"),
                         Var.width / 2 - ((Var.tilesX / 2) * bgTilesize) - Var.itemBoxPadding - Var.itemBoxSize + (Var.itemBoxSize / 2 - (int) (Var.itemBoxSize * Var.itemScalingFactor) / 2),
@@ -88,8 +99,9 @@ public class Label extends JLabel implements ActionListener {
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     if (Var.spielfeld[x][y].getTileTexture() != null) {
-//                            System.out.println((Var.tileStartY + y * (Var.tileSize + Var.tilePadding)));
-                        g.drawImage(Var.spielfeld[x][y].getTileTexture(), Var.tileStartX + x * (Var.tileSize + Var.tilePadding), Var.tileStartY + Var.tilesY - (y * (Var.tileSize + Var.tilePadding)), Var.tileSize, Var.tileSize, null);
+                              //System.out.println((Var.tileStartY + y * (Var.tileSize + Var.tilePadding)));
+                        g.drawImage(Var.spielfeld[x][y].getTileTexture(), Var.tileStartX + x * (Var.tileSize + Var.tilePadding), Var.tileStartY + Var.tilesY - (y * (Var.tileSize +
+                                Var.tilePadding)), Var.tileSize, Var.tileSize, null);
 
                     }
 
