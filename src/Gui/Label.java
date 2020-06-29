@@ -101,6 +101,7 @@ public class Label extends JLabel implements ActionListener {
             }
             else if (Var.gameState.equals("gameover")) {
                 g.drawImage(Var.images.get("Pausescreen"), 0, 0, Var.width, Var.height, null);
+                g.drawImage(Button.restartButton.image(), Button.restartButton.buttonX, Button.restartButton.buttonY, Button.restartButton.buttonWidth, Button.restartButton.buttonHeight,null);
             }
         }
 

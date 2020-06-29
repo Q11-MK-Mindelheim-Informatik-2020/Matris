@@ -1,6 +1,7 @@
 package Gui;
 
 import Game.GameStateHandler;
+import Game.Mechanics;
 import Var.Var;
 
 import java.awt.image.BufferedImage;
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class Button {
 
     public static Button startButton = new Button("gamestate", "singleplayer", "btn_startgame", "btn_startgame_pressed","btn_startgame_hover",400, Var.width/2, Var.height/2);
-    public static Button restartButton = new Button("gamestate", "singleplayer", "btn_restartgame", "btn_restartgame_pressed","btn_restartgame_hover",400, Var.width/2, Var.height-Var.height/4);
+    public static Button restartButton = new Button("restart", "", "btn_restartgame", "btn_restartgame_pressed","btn_restartgame_hover",400, Var.width/2, Var.height-Var.height/4);
 
     private String action;
     private String actionParam;
@@ -42,6 +43,9 @@ public class Button {
                 switch (action){
                     case "gamestate":
                         GameStateHandler.changeGameState(actionParam);
+                        break;
+                    case "restart":
+                        Mechanics.restartGame();
                         break;
                 }
                 tempButtonPress = false;

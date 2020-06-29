@@ -72,6 +72,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
         Var.mouseX = e.getX();
-        Var.mouseY = e.getY();
+        Var.mouseY = e.getY()-26;
+        System.out.println("x: " + e.getX() + " y: " + e.getY());
     }
 }
