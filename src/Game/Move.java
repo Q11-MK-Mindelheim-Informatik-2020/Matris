@@ -202,7 +202,7 @@ class Move {
             for (int j = 0; j < Var.m; j++) {
                 //System.out.println(y);
                 if(Var.spielfeld[i][j].getId() == Var.currentid && Var.spielfeld[i][j-y].getId() == 0) {
-                    Var.spielfeld[i][j-y] = new Box(Var.images.get("O_Brick"), 0);
+                    Var.spielfeld[i][j-y] = new Box(Var.images.get("Marker"), 0);
                 }
                 else if (Var.spielfeld[i][j].getId() == 0 && Var.spielfeld[i][j].getTileTexture() != null) {
                     Var.spielfeld[i][j] = new Box(null, 0);

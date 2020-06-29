@@ -15,12 +15,17 @@ public class Label extends JLabel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        Font f = new Font("Comic Sans MS",Font.PLAIN, 30);
+        g.setFont(f);
         if(Var.gameState.equals("homescreen") || Var.gameState.equals("startup")) {
             g.drawImage(Var.images.get("Startscreen"), 0, 0, Var.width, Var.height, null);
             g.drawImage(Button.startButton.image(), Button.startButton.buttonX, Button.startButton.buttonY, Button.startButton.buttonWidth, Button.startButton.buttonHeight,null);
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
             int bgTilesize = (int) ((Var.height * ((100 - (Var.bgBoardPaddingPercent * 2)) / 100)) / Var.tilesY);
             g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
+            g.setColor(Var.fontColor);
+            g.drawString("Punktestand: "+ Integer.toString(Var.score), 20, 40);
+            g.drawString("Level "+ Integer.toString(Var.level), 20, 80);
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     int bgBoardTilePositionX = Var.width / 2 - (Var.tilesX / 2) * bgTilesize + x * bgTilesize;
@@ -104,7 +109,6 @@ public class Label extends JLabel implements ActionListener {
                 g.drawImage(Button.restartButton.image(), Button.restartButton.buttonX, Button.restartButton.buttonY, Button.restartButton.buttonWidth, Button.restartButton.buttonHeight,null);
             }
         }
-
 
 
         timer.start(); // Start Refresh Timer

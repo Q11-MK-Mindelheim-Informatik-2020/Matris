@@ -36,7 +36,7 @@ public class Var {
     public static int startButtonWidth = 300, startButtonY = 400;
     public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
-    public static Color backgroundColor = new Color(24, 21, 33);
+    public static Color backgroundColor = new Color(24, 21, 33), fontColor = new Color(22,96,170);
     public static boolean stopSignal = false;
     public static int linecounter = 0;
     public static List<Character> bag = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Var {
     public static HashMap<String, BufferedImage> images = new HashMap<>();
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
     public static int score, level;
-    public static boolean ghostmode = true;
+    public static boolean ghostmode = false;
 
     public Var() {
         //Open Images
