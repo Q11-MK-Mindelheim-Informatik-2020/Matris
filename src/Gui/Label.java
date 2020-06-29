@@ -25,7 +25,8 @@ public class Label extends JLabel implements ActionListener {
             g.drawImage(Var.images.get("Singleplayer"), 0, 0, Var.width, Var.height, null);
             g.setColor(Var.fontColor);
             g.drawString("Punktestand: "+ Integer.toString(Var.score), 20, 40);
-            g.drawString("Level "+ Integer.toString(Var.level), 20, 80);
+            g.drawString("Linien: "+ Integer.toString(Var.linecounter), 20, 80);
+            g.drawString("Level "+ Integer.toString(Var.level), 20, 120);
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     int bgBoardTilePositionX = Var.width / 2 - (Var.tilesX / 2) * bgTilesize + x * bgTilesize;
@@ -109,7 +110,7 @@ public class Label extends JLabel implements ActionListener {
                 g.drawImage(Button.restartButton.image(), Button.restartButton.buttonX, Button.restartButton.buttonY, Button.restartButton.buttonWidth, Button.restartButton.buttonHeight,null);
             }
             else if (Var.gameState.equals("gameover")) {
-                g.drawImage(Var.images.get("Pausescreen"), 0, 0, Var.width, Var.height, null);
+                g.drawImage(Var.images.get("Gameoverscreen"), 0, 0, Var.width, Var.height, null);
                 g.drawImage(Button.restartButton.image(), Button.restartButton.buttonX, Button.restartButton.buttonY, Button.restartButton.buttonWidth, Button.restartButton.buttonHeight,null);
             }
         }
