@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public class Box {
 
     private int id; //ID des Blockes
-    private boolean rotationpoint; //um die box, die diesen boolean auf true hat wird rotiert
+    private boolean rotationpoint; //um die Box mit diesem Boolean auf true wird rotiert
     private BufferedImage tileTexture;
 
     Box(BufferedImage tileTexture, int id, boolean rotationpoint) {

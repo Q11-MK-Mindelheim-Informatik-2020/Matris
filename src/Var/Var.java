@@ -17,6 +17,7 @@ import sun.misc.Launcher;
 import javax.imageio.ImageIO;
 
 public class Var {
+
     public static int currentid = 1; //ID des aktiven/fallenden Blöcken
     public static String gameState = "startup";
     public static boolean mouseClicked = false;

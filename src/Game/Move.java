@@ -5,18 +5,18 @@ import Var.Var;
 import java.util.ArrayList;
 import java.util.Timer;
 
-class Move {
+class Move {    //Steine können hier in alle vier Richtungen bewegt werden
 
-    static boolean right() {
+    static boolean right() {    //nach rechts
         return move(1,0);
     }
-    static boolean left() {
+    static boolean left() {     //nach links
         return move(-1,0);
     }
-    static boolean down() {
+    static boolean down() {     //nach unten
         return move(0,-1);
     }
-    static boolean up() {
+    static boolean up() {       //nach oben
         return move(0,1);
     }
     static void downdown() {
@@ -45,9 +45,9 @@ class Move {
         return move(x,y,true);
     }
 
-    private static boolean move(int x, int y, boolean handle) { //Stein mit currentid wird versucht zu verschieben
-        boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
-        Box[][] tempspielfeld = new Box[Var.n][Var.m]; //zwischenspielfeld
+    private static boolean move(int x, int y, boolean handle) { //Stein mit der Currentid wird versucht zu verschieben
+        boolean bool = true; //wird auf false gesetzt, falls das Verschieben nicht erfolgreich war
+        Box[][] tempspielfeld = new Box[Var.n][Var.m]; //Zwischenspielfeld
 
         if(handle) {
             for (int i = 0; i < Var.n; i++) {
@@ -89,12 +89,12 @@ class Move {
     }
 
     static boolean rotate() {
-        boolean bool = true; //wird auf false gesetzt, falls move nicht erfolgreich
+        boolean bool = true; //wird auf false gesetzt, falls Verschiebung nicht erfolgreich
 
         int a = 0;
         int b = 0;
 
-        Box[][] tempspielfeld = new Box[Var.n][Var.m]; //zwischenspielfeld
+        Box[][] tempspielfeld = new Box[Var.n][Var.m]; //Zwischenspielfeld
 
         for (int i = 0; i < Var.n; i++) {
             for (int j = 0; j < Var.m; j++) {
@@ -143,7 +143,7 @@ class Move {
                 Var.spielfeld[i][j] = new Box(null, 0);
             }
         }
-        //linien runtermoven
+        //Linien nach unten bewegen
         for (int j = 1; j < Var.m; j++) {
             int z = 0;
             for (int k : lines) {
@@ -162,7 +162,9 @@ class Move {
             }
         }
         int l = lines.size();
-        Var.score += (Var.level+1)*(5*l*(l*(l*(11*l - 54) + 91) - 24))/3; //Polynom vierten Grades in Horner Form, das die Punkte für l linien berechnet. Siehe https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
+        Var.score += (Var.level+1)*(5*l*(l*(l*(11*l - 54) + 91) - 24))/3;
+        //Polynom vierten Grades in Horner Form, das die Punkte für l Linien berechnet.
+        // Siehe https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
         System.out.println("Score: " + Var.score);
     }
 

@@ -67,12 +67,15 @@ public class Label extends JLabel implements ActionListener {
                 } else {
                     g.drawImage(Var.images.get("item_box"),
                             Var.width / 2 + ((Var.tilesX / 2) * bgTilesize) + Var.itemBoxPadding,
-                            (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding,
+                            (int) ((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor)
+                                    + i * Var.itemBoxPadding,
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor), null);
                     g.drawImage(Var.images.get(Var.bag.get(i) + "_Brick"),
-                            (int) (Var.width / 2.0 + ((Var.tilesX / 2.0) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
-                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i * Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2.0)),
+                            (int) (Var.width / 2.0 + ((Var.tilesX / 2.0) * bgTilesize) + Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 -
+                                    (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2)),
+                            (int) (((Var.bgBoardPaddingPercent / 100) * Var.height) + Var.itemBoxSize + (i - 1) * (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor) + i *
+                                    Var.itemBoxPadding + (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor / 2 - (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor) / 2.0)),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor),
                             (int) (Var.itemBoxSize * Var.secondaryItemBoxScalingFactor * Var.itemScalingFactor), null);
                 }
@@ -93,8 +96,9 @@ public class Label extends JLabel implements ActionListener {
             for (int x = 0; x < Var.tilesX; x++) {
                 for (int y = 0; y < Var.tilesY; y++) {
                     if (Var.spielfeld[x][y].getTileTexture() != null) {
-//                            System.out.println((Var.tileStartY + y * (Var.tileSize + Var.tilePadding)));
-                        g.drawImage(Var.spielfeld[x][y].getTileTexture(), Var.tileStartX + x * (Var.tileSize + Var.tilePadding), Var.tileStartY + Var.tilesY - (y * (Var.tileSize + Var.tilePadding)), Var.tileSize, Var.tileSize, null);
+                              //System.out.println((Var.tileStartY + y * (Var.tileSize + Var.tilePadding)));
+                        g.drawImage(Var.spielfeld[x][y].getTileTexture(), Var.tileStartX + x * (Var.tileSize + Var.tilePadding), Var.tileStartY + Var.tilesY - (y * (Var.tileSize +
+                                Var.tilePadding)), Var.tileSize, Var.tileSize, null);
 
                     }
 
@@ -109,6 +113,7 @@ public class Label extends JLabel implements ActionListener {
                 g.drawImage(Button.restartButton.image(), Button.restartButton.buttonX, Button.restartButton.buttonY, Button.restartButton.buttonWidth, Button.restartButton.buttonHeight,null);
             }
         }
+
 
 
         timer.start(); // Start Refresh Timer
