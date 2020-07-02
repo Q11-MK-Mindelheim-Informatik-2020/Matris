@@ -5,7 +5,7 @@ import Var.Var;
 import java.util.ArrayList;
 import java.util.Timer;
 
-class Move {    //Steine können hier in alle vier Richtungen bewegt werden
+class Move {
 
     /**
      * Eine Einheit nach rechts verschieben
