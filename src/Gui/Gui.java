@@ -2,15 +2,20 @@ package Gui;
 import javax.swing.*;
 
 import Game.GameStateHandler;
-import Game.KeyHandler;
 import Var.Var;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     //initialisiere JFrame
+
+    private static HashMap<String, Timer> timers = new HashMap<>();
+    private static HashSet<Integer> locked = new HashSet<>();
+
     public Gui() {
         Label lb;
         setResizable(true);
@@ -21,8 +26,17 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        setUndecorated(true);
         lb = new Label();
+
+        addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, e -> Game.Move.left());
+        addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, e -> Game.Move.right());
+        addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, e -> Game.Move.down());
+        addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, e -> Game.Move.downdown());
+        addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, e -> Game.Move.rotate());
+        addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, e -> Game.Move.store());
+        addKeyBinding(lb, KeyEvent.VK_ESCAPE, "pause", true, e -> Game.Mechanics.pause());
+
         add(lb);
-        addKeyListener(new KeyHandler());
+        //addKeyListener(new KeyHandler());
         addMouseListener(this);
         addMouseMotionListener(this);
         addComponentListener(new ComponentAdapter()
@@ -48,6 +62,50 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
                 }
             }
         });
+    }
+
+    private static void addKeyBinding(JComponent comp, int keyCode, String id, boolean once, ActionListener actionListener) {
+        addKeyBinding(comp, keyCode, 0, id, once, actionListener);
+    }
+
+    private static void addKeyBinding(JComponent comp, int keyCode, int modifier, String id, boolean once, ActionListener actionListener) {
+        if (!once) {
+            timers.put(id, new Timer(30, actionListener));
+            timers.get(id).setInitialDelay(300);
+        }
+
+        InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap ap = comp.getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(keyCode, modifier, false), id);
+        im.put(KeyStroke.getKeyStroke(keyCode, 0, true), id + "Released");
+
+        ap.put(id, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!once && !timers.get(id).isRunning()) {
+                    actionListener.actionPerformed(e);
+                    timers.get(id).start();
+                }
+                else if (once && !locked.contains(keyCode)) {
+                    actionListener.actionPerformed(e);
+                    locked.add(keyCode);
+                }
+            }
+        });
+        ap.put(id + "Released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!once && timers.get(id).isRunning()) {
+                    timers.get(id).stop();
+                }
+                else if (once) {
+                    locked.remove(keyCode);
+                }
+            }
+        });
+
+
     }
 
 

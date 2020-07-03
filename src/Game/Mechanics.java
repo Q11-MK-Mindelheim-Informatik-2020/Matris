@@ -54,7 +54,7 @@ public class Mechanics extends TimerTask {
         Tetromino.spawnRandom();
         GameStateHandler.changeGameState("singleplayer");
     }
-    static void reset() {
+    private static void reset() {
         Var.timer.cancel();
         Var.timer.purge();
         Var.timer = new Timer();
@@ -70,6 +70,15 @@ public class Mechanics extends TimerTask {
             for(int j = 0; j < Var.m; j++) {
                 Var.spielfeld[i][j] = new Box(0);
             }
+        }
+    }
+
+    public static void pause() {
+        if (Var.gameState.equals("pause")) {
+            GameStateHandler.changeGameState("singleplayer");
+        }
+        else if (Var.gameState.equals("singleplayer")) {
+            GameStateHandler.changeGameState("pause");
         }
     }
 }

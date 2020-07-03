@@ -24,7 +24,7 @@ public class Var {
     public static int mouseX = 0, mouseY = 0;
     public static int fps = 30;
     public static int m = 24; //Größe des Spielfeld-arrays: [n][m]
-    public static int n = 10;
+    public static int n = 4;
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand

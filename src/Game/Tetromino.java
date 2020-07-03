@@ -20,19 +20,18 @@ public class Tetromino {
     }
 
     public static void spawnRandom() {
-        //Wenn das Array leer ist, werden die die 7 Tetrominos in zufälliger Reihenfolge hinzugefügt
+        //Wenn die ArrayListe leer ist, werden die die 7 Tetrominos in zufälliger Reihenfolge hinzugefügt
         if (Var.bag.isEmpty()) {
             Var.bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
             Collections.shuffle(Var.bag);
         }
-        // Wenn die Tetrominoanzahl kleiner als 8 ist, werden 7 weitere verschiedene Terominos in zufälliger
-        // Reihenfolge hinzugefügt
+        // Wenn die Tetrominoanzahl kleiner als 8 ist, werden 7 weitere verschiedene Terominos in zufälliger Reihenfolge hinzugefügt
         if(Var.bag.size() <= 7) {
             List<Character> bag2 = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
             Collections.shuffle(bag2);
             Var.bag.addAll(bag2);
         }
-        //Das Tetromino an der Position 0 wird erschaffen und anschließend gelöscht
+        //Das Tetromino an der Position 0 wird gespawnt und anschließend von der ArrayListe entfernt
         spawn(Var.bag.get(0));
         Var.bag.remove(0);
     }

@@ -5,13 +5,13 @@ import Var.Var;
 import java.util.ArrayList;
 import java.util.Timer;
 
-class Move {
+public class Move {
 
     /**
      * Eine Einheit nach rechts verschieben
      * @return Boolean ob Move erfolgreich
      */
-    static boolean right() {
+    public static boolean right() {
         return move(1,0);
     }
 
@@ -19,7 +19,7 @@ class Move {
      * Eine Einheit nach links verschieben
      * @return Boolean ob Move erfolgreich
      */
-    static boolean left() {
+    public static boolean left() {
         return move(-1,0);
     }
 
@@ -27,7 +27,7 @@ class Move {
      * Eine Einheit nach unten verschieben
      * @return Boolean ob Move erfolgreich
      */
-    static boolean down() {
+    public static boolean down() {
         return move(0,-1);
     }
 
@@ -42,7 +42,7 @@ class Move {
     /**
      * Stein mit Currentid wird möglichst weit nach unten verschoben
      */
-    static void downdown() {
+    public static void downdown() {
         int y; //Höhe bei dem es gerade nicht mehr funktioniert zu verschieben
         if (Var.ghostmode) { //Modus bei dem man durch Steine "durchbuggen" kann
             y = Var.m-1; //mit der größten Höhe angefangen
@@ -133,7 +133,7 @@ class Move {
      * Stein mit Currentid wird versucht zu drehen (im Uhrzeigersinn)
      * @return boolean Wert, ob die Drehung erfolgreich war
      */
-    static boolean rotate() {
+    public static boolean rotate() {
         boolean bool = true; //wird auf false gesetzt, falls die Drehung nicht erfolgreich war
 
         //Variabeln zum Speichern des Rotationspunkt
@@ -230,7 +230,7 @@ class Move {
     /**
      * Tetromino mit der Currentid wird entfernt
      */
-    static void removeTetromino() {
+    private static void removeTetromino() {
         int c = 0; //Zähler: wie viele Blöcke wurden bereits entfernt
         loop:
         for (int i = 0; i < Var.n; i++) {
@@ -278,6 +278,29 @@ class Move {
                 }
 
             }
+        }
+    }
+
+    public static boolean store() {
+        if (Var.gameState.equals("singleplayer") && !Var.stored) {
+            Var.timer.cancel();
+            Var.timer.purge();
+            char shape = Var.currentTetrominoshape;
+            removeTetromino();
+            if (Var.storedTetromino == 'x') {
+                Tetromino.spawnRandom();
+            }
+            else {
+                Tetromino.spawn(Var.storedTetromino);
+            }
+            Var.storedTetromino = shape;
+            Var.timer = new Timer();
+            Var.timer.schedule(new Mechanics(), Mechanics.getTime());
+            Var.stored = true;
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }
