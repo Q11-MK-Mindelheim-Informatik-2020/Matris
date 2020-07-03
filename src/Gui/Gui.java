@@ -5,6 +5,7 @@ import Game.GameStateHandler;
 import Game.KeyHandler;
 import Var.Var;
 
+import java.awt.*;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
@@ -12,16 +13,26 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     //initialisiere JFrame
     public Gui() {
         Label lb;
-        setResizable(false);
+        setResizable(true);
         setTitle("justTetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, Var.width, Var.height+26);
+        setSize(Var.width, Var.height);
         setLocationRelativeTo(null);
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setUndecorated(true);
         lb = new Label();
         add(lb);
         addKeyListener(new KeyHandler());
         addMouseListener(this);
         addMouseMotionListener(this);
+        addComponentListener(new ComponentAdapter()
+        {
+            public void componentResized(ComponentEvent evt) {
+                Component c = (Component)evt.getSource();
+                Var.width = getContentPane().getWidth();
+                Var.height = getContentPane().getHeight();
+            }
+        });
         addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(WindowEvent e) {

@@ -19,7 +19,7 @@ public class Main {
 
         Game.Tetromino.spawnRandom();
 
-        Game.GameStateHandler.changeGameState("startup");
+        Game.GameStateHandler.changeGameState("singleplayer");
         EventQueue.invokeLater(() -> {
             try {
                 Gui frame = new Gui();

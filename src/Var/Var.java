@@ -28,13 +28,9 @@ public class Var {
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
-    public static int itemBoxPadding = 20, itemBoxSize = 90, itemBoxCount = 5;
-    public static double secondaryItemBoxScalingFactor = 0.7, itemScalingFactor = 0.8;
-    public static int tileStartX = 472, tileStartY = 646; //Startposition Spielfeld
-    public static int tileSize = 31; //Kantenlänge der Felder
-    public static double bgBoardPaddingPercent = 1;
-    public static boolean startButtonPressed = false;
-    public static int startButtonWidth = 300, startButtonY = 400;
+    public static int itemBoxSize = 90, itemBoxCount = 5;
+    public static double itemScalingFactor = 0.8;
+    public static int padding = 10;
     public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33), fontColor = new Color(22,96,170);

@@ -10,8 +10,6 @@ public class GameStateHandler {
         Var.stopSignal = true;
         switch(state) {
             case "startup":
-//                Effects.Sounds.playSound("tetris.wav", 0.5);
-                break;
             case "homescreen":
 //                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
@@ -20,7 +18,7 @@ public class GameStateHandler {
                 Var.timer.purge();
                 Var.timer = new Timer();
                 Var.timer.schedule(new Mechanics(), Mechanics.getTime());
-                Effects.Sounds.playSound("tetris.wav", 0.5);
+//                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
             case "pause":
                 Var.timer.cancel();
