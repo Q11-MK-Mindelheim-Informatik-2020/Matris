@@ -21,7 +21,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         setResizable(true);
         setTitle("justTetris");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(Var.width, Var.height);
+        setBounds(0,0,Var.width, Var.height);
         setLocationRelativeTo(null);
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        setUndecorated(true);
@@ -71,7 +71,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     private static void addKeyBinding(JComponent comp, int keyCode, int modifier, String id, boolean once, ActionListener actionListener) {
         if (!once) {
             timers.put(id, new Timer(30, actionListener));
-            timers.get(id).setInitialDelay(300);
+            timers.get(id).setInitialDelay(150);
         }
 
         InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);

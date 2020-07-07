@@ -31,6 +31,7 @@ public class Mechanics extends TimerTask {
                 }
             }
 
+
             Move.removeLines(lines);
 
             //System.out.println("Folgende Linien sind fertig: " + lines);

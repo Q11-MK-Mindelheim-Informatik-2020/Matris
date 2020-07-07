@@ -49,6 +49,23 @@ public class Sounds {
             float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
             gainControl.setValue(dB);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void playSoundEffect(String fileName, double volume) {
+        try {
+            //Erstelle und öffne Audio-Clip Objekt mithilfe eines audioInputStreams
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Sounds.class.getResource("/Sounds/" + fileName)));
+
+            // Lautstärke einstellen
+            FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
+            gainControl.setValue(dB);
             Thread handler = new Thread(new SoundHandler(clip));
             handler.start();
 
@@ -57,6 +74,7 @@ public class Sounds {
         }
 
     }
+
     private static int getSampleFrame(String fileName, int microsec) {
         int framePos = 0;
         try {
