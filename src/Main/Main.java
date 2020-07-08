@@ -4,6 +4,7 @@ import Game.Box;
 import Game.Mechanics;
 import Gui.Gui;
 import Var.Var;
+import javafx.embed.swing.JFXPanel;
 
 import java.awt.*;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
         new Var();
+        new JFXPanel();
         for(int i = 0; i < Var.n; i++) {
             for(int j = 0; j < Var.m; j++) {
                 Var.spielfeld[i][j] = new Box(0);
@@ -19,7 +21,7 @@ public class Main {
 
         Game.Tetromino.spawnRandom();
 
-        Game.GameStateHandler.changeGameState("singleplayer");
+        Game.GameStateHandler.changeGameState("startup");
         EventQueue.invokeLater(() -> {
             try {
                 Gui frame = new Gui();

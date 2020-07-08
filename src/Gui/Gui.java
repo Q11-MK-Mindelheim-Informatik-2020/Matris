@@ -1,13 +1,14 @@
 package Gui;
 import javax.swing.*;
+import javax.swing.Timer;
 
 import Game.GameStateHandler;
+import Game.Move;
 import Var.Var;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public class Gui extends JFrame implements MouseListener, MouseMotionListener {
@@ -27,13 +28,29 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
 //        setUndecorated(true);
         lb = new Label();
 
-        addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, e -> Game.Move.left());
-        addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, e -> Game.Move.right());
-        addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, e -> Game.Move.down());
-        addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, e -> Game.Move.downdown());
-        addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, e -> Game.Move.rotate());
-        addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, e -> Game.Move.store());
-        addKeyBinding(lb, KeyEvent.VK_ESCAPE, "pause", true, e -> Game.Mechanics.pause());
+        addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
+            if (Move.left()) {
+                Effects.Sounds.playSound("/Tetris NES/SFX 4.mp3", 1.0, false);
+            }
+        });
+        addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, new String[]{"singleplayer"}, e -> {
+            if (Move.right()) {
+                Effects.Sounds.playSound("/Tetris NES/SFX 4.mp3", 1.0, false);
+            }
+        });
+        addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, new String[]{"singleplayer"}, e -> {
+            if (Move.down()) {
+                Var.score++;
+            }
+        });
+        addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, new String[]{"singleplayer"}, e -> Game.Move.downdown());
+        addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, new String[]{"singleplayer"}, e -> {
+            if (Move.rotate()) {
+                Effects.Sounds.playSound("/Tetris NES/SFX 6.mp3", 1.0, false);
+            }
+        });
+        addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, new String[]{"singleplayer"}, e -> Game.Move.store());
+        addKeyBinding(lb, KeyEvent.VK_ESCAPE, "pause", true, new String[]{"singleplayer", "pause"}, e -> Game.Mechanics.pause());
 
         add(lb);
         //addKeyListener(new KeyHandler());
@@ -64,14 +81,15 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         });
     }
 
-    private static void addKeyBinding(JComponent comp, int keyCode, String id, boolean once, ActionListener actionListener) {
-        addKeyBinding(comp, keyCode, 0, id, once, actionListener);
+    private static void addKeyBinding(JComponent comp, int keyCode, String id, boolean once, String[] gamestates, ActionListener actionListener) {
+        addKeyBinding(comp, keyCode, 0, id, once, gamestates, actionListener);
     }
 
-    private static void addKeyBinding(JComponent comp, int keyCode, int modifier, String id, boolean once, ActionListener actionListener) {
+    private static void addKeyBinding(JComponent comp, int keyCode, int modifier, String id, boolean once, String[] gamestates, ActionListener actionListener) {
         if (!once) {
-            timers.put(id, new Timer(30, actionListener));
-            timers.get(id).setInitialDelay(150);
+            //https://simon.lc/what-is-das-and-hyper-tapping-in-tetris
+            timers.put(id, new Timer((int) (1000*Var.ARR/60.0), actionListener));
+            timers.get(id).setInitialDelay((int) (1000*Var.DAS/60.0));
         }
 
         InputMap im = comp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -83,29 +101,41 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         ap.put(id, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!once && !timers.get(id).isRunning()) {
-                    actionListener.actionPerformed(e);
-                    timers.get(id).start();
+                if (Arrays.asList(gamestates).contains(Var.gameState)) {
+                    if (!once && !timers.get(id).isRunning()) {
+                        actionListener.actionPerformed(e);
+                        timers.get(id).start();
+                    }
+                    else if (once && !locked.contains(keyCode)) {
+                        actionListener.actionPerformed(e);
+                        locked.add(keyCode);
+                    }
                 }
-                else if (once && !locked.contains(keyCode)) {
-                    actionListener.actionPerformed(e);
-                    locked.add(keyCode);
+                else {
+                    System.out.println("locked");
                 }
             }
         });
         ap.put(id + "Released", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!once && timers.get(id).isRunning()) {
-                    timers.get(id).stop();
-                }
-                else if (once) {
-                    locked.remove(keyCode);
+                if (Arrays.asList(gamestates).contains(Var.gameState)) {
+                    if (!once && timers.get(id).isRunning()) {
+                        timers.get(id).stop();
+                    }
+                    else if (once) {
+                        locked.remove(keyCode);
+                    }
                 }
             }
         });
 
+    }
 
+    public static void resetKeybindingsTimers() {
+        for (Map.Entry<String, Timer> timerEntry : timers.entrySet()) {
+            timerEntry.getValue().stop();
+        }
     }
 
 

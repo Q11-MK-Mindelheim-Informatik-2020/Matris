@@ -1,5 +1,6 @@
 package Game;
 
+import Effects.Sounds;
 import Var.Var;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Mechanics extends TimerTask {
     @Override
     public void run() {
         if(!Move.down()) {
+            Sounds.playSound("/Tetris NES/SFX 8.mp3", 1.0, false);
             ArrayList<Integer> lines = new ArrayList<>();
 
             for (int j = 0; j < Var.m; j++) {
@@ -26,16 +28,19 @@ public class Mechanics extends TimerTask {
                     Var.linecounter++;
                     if (Var.linecounter%10 == 0) {
                         Var.level++;
+                        Effects.Sounds.playSound("/Tetris NES/SFX 7.mp3", 1.0, false);
                         System.out.println("Neues Level: " + Var.level);
                     }
                 }
             }
 
-
-            Move.removeLines(lines);
-
-            //System.out.println("Folgende Linien sind fertig: " + lines);
-            //System.out.println("Linien: " + Var.linecounter);
+            if (!lines.isEmpty()) {
+                try {
+                    Move.removeLines(lines);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
             Var.currentid++; //erhöhen der currentid
             Tetromino.spawnRandom(); //neuen stein mit der aktuellen id spawnen
@@ -51,14 +56,21 @@ public class Mechanics extends TimerTask {
     }
 
     public static void restartGame() {
-        reset();
+        resetValues();
         Tetromino.spawnRandom();
         GameStateHandler.changeGameState("singleplayer");
     }
-    private static void reset() {
-        Var.timer.cancel();
-        Var.timer.purge();
+
+    public static void resetTimer() {
+        try {
+            Var.timer.cancel();
+            Var.timer.purge();
+        }
+        catch (IllegalStateException e) {}
         Var.timer = new Timer();
+    }
+
+    private static void resetValues() {
         Var.level = 0;
         Var.score = 0;
         Var.linecounter = 0;
@@ -72,6 +84,7 @@ public class Mechanics extends TimerTask {
                 Var.spielfeld[i][j] = new Box(0);
             }
         }
+
     }
 
     public static void pause() {

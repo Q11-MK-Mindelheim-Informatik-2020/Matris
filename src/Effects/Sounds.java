@@ -1,97 +1,33 @@
 package Effects;
 
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import java.io.File;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Sounds {
 
-    //Funktion um Audio abspielen zu lassen
-    public static void playSound(String fileName, double startLoop, double endLoop, double volume) {
-        int startLoopFrame = getSampleFrame(fileName, (int)startLoop*1000000);
-        int endLoopFrame = getSampleFrame(fileName, (int)endLoop*1000000);
-        System.out.println(startLoopFrame + "||" + endLoopFrame);
-        try {
-            File audioFile = new File("rsc/Sounds/" + fileName);
-            if(audioFile.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(audioFile);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-                float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-                gainControl.setValue(dB);
-                clip.start();
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-                clip.setLoopPoints(startLoopFrame, endLoopFrame);
-                Thread handler = new Thread(new SoundHandler(clip));
-                handler.start();
-                //System.out.println("started");
-            }else{
-                System.out.println("Datei existiert nicht!");
+    public static MediaPlayer playSound(String filename, double volume, boolean repeat) {
+        return playSound(filename, volume, repeat, 0, MediaPlayer.INDEFINITE);
+    }
+
+    public static MediaPlayer playSound(String filename, double volume, boolean repeat, double start, double end) {
+        Media media = new Media(Sounds.class.getResource("/Sounds/" + filename).toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnReady(() -> {
+            mediaPlayer.setStartTime(Duration.seconds(start));
+            if (end == MediaPlayer.INDEFINITE) {
+                mediaPlayer.setStopTime(media.getDuration());
             }
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-    public static void playSound(String fileName, double volume) {
-        try {
-            //Erstelle und öffne Audio-Clip Objekt mithilfe eines audioInputStreams
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(Sounds.class.getResource("/Sounds/" + fileName)));
-
-            // Lautstärke einstellen
-            FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-            gainControl.setValue(dB);
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void playSoundEffect(String fileName, double volume) {
-        try {
-            //Erstelle und öffne Audio-Clip Objekt mithilfe eines audioInputStreams
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(Sounds.class.getResource("/Sounds/" + fileName)));
-
-            // Lautstärke einstellen
-            FloatControl gainControl = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-            gainControl.setValue(dB);
-            Thread handler = new Thread(new SoundHandler(clip));
-            handler.start();
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private static int getSampleFrame(String fileName, int microsec) {
-        int framePos = 0;
-        try {
-            File audioFile = new File("rsc/Sounds/" + fileName);
-            if(audioFile.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(audioFile);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.setMicrosecondPosition(microsec);
-                framePos = clip.getFramePosition();
-            }else{
-                System.out.println("Datei existiert nicht!");
+            else {
+                mediaPlayer.setStopTime(Duration.seconds(end));
             }
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return framePos;
+            if (repeat) {
+                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            }
+            mediaPlayer.setVolume(volume);
+            mediaPlayer.play();
+        });
+        return mediaPlayer;
     }
-
 }

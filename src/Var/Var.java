@@ -12,6 +12,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import Game.Box;
+import javafx.scene.media.MediaPlayer;
 import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
@@ -45,6 +46,7 @@ public class Var {
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
     public static int score, level;
     public static boolean ghostmode = false;
+    public static double ARR = 2, DAS = 12;
 
     public Var() {
         //Open Images
