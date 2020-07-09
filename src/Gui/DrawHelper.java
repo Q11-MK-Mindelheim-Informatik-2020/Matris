@@ -14,6 +14,10 @@ public class DrawHelper {
     public static DrawHelper restartButton = new DrawHelper("btn_restartgame", "btn_restartgame_pressed","btn_restartgame_hover");
     public static DrawHelper enterButton = new DrawHelper("btn_enter", "btn_enter_click","btn_enter_hover");
     public static DrawHelper optButton = new DrawHelper("btn_opt", "btn_opt_click","btn_opt_hover");
+    public static DrawHelper helpButton = new DrawHelper("btn_help", "btn_help_click","btn_help_hover");
+    public static DrawHelper resButton = new DrawHelper("btn_res", "btn_res_click","btn_res_hover");
+    public static DrawHelper menuButton = new DrawHelper("btn_menu", "btn_menu_click","btn_menu_hover");
+
 
     //public object specific variables
     public int elementWidth, elementHeight, elementX, elementY;

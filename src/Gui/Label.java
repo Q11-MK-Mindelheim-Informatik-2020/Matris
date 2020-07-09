@@ -29,7 +29,6 @@ public class Label extends JLabel implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
         // Startscreen
         if(Var.gameState.equals("homescreen") || Var.gameState.equals("startup")) {
 
@@ -37,32 +36,25 @@ public class Label extends JLabel implements ActionListener {
             DrawHelper.drawBackgroundImage("Startscreen", g);
             DrawHelper.startButton.drawButton("gamestate", "singleplayer", 400, Var.width/2, (Var.height/10)*6, g);
             DrawHelper.optButton.drawButton("gamestate", "options1", 400, Var.width/2, (Var.height/10)*8, g);
+            DrawHelper.helpButton.drawButton("gamestate", "controls", 100, Var.width-55, 50, g);
         // Singlepla8er
         } else if(Var.gameState.equals("options1")) {
-            /*
-            OPTIONEN
-
-            fps
-            Größe des Spielfelds (m und n)
-            ghostmode
-            ARR und DAS
-            Themes ?
-
-            Music
-            Lautstärke der Musik
-            Soundeffekts an aus
-            Lautstärke der Soundeffects
-            * */
-
-            // Draw Background
             DrawHelper.drawBackgroundImage("Singleplayer", g);
-            DrawHelper.drawCheckbox("Ghostmodus", Var.fontColor, Var.test, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*2, Var.width/30, "Comic Sans MS",() -> Var.test = !Var.test, g);
-            Var.m = (int)DrawHelper.drawSlider("Breite: "+Var.m, Var.fontColor, Var.m, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*3, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
-            Var.n = (int)DrawHelper.drawSlider("Länge:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*5, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            DrawHelper.drawCheckbox("Ghostmodus:", Var.fontColor, Var.ghostmode, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*2, Var.width/30, "Comic Sans MS",() -> Var.ghostmode = !Var.ghostmode, g);
+            Var.m = (int)DrawHelper.drawSlider("Höhe: "+Var.m, Var.fontColor, Var.m, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*3, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.tilesY = Var.m-4;
+            Var.n = (int)DrawHelper.drawSlider("Breite:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*5, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.tilesX = Var.n;
             Var.ARR = round(DrawHelper.drawSlider("ARR: "+Var.ARR, Var.fontColor, Var.ARR, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*7, Var.width/30, Var.width/3, 0.1, 0, 6, "Comic Sans MS", g), 1);
             Var.DAS = round(DrawHelper.drawSlider("DAS:  "+Var.DAS, Var.fontColor, Var.DAS, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*9, Var.width/30, Var.width/3, 0.1, 0, 20, "Comic Sans MS", g), 1);
             Var.volume = (int)DrawHelper.drawSlider("Lautstärke:  "+Var.volume, Var.fontColor, Var.volume, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*11, Var.width/30, Var.width/3, 5, 0, 100, "Comic Sans MS", g);
             DrawHelper.enterButton.drawButton("gamestate", "startup", 300, Var.width/2, (Var.height/15)*13, g);
+        } else if(Var.gameState.equals("controls")) {
+            DrawHelper.drawBackgroundImage("Singleplayer", g);
+            DrawHelper.drawBackgroundImage("controls", g);
+            DrawHelper.enterButton.drawButton("gamestate", "startup", 300, Var.width/2, (Var.height/15)*14, g);
+
+
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
 
             // Draw Background
@@ -85,7 +77,9 @@ public class Label extends JLabel implements ActionListener {
             // Draw Pausescreen
             if (Var.gameState.equals("pause")) {
                 DrawHelper.drawBackgroundImage("Pausescreen", g);
-                DrawHelper.restartButton.drawButton("restart", null, 400, Var.width/2, Var.height-Var.height/4, g);
+                DrawHelper.restartButton.drawButton("restart", null, 400, Var.width/2, (Var.height/20)*10, g);
+                DrawHelper.resButton.drawButton("gamestate", "singleplayer", 400, Var.width/2, (Var.height/20)*14, g);
+                DrawHelper.menuButton.drawButton("gamestate", "startup", 400, Var.width/2, (Var.height/20)*18, g);
             }
             // Draw Gameover-screen
             else if (Var.gameState.equals("gameover")) {
