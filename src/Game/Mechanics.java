@@ -12,7 +12,7 @@ public class Mechanics extends TimerTask {
     @Override
     public void run() {
         if(!Move.down()) {
-            Sounds.playSound("/Tetris NES/SFX 8.mp3", 1.0, false);
+            Sounds.playSound("/SFX/NES - land.mp3", 1.0, false);
             ArrayList<Integer> lines = new ArrayList<>();
 
             for (int j = 0; j < Var.m; j++) {
@@ -28,7 +28,7 @@ public class Mechanics extends TimerTask {
                     Var.linecounter++;
                     if (Var.linecounter%10 == 0) {
                         Var.level++;
-                        Effects.Sounds.playSound("/Tetris NES/SFX 7.mp3", 1.0, false);
+                        Effects.Sounds.playSound("/SFX/NES - level up.mp3", 1.0, false);
                         System.out.println("Neues Level: " + Var.level);
                     }
                 }
@@ -61,7 +61,7 @@ public class Mechanics extends TimerTask {
         GameStateHandler.changeGameState("singleplayer");
     }
 
-    public static void resetTimer() {
+    static void resetTimer() {
         try {
             Var.timer.cancel();
             Var.timer.purge();

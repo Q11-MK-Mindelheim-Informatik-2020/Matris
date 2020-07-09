@@ -215,17 +215,27 @@ public class Move {
 
         deactived = true;
 
+        int l = lines.size(); //Anzahl der linien
+        if (l == 4) {
+            Sounds.playSound("/SFX/NES - tetris clear.mp3", 1.0, false);
+        }
+        else {
+            Sounds.playSound("/SFX/NES - line clear.mp3", 1.0, false);
+        }
+
+        Thread.sleep(33);
+
         if (Var.n % 2 == 1) {
             for (int j : lines) {
                 Var.spielfeld[Var.n/2+1][j] = new Box(0);
             }
-            Thread.sleep(100);
+            Thread.sleep(66);
             for (int i = 1; i < Var.n/2; i++) {
                 for (int j: lines) {
                     Var.spielfeld[Var.n/2+1-i][j] = new Box(0);
                     Var.spielfeld[Var.n/2+1+i][j] = new Box(0);
                 }
-                Thread.sleep(100);
+                Thread.sleep(66);
             }
         }
         else {
@@ -234,7 +244,7 @@ public class Move {
                     Var.spielfeld[Var.n/2+i][j] = new Box( 0);
                     Var.spielfeld[Var.n/2-1-i][j] = new Box( 0);
                 }
-                Thread.sleep(100);
+                Thread.sleep(66);
             }
         }
 
@@ -260,22 +270,8 @@ public class Move {
                 }
             }
         }
-        int l = lines.size(); //Anzahl der linien
+
         Var.score += (Var.level+1)*(5*l*(l*(l*(11*l - 54) + 91) - 24))/3;
-        switch (l) {
-            case 1:
-                Sounds.playSound("holyshit.mp3", 1.0, false);
-                break;
-            case 2:
-                Sounds.playSound("dominating.mp3", 1.0, false);
-                break;
-            case 3:
-                Sounds.playSound("rampage.mp3", 1.0, false);
-                break;
-            case 4:
-                Sounds.playSound("godlike.mp3", 1.0, false);
-                break;
-        }
         //Polynom vierten Grades in Horner Form, das die Punkte für l Linien berechnet.
         //Siehe https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
     }
@@ -337,6 +333,7 @@ public class Move {
     public static boolean store() {
         if (Var.gameState.equals("singleplayer") && !Var.stored) {
             Mechanics.resetTimer();
+            Effects.Sounds.playSound("/SFX/NES - store.mp3", 1.0, false);
             char shape = Var.currentTetrominoshape;
             removeTetromino();
             if (Var.storedTetromino == 'x') {
@@ -351,6 +348,7 @@ public class Move {
             return true;
         }
         else {
+            Effects.Sounds.playSound("/SFX/NES - store lock.mp3", 1.0, false);
             return false;
         }
     }

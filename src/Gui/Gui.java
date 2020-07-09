@@ -5,6 +5,7 @@ import javax.swing.Timer;
 import Game.GameStateHandler;
 import Game.Move;
 import Var.Var;
+import javafx.scene.media.MediaPlayer;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,6 +17,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
 
     private static HashMap<String, Timer> timers = new HashMap<>();
     private static HashSet<Integer> locked = new HashSet<>();
+    private static MediaPlayer leftSound, rightSound;
 
     public Gui() {
         Label lb;
@@ -30,12 +32,28 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
 
         addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
             if (Move.left()) {
-                Effects.Sounds.playSound("/Tetris NES/SFX 4.mp3", 1.0, false);
+                if (leftSound == null) {
+                    leftSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, false, 0.07, 0.08);
+                }
+                else if (leftSound.getCycleCount() == 1) {
+                    leftSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, true, 0.07, 0.08);
+                }
+            }
+            else if (leftSound != null && leftSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                leftSound.setCycleCount(0);
             }
         });
         addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, new String[]{"singleplayer"}, e -> {
             if (Move.right()) {
-                Effects.Sounds.playSound("/Tetris NES/SFX 4.mp3", 1.0, false);
+                if (rightSound == null) {
+                    rightSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, false, 0.07, 0.08);
+                }
+                else if (rightSound.getCycleCount() == 1) {
+                    rightSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, true, 0.07, 0.08);
+                }
+            }
+            else if (rightSound != null && rightSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                rightSound.setCycleCount(0);
             }
         });
         addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, new String[]{"singleplayer"}, e -> {
@@ -46,7 +64,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, new String[]{"singleplayer"}, e -> Game.Move.downdown());
         addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, new String[]{"singleplayer"}, e -> {
             if (Move.rotate()) {
-                Effects.Sounds.playSound("/Tetris NES/SFX 6.mp3", 1.0, false);
+                Effects.Sounds.playSound("/SFX/NES - store lock.mp3", 1.0, false);
             }
         });
         addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, new String[]{"singleplayer"}, e -> Game.Move.store());
@@ -67,9 +85,9 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(WindowEvent e) {
-                if(Var.gameState.equals("pause")) {
+                /*if(Var.gameState.equals("pause")) {
                     GameStateHandler.changeGameState("singleplayer");
-                }
+                }*/
             }
 
             @Override
@@ -111,9 +129,6 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
                         locked.add(keyCode);
                     }
                 }
-                else {
-                    System.out.println("locked");
-                }
             }
         });
         ap.put(id + "Released", new AbstractAction() {
@@ -122,6 +137,14 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
                 if (Arrays.asList(gamestates).contains(Var.gameState)) {
                     if (!once && timers.get(id).isRunning()) {
                         timers.get(id).stop();
+                        if (id.equals("right") && rightSound != null) {
+                            rightSound.dispose();
+                            rightSound = null;
+                        }
+                        if (id.equals("left") && leftSound != null) {
+                            leftSound.dispose();
+                            leftSound = null;
+                        }
                     }
                     else if (once) {
                         locked.remove(keyCode);
