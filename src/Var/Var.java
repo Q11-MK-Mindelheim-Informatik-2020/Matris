@@ -24,6 +24,7 @@ public class Var {
     public static int m = 24; //Größe des Spielfeld-arrays: [n][m]
     public static int n = 10;
     public static boolean ghostmode = false;
+    public static int volume = 50;
 
     public static boolean test = false;
     public static int currentid = 1; //ID des aktiven/fallenden Blöcken

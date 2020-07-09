@@ -12,6 +12,8 @@ public class DrawHelper {
     //predefined buttons:
     public static DrawHelper startButton = new DrawHelper("btn_startgame", "btn_startgame_pressed","btn_startgame_hover");
     public static DrawHelper restartButton = new DrawHelper("btn_restartgame", "btn_restartgame_pressed","btn_restartgame_hover");
+    public static DrawHelper enterButton = new DrawHelper("btn_enter", "btn_enter_click","btn_enter_hover");
+    public static DrawHelper optButton = new DrawHelper("btn_opt", "btn_opt_click","btn_opt_hover");
 
     //public object specific variables
     public int elementWidth, elementHeight, elementX, elementY;
@@ -75,10 +77,10 @@ public class DrawHelper {
     public static void drawCheckbox(String labelText, Color labelColor,  boolean actionVariable, int cornerX, int boxCornerX, int cornerY, int size, String fontName, Runnable run, Graphics g) {
         BufferedImage image = null;
         drawText(labelText, cornerX, cornerY, labelColor, size, fontName, g);
-        if (isInsideBox(Var.mouseX, Var.mouseY, boxCornerX, cornerY-size, size, size) && Var.mouseClicked) { //Check if mouse is pressed while hovering over the
+        if (isInsideBox(Var.mouseX, Var.mouseY, boxCornerX+size/2, cornerY-size, size, size) && Var.mouseClicked) { //Check if mouse is pressed while hovering over the
             Var.tempCheckboxClick = true;
             if(actionVariable) { image = Var.images.get("checkbox_click_checked"); } else { image = Var.images.get("checkbox_click_unchecked"); }
-        } else if(isInsideBox(Var.mouseX, Var.mouseY, boxCornerX, cornerY-size, size, size)) { //Check if mouse is hovering over the button
+        } else if(isInsideBox(Var.mouseX, Var.mouseY, boxCornerX+size/2, cornerY-size, size, size)) { //Check if mouse is hovering over the button
             if(Var.tempCheckboxClick) {
                 run.run();
                 Var.tempCheckboxClick = false;
@@ -87,7 +89,7 @@ public class DrawHelper {
         } else {
             if(actionVariable) { image = Var.images.get("checkbox_idle_checked"); } else { image = Var.images.get("checkbox_idle_unchecked"); }
         }
-        g.drawImage(image, boxCornerX, cornerY-size, size, size, null);
+        g.drawImage(image, boxCornerX+size/2, cornerY-size, size, size, null);
     }
 
     public static double drawSlider(String labelText, Color labelColor, double actionVariable, int cornerX, int sliderCornerX, int cornerY, int height, int width, double step, double start, double end, String fontName, Graphics g) {

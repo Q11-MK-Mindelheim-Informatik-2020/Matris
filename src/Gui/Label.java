@@ -5,11 +5,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
 
 public class Label extends JLabel implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private Timer timer = new Timer(1000/Var.fps, this); //refresh-Zeit
+    private static DecimalFormat dF = new DecimalFormat("#.#");
+
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
 
     public void paintComponent(Graphics g) {
 
@@ -23,8 +35,9 @@ public class Label extends JLabel implements ActionListener {
 
             // Draw Startscreen
             DrawHelper.drawBackgroundImage("Startscreen", g);
-            DrawHelper.startButton.drawButton("gamestate", "singleplayer", 400, Var.width/2, Var.height/2, g);
-        // Singleplayer
+            DrawHelper.startButton.drawButton("gamestate", "singleplayer", 400, Var.width/2, (Var.height/10)*6, g);
+            DrawHelper.optButton.drawButton("gamestate", "options1", 400, Var.width/2, (Var.height/10)*8, g);
+        // Singlepla8er
         } else if(Var.gameState.equals("options1")) {
             /*
             OPTIONEN
@@ -43,9 +56,13 @@ public class Label extends JLabel implements ActionListener {
 
             // Draw Background
             DrawHelper.drawBackgroundImage("Singleplayer", g);
-            DrawHelper.drawCheckbox("Ghostmodus", Var.fontColor, Var.test, 100, 300, 200, 50, "Comic Sans MS",() -> Var.test = !Var.test, g);
-            Var.m = (int)DrawHelper.drawSlider("Breite: "+Var.m, Var.fontColor, Var.m, Var.width/7, (Var.width/5)*2, 450, Var.width/20, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
-            Var.n = (int)DrawHelper.drawSlider("Länge:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (Var.width/5)*2, 550, Var.width/20, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            DrawHelper.drawCheckbox("Ghostmodus", Var.fontColor, Var.test, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*2, Var.width/30, "Comic Sans MS",() -> Var.test = !Var.test, g);
+            Var.m = (int)DrawHelper.drawSlider("Breite: "+Var.m, Var.fontColor, Var.m, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*3, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.n = (int)DrawHelper.drawSlider("Länge:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*5, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.ARR = round(DrawHelper.drawSlider("ARR: "+Var.ARR, Var.fontColor, Var.ARR, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*7, Var.width/30, Var.width/3, 0.1, 0, 6, "Comic Sans MS", g), 1);
+            Var.DAS = round(DrawHelper.drawSlider("DAS:  "+Var.DAS, Var.fontColor, Var.DAS, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*9, Var.width/30, Var.width/3, 0.1, 0, 20, "Comic Sans MS", g), 1);
+            Var.volume = (int)DrawHelper.drawSlider("Lautstärke:  "+Var.volume, Var.fontColor, Var.volume, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*11, Var.width/30, Var.width/3, 5, 0, 100, "Comic Sans MS", g);
+            DrawHelper.enterButton.drawButton("gamestate", "startup", 300, Var.width/2, (Var.height/15)*13, g);
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
 
             // Draw Background
