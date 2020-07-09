@@ -71,6 +71,59 @@ public class DrawHelper {
         g.drawString(string, x, y);
     }
 
+    //function to draw checkbox
+    public static void drawCheckbox(String labelText, Color labelColor,  boolean actionVariable, int cornerX, int boxCornerX, int cornerY, int size, String fontName, Runnable run, Graphics g) {
+        BufferedImage image = null;
+        drawText(labelText, cornerX, cornerY, labelColor, size, fontName, g);
+        if (isInsideBox(Var.mouseX, Var.mouseY, boxCornerX, cornerY-size, size, size) && Var.mouseClicked) { //Check if mouse is pressed while hovering over the
+            Var.tempCheckboxClick = true;
+            if(actionVariable) { image = Var.images.get("checkbox_click_checked"); } else { image = Var.images.get("checkbox_click_unchecked"); }
+        } else if(isInsideBox(Var.mouseX, Var.mouseY, boxCornerX, cornerY-size, size, size)) { //Check if mouse is hovering over the button
+            if(Var.tempCheckboxClick) {
+                run.run();
+                Var.tempCheckboxClick = false;
+            }
+            if(actionVariable) { image = Var.images.get("checkbox_hover_checked"); } else { image = Var.images.get("checkbox_hover_unchecked"); }
+        } else {
+            if(actionVariable) { image = Var.images.get("checkbox_idle_checked"); } else { image = Var.images.get("checkbox_idle_unchecked"); }
+        }
+        g.drawImage(image, boxCornerX, cornerY-size, size, size, null);
+    }
+
+    public static double drawSlider(String labelText, Color labelColor, double actionVariable, int cornerX, int sliderCornerX, int cornerY, int height, int width, double step, double start, double end, String fontName, Graphics g) {
+        BufferedImage image = null;
+        double returnValue = actionVariable;
+        int buttonX = (int)(sliderCornerX+Math.floor(actionVariable/step)*step*(width/(end-start)));
+        int buttonY = cornerY;
+        drawText(labelText, cornerX, cornerY+(int)(height*0.8), labelColor, height, fontName, g);
+        g.drawImage(Var.images.get("slider_bar"), sliderCornerX + height/2, cornerY + height/3, width, height/3, null);
+        if ((isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, height, height) && Var.mouseClicked) || (Var.tempSliderTouched && Var.mouseDragged && isInsideBox(Var.mouseX, Var.mouseY, sliderCornerX, cornerY-height/2, width+height, height*2))) { //Check if mouse is pressed while hovering over the
+            Var.tempSliderTouched = true;
+            double boxMousePercent = (( Var.mouseX-sliderCornerX )/(double)width);
+            if(boxMousePercent<=0) {
+                buttonX = sliderCornerX;
+                returnValue = start;
+            } else if(boxMousePercent>=1) {
+                buttonX = sliderCornerX+width;
+                returnValue = end;
+            } else {
+                double value = (Math.floor((((Var.mouseX - sliderCornerX) / (double) width) * (end - start)) / step) * step);
+                buttonX = (int) (sliderCornerX + value * (width / (end - start)));
+                returnValue = value;
+            }
+            image = Var.images.get("slider_button_click");
+        } else if(isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, height, height)) { //Check if mouse is hovering over the button
+            if(Var.tempSliderTouched) {
+                Var.tempSliderTouched = false;
+            }
+            image = Var.images.get("slider_button_hover");
+        } else {
+            image = Var.images.get("slider_button_idle");
+        }
+        g.drawImage(image, buttonX, buttonY, height, height, null);
+        return returnValue;
+    }
+
     //function to draw background tiles
     public static void drawBackgroundTiles(int tilesX, int tilesY, int padding, Graphics g) {
         int tileSize = ((Var.height - 2*padding) / tilesY);
@@ -145,7 +198,8 @@ public class DrawHelper {
     }
 
     //function to check coordinate collisions
-    private boolean isInsideBox(int testX, int testY, int x, int y, int width, int height) {
+    private static boolean isInsideBox(int testX, int testY, int x, int y, int width, int height) {
         return testX >= x && testX <= (x + width) && testY >= y && testY <= (y + height);
     }
+
 }

@@ -24,8 +24,28 @@ public class Label extends JLabel implements ActionListener {
             // Draw Startscreen
             DrawHelper.drawBackgroundImage("Startscreen", g);
             DrawHelper.startButton.drawButton("gamestate", "singleplayer", 400, Var.width/2, Var.height/2, g);
-
         // Singleplayer
+        } else if(Var.gameState.equals("options1")) {
+            /*
+            OPTIONEN
+
+            fps
+            Größe des Spielfelds (m und n)
+            ghostmode
+            ARR und DAS
+            Themes ?
+
+            Music
+            Lautstärke der Musik
+            Soundeffekts an aus
+            Lautstärke der Soundeffects
+            * */
+
+            // Draw Background
+            DrawHelper.drawBackgroundImage("Singleplayer", g);
+            DrawHelper.drawCheckbox("Ghostmodus", Var.fontColor, Var.test, 100, 300, 200, 50, "Comic Sans MS",() -> Var.test = !Var.test, g);
+            Var.m = (int)DrawHelper.drawSlider("Breite: "+Var.m, Var.fontColor, Var.m, Var.width/7, (Var.width/5)*2, 450, Var.width/20, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.n = (int)DrawHelper.drawSlider("Länge:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (Var.width/5)*2, 550, Var.width/20, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
 
             // Draw Background
