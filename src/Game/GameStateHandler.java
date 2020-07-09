@@ -33,6 +33,7 @@ public class GameStateHandler {
 //                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
             case "pause":
+            case "options1":
                 Mechanics.resetTimer();
                 break;
             case "gameover":

@@ -19,13 +19,18 @@ import javax.imageio.ImageIO;
 
 public class Var {
 
+    // Optionsvariablen
+    public static int fps = 30;
+    public static int m = 30; //Größe des Spielfeld-arrays: [n][m]
+    public static int n = 17;
+    public static boolean ghostmode = false;
+
+    public static boolean test = false;
     public static int currentid = 1; //ID des aktiven/fallenden Blöcken
     public static String gameState = "startup";
     public static boolean mouseClicked = false;
     public static int mouseX = 0, mouseY = 0;
-    public static int fps = 30;
-    public static int m = 24; //Größe des Spielfeld-arrays: [n][m]
-    public static int n = 10;
+    public static boolean tempCheckboxClick = false, tempSliderTouched = false, mouseDragged;
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
@@ -45,7 +50,6 @@ public class Var {
     public static HashMap<String, BufferedImage> images = new HashMap<>();
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
     public static int score, level;
-    public static boolean ghostmode = false;
     public static double ARR = 2, DAS = 12;
 
     public Var() {

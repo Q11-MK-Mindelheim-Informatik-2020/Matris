@@ -21,7 +21,7 @@ public class Main {
 
         Game.Tetromino.spawnRandom();
 
-        Game.GameStateHandler.changeGameState("startup");
+        Game.GameStateHandler.changeGameState("options1");
         EventQueue.invokeLater(() -> {
             try {
                 Gui frame = new Gui();
