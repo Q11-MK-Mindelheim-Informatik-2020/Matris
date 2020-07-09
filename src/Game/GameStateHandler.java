@@ -17,6 +17,14 @@ public class GameStateHandler {
         }
         switch(state) {
             case "startup":
+                Var.spielfeld = new Box[Var.n][Var.m];
+                for(int i = 0; i < Var.n; i++) {
+                    for(int j = 0; j < Var.m; j++) {
+                        Var.spielfeld[i][j] = new Box(0);
+                    }
+                }
+                Game.Tetromino.spawnRandom();
+                break;
             case "homescreen":
 //                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;

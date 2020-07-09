@@ -21,8 +21,8 @@ public class Var {
 
     // Optionsvariablen
     public static int fps = 30;
-    public static int m = 30; //Größe des Spielfeld-arrays: [n][m]
-    public static int n = 17;
+    public static int m = 24; //Größe des Spielfeld-arrays: [n][m]
+    public static int n = 10;
     public static boolean ghostmode = false;
 
     public static boolean test = false;
