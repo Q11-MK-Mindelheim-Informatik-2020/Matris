@@ -41,10 +41,10 @@ public class Label extends JLabel implements ActionListener {
         } else if(Var.gameState.equals("options1")) {
             DrawHelper.drawBackgroundImage("Singleplayer", g);
             DrawHelper.drawCheckbox("Ghostmodus:", Var.fontColor, Var.ghostmode, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*2, Var.width/30, "Comic Sans MS",() -> Var.ghostmode = !Var.ghostmode, g);
-            Var.m = (int)DrawHelper.drawSlider("Höhe: "+Var.m, Var.fontColor, Var.m, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*3, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
-            Var.tilesY = Var.m-4;
-            Var.n = (int)DrawHelper.drawSlider("Breite:  "+Var.n, Var.fontColor, Var.n, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*5, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
-            Var.tilesX = Var.n;
+            Var.tilesY = (int)DrawHelper.drawSlider("Höhe: "+Var.tilesY, Var.fontColor, Var.tilesY, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*3, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.tilesX = (int)DrawHelper.drawSlider("Breite:  "+Var.tilesX, Var.fontColor, Var.tilesX, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*5, Var.width/30, Var.width/3, 2, 0, 30, "Comic Sans MS", g);
+            Var.m = Var.tilesY + 4;
+            Var.n = Var.tilesX;
             Var.ARR = round(DrawHelper.drawSlider("ARR: "+Var.ARR, Var.fontColor, Var.ARR, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*7, Var.width/30, Var.width/3, 0.1, 0, 6, "Comic Sans MS", g), 1);
             Var.DAS = round(DrawHelper.drawSlider("DAS:  "+Var.DAS, Var.fontColor, Var.DAS, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*9, Var.width/30, Var.width/3, 0.1, 0, 20, "Comic Sans MS", g), 1);
             Var.volume = (int)DrawHelper.drawSlider("Lautstärke:  "+Var.volume, Var.fontColor, Var.volume, Var.width/7, (int)((Var.width/5)*2.5), (Var.height/15)*11, Var.width/30, Var.width/3, 5, 0, 100, "Comic Sans MS", g);
@@ -58,7 +58,8 @@ public class Label extends JLabel implements ActionListener {
         } else if(Var.gameState.equals("singleplayer") || Var.gameState.equals("pause") || Var.gameState.equals("gameover")) {
 
             // Draw Background
-            DrawHelper.drawBackgroundImage("Singleplayer", g);
+            //DrawHelper.drawBackgroundImage("Singleplayer", g);
+            DrawHelper.drawBackgroundImage("Singleplayer" + Var.currentBackgroundID, g);
 
             // Draw Score-elements
             DrawHelper.drawText("Punktestand: " + Var.score, 20,40, Var.fontColor, 30, "Comic Sans MS", g);

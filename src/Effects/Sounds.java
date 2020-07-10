@@ -1,9 +1,10 @@
 package Effects;
 
 
-import javafx.scene.media.Media;
+import Var.Var;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
 
 public class Sounds {
 
@@ -12,12 +13,14 @@ public class Sounds {
     }
 
     public static MediaPlayer playSound(String filename, double volume, boolean repeat, double start, double end) {
-        Media media = new Media(Sounds.class.getResource("/Sounds/" + filename).toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        //Media media = new Media(Sounds.class.getResource("/Sounds/" + filename));
+        //System.out.println(Var.sounds.get(filename));
+        MediaPlayer mediaPlayer = new MediaPlayer(Var.sounds.get(filename));
+
         mediaPlayer.setOnReady(() -> {
             mediaPlayer.setStartTime(Duration.seconds(start));
             if (end == MediaPlayer.INDEFINITE) {
-                mediaPlayer.setStopTime(media.getDuration());
+                mediaPlayer.setStopTime(Var.sounds.get(filename).getDuration());
             }
             else {
                 mediaPlayer.setStopTime(Duration.seconds(end));
@@ -25,7 +28,7 @@ public class Sounds {
             if (repeat) {
                 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             }
-            mediaPlayer.setVolume(volume);
+            mediaPlayer.setVolume(Var.volume*volume/100);
             mediaPlayer.play();
         });
         return mediaPlayer;

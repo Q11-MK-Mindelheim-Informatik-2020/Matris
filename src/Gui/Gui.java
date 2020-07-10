@@ -33,27 +33,31 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
             if (Move.left()) {
                 if (leftSound == null) {
-                    leftSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, false, 0.07, 0.08);
+                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.08);
                 }
                 else if (leftSound.getCycleCount() == 1) {
-                    leftSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, true, 0.07, 0.08);
+                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);
                 }
             }
             else if (leftSound != null && leftSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
                 leftSound.setCycleCount(0);
+                leftSound.stop();
+                leftSound.dispose();
             }
         });
         addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, new String[]{"singleplayer"}, e -> {
             if (Move.right()) {
                 if (rightSound == null) {
-                    rightSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, false, 0.07, 0.08);
+                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.08);
                 }
                 else if (rightSound.getCycleCount() == 1) {
-                    rightSound = Effects.Sounds.playSound("/SFX/NES - move.mp3", 1.0, true, 0.07, 0.08);
+                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);
                 }
             }
             else if (rightSound != null && rightSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
                 rightSound.setCycleCount(0);
+                rightSound.stop();
+                rightSound.dispose();
             }
         });
         addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, new String[]{"singleplayer"}, e -> {
@@ -64,7 +68,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, new String[]{"singleplayer"}, e -> Game.Move.downdown());
         addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, new String[]{"singleplayer"}, e -> {
             if (Move.rotate()) {
-                Effects.Sounds.playSound("/SFX/NES - store lock.mp3", 1.0, false);
+                Effects.Sounds.playSound("NES - rotate.mp3", 1.0, false);
             }
         });
         addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, new String[]{"singleplayer"}, e -> Game.Move.store());

@@ -3,8 +3,6 @@ package Game;
 import Var.Var;
 import javafx.scene.media.MediaPlayer;
 
-import java.util.Timer;
-
 public class GameStateHandler {
 
     private static MediaPlayer backgroundmusic;
@@ -23,6 +21,7 @@ public class GameStateHandler {
                         Var.spielfeld[i][j] = new Box(0);
                     }
                 }
+                Var.updateTetrominos();
                 Game.Tetromino.spawnRandom();
                 break;
             case "homescreen":
@@ -33,7 +32,7 @@ public class GameStateHandler {
                 Var.timer.schedule(new Mechanics(), Mechanics.getTime());
                 if (backgroundmusic == null) {
                     //backgroundmusic = Effects.Sounds.playSound("Worstholdmusicever.mp3", 1.0, true, 10.6, 49);
-                    backgroundmusic = Effects.Sounds.playSound("/BGmusic/Gameboy - Tetris Theme.mp3", 0.6, true);
+                    backgroundmusic = Effects.Sounds.playSound("Gameboy - Tetris Theme.mp3", 0.6, true);
                 }
                 else {
                     backgroundmusic.play();
@@ -44,12 +43,12 @@ public class GameStateHandler {
             case "controls":
             case "options1":
                 Mechanics.resetTimer();
-                Effects.Sounds.playSound("/SFX/NES - pause.mp3", 1.0, false);
+                Effects.Sounds.playSound("NES - pause.mp3", 1.0, false);
                 break;
             case "gameover":
                 Mechanics.resetTimer();
                 Gui.Gui.resetKeybindingsTimers();
-                Effects.Sounds.playSound("/SFX/NES - gameover.mp3", 1.0, false);
+                Effects.Sounds.playSound("NES - gameover.mp3", 1.0, false);
                 System.out.println("Ende!");
                 break;
         }

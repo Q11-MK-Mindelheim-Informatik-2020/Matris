@@ -217,10 +217,10 @@ public class Move {
 
         int l = lines.size(); //Anzahl der linien
         if (l == 4) {
-            Sounds.playSound("/SFX/NES - tetris clear.mp3", 1.0, false);
+            Sounds.playSound("NES - tetris clear.mp3", 1.0, false);
         }
         else {
-            Sounds.playSound("/SFX/NES - line clear.mp3", 1.0, false);
+            Sounds.playSound("NES - line clear.mp3", 1.0, false);
         }
 
         Thread.sleep(33);
@@ -333,7 +333,7 @@ public class Move {
     public static boolean store() {
         if (Var.gameState.equals("singleplayer") && !Var.stored) {
             Mechanics.resetTimer();
-            Effects.Sounds.playSound("/SFX/NES - store.mp3", 1.0, false);
+            Effects.Sounds.playSound("NES - store.mp3", 1.0, false);
             char shape = Var.currentTetrominoshape;
             removeTetromino();
             if (Var.storedTetromino == 'x') {
@@ -348,7 +348,7 @@ public class Move {
             return true;
         }
         else {
-            Effects.Sounds.playSound("/SFX/NES - store lock.mp3", 1.0, false);
+            //Effects.Sounds.playSound("NES - store lock.mp3", 1.0, false);
             return false;
         }
     }

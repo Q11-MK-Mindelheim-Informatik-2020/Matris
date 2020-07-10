@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.CodeSource;
 import java.util.*;
 import java.util.List;
@@ -12,10 +13,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import Game.Box;
-import javafx.scene.media.MediaPlayer;
 import sun.misc.Launcher;
 
 import javax.imageio.ImageIO;
+import javafx.scene.media.Media;
 
 public class Var {
 
@@ -38,7 +39,7 @@ public class Var {
     public static int itemBoxSize = 90, itemBoxCount = 5;
     public static double itemScalingFactor = 0.8;
     public static int padding = 5;
-    public static Box[][] spielfeld = new Box[n][m]; //Spielfeld mit Box-Objekten
+    public static Box[][] spielfeld; //Spielfeld mit Box-Objekten
     public static int width = 1280, height = 720;
     public static Color backgroundColor = new Color(24, 21, 33), fontColor = new Color(22,96,170);
     public static boolean stopSignal = false;
@@ -50,8 +51,10 @@ public class Var {
     public static Timer timer = new Timer();
     public static HashMap<String, BufferedImage> images = new HashMap<>();
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
+    public static HashMap<String, Media> sounds = new HashMap<>();
     public static int score, level;
     public static double ARR = 2, DAS = 12;
+    public static int currentBackgroundID = (int) (Math.random()*20);
 
     public Var() {
         //Open Images
@@ -70,6 +73,15 @@ public class Var {
                         String filename = entryName.substring(index+1, entryName.length()-4);
                         images.put(filename, ImageIO.read(Var.class.getResourceAsStream("/" + entryName)));
                         //System.out.println(filename);
+                    }
+                    if (entryName.startsWith("Sounds") && entryName.endsWith(".mp3")) {
+                        String filename = entryName.substring(entryName.lastIndexOf("/")+1);
+                        //System.out.println(filename);
+                        try {
+                            sounds.put(filename, new Media(Var.class.getResource("/" + entryName).toURI().toString()));
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -96,6 +108,10 @@ public class Var {
             System.out.println("Fehler beim laden der Bilder!");
         }
 
+        updateTetrominos();
+    }
+
+    public static void updateTetrominos() {
         //Tetrominos
         int k = (int) Math.ceil(Var.n/2.0);
         Tetrominos.put('I', new int[][]{

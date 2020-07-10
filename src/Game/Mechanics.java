@@ -12,7 +12,7 @@ public class Mechanics extends TimerTask {
     @Override
     public void run() {
         if(!Move.down()) {
-            Sounds.playSound("/SFX/NES - land.mp3", 1.0, false);
+            Sounds.playSound("NES - land.mp3", 1.0, false);
             ArrayList<Integer> lines = new ArrayList<>();
 
             for (int j = 0; j < Var.m; j++) {
@@ -28,7 +28,8 @@ public class Mechanics extends TimerTask {
                     Var.linecounter++;
                     if (Var.linecounter%10 == 0) {
                         Var.level++;
-                        Effects.Sounds.playSound("/SFX/NES - level up.mp3", 1.0, false);
+                        Var.currentBackgroundID = (int) (Math.random()*20);
+                        Effects.Sounds.playSound("NES - level up.mp3", 1.0, false);
                         System.out.println("Neues Level: " + Var.level);
                     }
                 }
@@ -71,6 +72,7 @@ public class Mechanics extends TimerTask {
     }
 
     private static void resetValues() {
+        Var.currentBackgroundID = (int) (Math.random()*20);
         Var.level = 0;
         Var.score = 0;
         Var.linecounter = 0;
