@@ -33,7 +33,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
             if (Move.left()) {
                 if (leftSound == null) {
-                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.08);
+                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.07);
                 }
                 else if (leftSound.getCycleCount() == 1) {
                     leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);
@@ -48,7 +48,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, new String[]{"singleplayer"}, e -> {
             if (Move.right()) {
                 if (rightSound == null) {
-                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.08);
+                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.07);
                 }
                 else if (rightSound.getCycleCount() == 1) {
                     rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);

@@ -68,9 +68,9 @@ public class Var {
                 ZipEntry ze;
                 while((ze = zip.getNextEntry() ) != null ) {
                     String entryName = ze.getName();
-                    if(entryName.startsWith("Pictures") &&  entryName.endsWith(".png") ) {
+                    if(entryName.startsWith("Pictures") &&  (entryName.endsWith(".png") || entryName.endsWith(".jpeg"))) {
                         int index = entryName.lastIndexOf("/");
-                        String filename = entryName.substring(index+1, entryName.length()-4);
+                        String filename = entryName.substring(index+1, entryName.length()-4 - (entryName.endsWith(".jpeg") ? 1 : 0));
                         images.put(filename, ImageIO.read(Var.class.getResourceAsStream("/" + entryName)));
                         //System.out.println(filename);
                     }
@@ -93,8 +93,22 @@ public class Var {
                         for (File subfolder : Objects.requireNonNull(subfolders.listFiles())) {
                             for (File image : Objects.requireNonNull(subfolder.listFiles())) {
                                 String imagename = image.getName();
-                                images.put(imagename.substring(0,imagename.length()-4), ImageIO.read(image));
+                                images.put(imagename.substring(0,imagename.length()-4 - (imagename.endsWith(".jpeg") ? 1 : 0)), ImageIO.read(image));
                                 //System.out.println(imagename.substring(0,imagename.length()-4));
+                            }
+                        }
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+                URL url2 = Launcher.class.getResource("/Sounds");
+                if (url2 != null) {
+                    try {
+                        final File subfolders = new File(url2.toURI());
+                        for (File subfolder : Objects.requireNonNull(subfolders.listFiles())) {
+                            for (File sound : Objects.requireNonNull(subfolder.listFiles())) {
+                                String soundname = sound.getName();
+                                sounds.put(soundname, new Media(sound.toURI().toString()));
                             }
                         }
                     } catch (URISyntaxException e) {

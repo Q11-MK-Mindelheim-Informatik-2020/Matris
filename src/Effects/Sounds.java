@@ -31,6 +31,9 @@ public class Sounds {
             mediaPlayer.setVolume(Var.volume*volume/100);
             mediaPlayer.play();
         });
+        if (!repeat) {
+            mediaPlayer.setOnPaused(mediaPlayer::dispose);
+        }
         return mediaPlayer;
     }
 }
