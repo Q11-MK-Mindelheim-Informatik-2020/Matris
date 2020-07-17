@@ -99,11 +99,11 @@ public class DrawHelper {
     public static double drawSlider(String labelText, Color labelColor, double actionVariable, int cornerX, int sliderCornerX, int cornerY, int height, int width, double step, double start, double end, String fontName, Graphics g) {
         BufferedImage image = null;
         double returnValue = actionVariable;
-        int buttonX = (int)(sliderCornerX+Math.floor(actionVariable/step)*step*(width/(end-start)));
+        int buttonX = (int)(sliderCornerX+Math.floor((actionVariable-start)/step)*step*(width/(end-start)));
         int buttonY = cornerY;
         drawText(labelText, cornerX, cornerY+(int)(height*0.8), labelColor, height, fontName, g);
         g.drawImage(Var.images.get("slider_bar"), sliderCornerX + height/2, cornerY + height/3, width, height/3, null);
-        if ((isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, height, height) && Var.mouseClicked) || (Var.tempSliderTouched && Var.mouseDragged && isInsideBox(Var.mouseX, Var.mouseY, sliderCornerX, cornerY-height/2, width+height, height*2))) { //Check if mouse is pressed while hovering over the
+        if ((isInsideBox(Var.mouseX, Var.mouseY, buttonX, buttonY, height, height) && Var.mouseClicked) || (Var.tempSliderTouched && Var.mouseDragged && isInsideBox(Var.mouseX, Var.mouseY, sliderCornerX-height, cornerY-height/2, width+height*2, height*2))) { //Check if mouse is pressed while hovering over the
             Var.tempSliderTouched = true;
             double boxMousePercent = (( Var.mouseX-sliderCornerX )/(double)width);
             if(boxMousePercent<=0) {
@@ -113,8 +113,8 @@ public class DrawHelper {
                 buttonX = sliderCornerX+width;
                 returnValue = end;
             } else {
-                double value = (Math.floor((((Var.mouseX - sliderCornerX) / (double) width) * (end - start)) / step) * step);
-                buttonX = (int) (sliderCornerX + value * (width / (end - start)));
+                double value = (Math.floor((((Var.mouseX - sliderCornerX) / (double) width) * (end - start)) / step) * step)+start;
+                buttonX = (int) (sliderCornerX + (value-start) * (width / (end - start)));
                 returnValue = value;
             }
             image = Var.images.get("slider_button_click");
@@ -136,7 +136,7 @@ public class DrawHelper {
         BufferedImage img = null;
         for (int x = 0; x < tilesX; x++) {
             for (int y = 0; y < tilesY; y++) {
-                int bgBoardTilePositionX = Var.width / 2 - (tilesX / 2) * tileSize + x * tileSize;
+                int bgBoardTilePositionX = (int)(Var.width / 2.0 - (tilesX / 2.0) * tileSize + x * tileSize);
                 int bgBoardTilePositionY = Var.height - padding - (y+1)*tileSize;
                 if(x==0){
                     if(y==0) {
@@ -168,7 +168,21 @@ public class DrawHelper {
 
     //function to draw background image
     public static void drawBackgroundImage(String imageName, Graphics g) {
-        g.drawImage(Var.images.get(imageName),0, 0, Var.width, Var.height, null);
+        BufferedImage image = Var.images.get(imageName);
+        double ratio = (double)image.getWidth()/image.getHeight();
+        int x, y, width, height;
+        if((double)Var.width/image.getWidth() <= (double)Var.height/image.getHeight()) {
+            height = Var.height;
+            y = 0;
+            width = (int)(height*ratio);
+            x = Var.width/2-width/2;
+        } else {
+            width = Var.width;
+            x = 0;
+            height = (int)(width/ratio);
+            y = Var.height/2-height/2;
+        }
+        g.drawImage(image,x, y, width, height, null);
     }
 
     //function to draw item boxes
@@ -191,7 +205,7 @@ public class DrawHelper {
     public static void drawTetrominos(int tilePadding, int bgTilesX, int bgTilesY, int padding, Graphics g) {
         int bgTileSize = ((Var.height - 2*Var.padding) / Var.tilesY);
         int cornerX = Var.width/2 - (bgTileSize*bgTilesX)/2 + tilePadding;
-        int tileSize = (bgTileSize*bgTilesX-tilePadding)/bgTilesX;
+        int tileSize = (int)((bgTileSize*bgTilesX-tilePadding)/(double)bgTilesX);
 //        System.out.println(((tilePadding*bgTilesX)-1)/bgTilesX);
         int cornerY = Var.height-padding;
         for (int x = 0; x < bgTilesX; x++) {

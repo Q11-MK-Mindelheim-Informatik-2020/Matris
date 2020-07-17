@@ -36,7 +36,7 @@ public class Var {
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
-    public static int itemBoxSize = 90, itemBoxCount = 5;
+    public static int itemBoxSize = 7, itemBoxCount = 5;
     public static double itemScalingFactor = 0.8;
     public static int padding = 5;
     public static Box[][] spielfeld; //Spielfeld mit Box-Objekten
