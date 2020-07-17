@@ -46,6 +46,7 @@ public class DrawHelper {
             image = Var.images.get(imagePathClicked);
         } else if(isInsideBox(Var.mouseX, Var.mouseY, x, y, width, height)) { //Check if mouse is hovering over the button
             if(tempButtonPress) {
+                Effects.Sounds.playSound("another_menu_switch.mp3", 1.0, false);
                 //executed if mousebutton is released again
                 switch (action){ //determines the action of the buttonclick specified by the function parameters
                     case "gamestate": //changes the gamestate

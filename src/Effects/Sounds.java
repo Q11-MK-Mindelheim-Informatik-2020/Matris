@@ -9,12 +9,10 @@ import javafx.util.Duration;
 public class Sounds {
 
     public static MediaPlayer playSound(String filename, double volume, boolean repeat) {
-        return playSound(filename, volume, repeat, 0, MediaPlayer.INDEFINITE);
+        return playSound(filename, volume, repeat, 0, MediaPlayer.INDEFINITE, 0);
     }
 
-    public static MediaPlayer playSound(String filename, double volume, boolean repeat, double start, double end) {
-        //Media media = new Media(Sounds.class.getResource("/Sounds/" + filename));
-        //System.out.println(Var.sounds.get(filename));
+    public static MediaPlayer playSound(String filename, double volume, boolean repeat, double start, double end, double secondstart) {
         MediaPlayer mediaPlayer = new MediaPlayer(Var.sounds.get(filename));
 
         mediaPlayer.setOnReady(() -> {
@@ -29,11 +27,14 @@ public class Sounds {
                 mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             }
             mediaPlayer.setVolume(Var.volume*volume/100);
+            /*mediaPlayer.setOnRepeat(() -> {
+                System.out.println(filename + " wird wiederholt");
+                System.out.println(mediaPlayer.getStartTime());
+            });*/
             mediaPlayer.play();
+            mediaPlayer.setStartTime(Duration.seconds(secondstart));
         });
-        if (!repeat) {
-            mediaPlayer.setOnPaused(mediaPlayer::dispose);
-        }
+        if (!repeat) mediaPlayer.setOnEndOfMedia(mediaPlayer::dispose);
         return mediaPlayer;
     }
 }

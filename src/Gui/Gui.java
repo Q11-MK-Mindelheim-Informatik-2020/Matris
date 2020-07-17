@@ -15,9 +15,10 @@ import java.util.*;
 public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     //initialisiere JFrame
 
-    private static HashMap<String, Timer> timers = new HashMap<>();
     private static HashSet<Integer> locked = new HashSet<>();
-    private static MediaPlayer leftSound, rightSound;
+    private static HashMap<String, javax.swing.Timer> timers = new HashMap<>();
+    //private static MediaPlayer leftSound, rightSound;
+    private static MediaPlayer leftrightSound;
 
     public Gui() {
         Label lb;
@@ -33,32 +34,22 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
 
         addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
             if (Move.left()) {
-                if (leftSound == null) {
-                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.07);
+                if (leftrightSound == null) {
+                    leftrightSound = Effects.Sounds.playSound("NES - move3.mp3", 0.7, false);
                 }
-                else if (leftSound.getCycleCount() == 1) {
-                    leftSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);
+                else if (leftrightSound.getStatus().equals(MediaPlayer.Status.DISPOSED)) {
+                    leftrightSound = Effects.Sounds.playSound("NES - move3.mp3", 0.7, false);
                 }
-            }
-            else if (leftSound != null && leftSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
-                leftSound.setCycleCount(0);
-                leftSound.stop();
-                leftSound.dispose();
             }
         });
         addKeyBinding(lb, KeyEvent.VK_RIGHT, "right", false, new String[]{"singleplayer"}, e -> {
             if (Move.right()) {
-                if (rightSound == null) {
-                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, false, 0.07, 0.07);
+                if (leftrightSound == null) {
+                    leftrightSound = Effects.Sounds.playSound("NES - move3.mp3", 0.7, false);
                 }
-                else if (rightSound.getCycleCount() == 1) {
-                    rightSound = Effects.Sounds.playSound("NES - move.mp3", 1.0, true, 0.07, 0.08);
+                else if (leftrightSound.getStatus().equals(MediaPlayer.Status.DISPOSED)) {
+                    leftrightSound = Effects.Sounds.playSound("NES - move3.mp3", 0.7, false);
                 }
-            }
-            else if (rightSound != null && rightSound.getStatus().equals(MediaPlayer.Status.PLAYING)) {
-                rightSound.setCycleCount(0);
-                rightSound.stop();
-                rightSound.dispose();
             }
         });
         addKeyBinding(lb, KeyEvent.VK_DOWN, "down", false, new String[]{"singleplayer"}, e -> {
@@ -69,7 +60,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         addKeyBinding(lb, KeyEvent.VK_UP, "downdown", true, new String[]{"singleplayer"}, e -> Game.Move.downdown());
         addKeyBinding(lb, KeyEvent.VK_ENTER, "rotate", true, new String[]{"singleplayer"}, e -> {
             if (Move.rotate()) {
-                Effects.Sounds.playSound("NES - rotate.mp3", 1.0, false);
+                Effects.Sounds.playSound("Info_tetris_menu_switch.mp3", 1.0, false);
             }
         });
         addKeyBinding(lb, KeyEvent.VK_CONTROL, KeyEvent.CTRL_MASK, "store", true, new String[]{"singleplayer"}, e -> Game.Move.store());
@@ -142,14 +133,16 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
                 if (Arrays.asList(gamestates).contains(Var.gameState)) {
                     if (!once && timers.get(id).isRunning()) {
                         timers.get(id).stop();
-                        if (id.equals("right") && rightSound != null) {
+                        /*if (id.equals("right") && rightSound != null) {
+                            rightSound.stop();
                             rightSound.dispose();
                             rightSound = null;
                         }
                         if (id.equals("left") && leftSound != null) {
+                            leftSound.stop();
                             leftSound.dispose();
                             leftSound = null;
-                        }
+                        }*/
                     }
                     else if (once) {
                         locked.remove(keyCode);
@@ -161,9 +154,12 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     public static void resetKeybindingsTimers() {
-        for (Map.Entry<String, Timer> timerEntry : timers.entrySet()) {
-            timerEntry.getValue().stop();
+        for (Timer atimer : timers.values()) {
+            atimer.stop();
+            atimer.setDelay((int) (1000*Var.ARR/60.0));
+            atimer.setInitialDelay((int) (1000*Var.DAS/60.0));
         }
+
     }
 
 

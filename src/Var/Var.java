@@ -119,7 +119,7 @@ public class Var {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Fehler beim laden der Bilder!");
+            System.out.println("Fehler beim laden der Bilder/Sounds!");
         }
 
         updateTetrominos();

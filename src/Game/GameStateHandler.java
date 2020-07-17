@@ -2,6 +2,7 @@ package Game;
 
 import Var.Var;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class GameStateHandler {
 
@@ -22,28 +23,33 @@ public class GameStateHandler {
                     }
                 }
                 Var.updateTetrominos();
+                Mechanics.resetValues();
+                Gui.Gui.resetKeybindingsTimers();
+                if (backgroundmusic != null) backgroundmusic.seek(Duration.seconds(0));
                 Game.Tetromino.spawnRandom();
-                break;
-            case "homescreen":
-//                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
             case "singleplayer":
                 Mechanics.resetTimer();
                 Var.timer.schedule(new Mechanics(), Mechanics.getTime());
                 if (backgroundmusic == null) {
                     //backgroundmusic = Effects.Sounds.playSound("Worstholdmusicever.mp3", 1.0, true, 10.6, 49);
-                    backgroundmusic = Effects.Sounds.playSound("Gameboy - Tetris Theme.mp3", 0.6, true);
+                    //backgroundmusic = Effects.Sounds.playSound("Gameboy - Tetris Theme.mp3", 0.5, true);
+                    backgroundmusic = Effects.Sounds.playSound("tetris by philip.mp3", 0.5, true, 0, MediaPlayer.INDEFINITE, 72);
                 }
                 else {
+                    backgroundmusic.setVolume(Var.volume*0.5/100);
                     backgroundmusic.play();
                 }
 //                Effects.Sounds.playSound("tetris.wav", 0.5);
                 break;
             case "pause":
+                Mechanics.resetTimer();
+                Effects.Sounds.playSound("another_menu_switch.mp3", 1.0, false);
+                break;
             case "controls":
             case "options1":
                 Mechanics.resetTimer();
-                Effects.Sounds.playSound("NES - pause.mp3", 1.0, false);
+                //Effects.Sounds.playSound("another_menu_switch.mp3", 1.0, false);
                 break;
             case "gameover":
                 Mechanics.resetTimer();
