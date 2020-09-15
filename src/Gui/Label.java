@@ -50,14 +50,14 @@ public class Label extends JLabel implements ActionListener {
             case "options1":
 
                 DrawHelper.drawBackgroundImage("Singleplayer", g);
-                DrawHelper.drawCheckbox("Ghostmodus:", Var.fontColor, Var.ghostmode, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 2, Var.width / 30, "Comic Sans MS", () -> Var.ghostmode = !Var.ghostmode, g);
-                Var.tilesY = (int) DrawHelper.drawSlider("Höhe: " + Var.tilesY, Var.fontColor, Var.tilesY, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 3, Var.width / 30, Var.width / 3, 1, 6, 30, "Comic Sans MS", g);
-                Var.tilesX = (int) DrawHelper.drawSlider("Breite:  " + Var.tilesX, Var.fontColor, Var.tilesX, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 5, Var.width / 30, Var.width / 3, 1, 4, 15, "Comic Sans MS", g);
+                DrawHelper.drawCheckbox("Ghostmodus:", Var.fontColor, Var.ghostmode, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 2, Var.width / 30, "Consolas", () -> Var.ghostmode = !Var.ghostmode, g);
+                Var.tilesY = (int) DrawHelper.drawSlider("Höhe: " + Var.tilesY, Var.fontColor, Var.tilesY, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 3, Var.width / 30, Var.width / 3, 1, 6, 30, "Consolas", g);
+                Var.tilesX = (int) DrawHelper.drawSlider("Breite:  " + Var.tilesX, Var.fontColor, Var.tilesX, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 5, Var.width / 30, Var.width / 3, 1, 4, 15, "Consolas", g);
                 Var.m = Var.tilesY + 4;
                 Var.n = Var.tilesX;
-                Var.ARR = round(DrawHelper.drawSlider("ARR: " + Var.ARR, Var.fontColor, Var.ARR, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 7, Var.width / 30, Var.width / 3, 0.1, 0, 6, "Comic Sans MS", g), 1);
-                Var.DAS = round(DrawHelper.drawSlider("DAS:  " + Var.DAS, Var.fontColor, Var.DAS, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 9, Var.width / 30, Var.width / 3, 0.1, 0, 20, "Comic Sans MS", g), 1);
-                Var.volume = (int) DrawHelper.drawSlider("Lautstärke:  " + Var.volume, Var.fontColor, Var.volume, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 11, Var.width / 30, Var.width / 3, 1, 0, 100, "Comic Sans MS", g);
+                Var.ARR = round(DrawHelper.drawSlider("ARR: " + Var.ARR, Var.fontColor, Var.ARR, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 7, Var.width / 30, Var.width / 3, 0.1, 0, 6, "Consolas", g), 1);
+                Var.DAS = round(DrawHelper.drawSlider("DAS:  " + Var.DAS, Var.fontColor, Var.DAS, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 9, Var.width / 30, Var.width / 3, 0.1, 0, 20, "Consolas", g), 1);
+                Var.volume = (int) DrawHelper.drawSlider("Lautstärke:  " + Var.volume, Var.fontColor, Var.volume, Var.width / 7, (int) ((Var.width / 5) * 2.5), (Var.height / 15) * 11, Var.width / 30, Var.width / 3, 1, 0, 100, "Consolas", g);
                 DrawHelper.enterButton.drawButton("gamestate", "startup", 300, Var.width / 2, (Var.height / 15) * 13, g);
 
                 break;
@@ -78,9 +78,9 @@ public class Label extends JLabel implements ActionListener {
 
                 // Draw Score-elements
                 g.drawImage(Var.images.get("bg_text"), 0, Var.height - (60 + Var.width / 30 * 3), Var.width / 4, 60 + Var.width / 30 * 3, null);
-                DrawHelper.drawText("Punktestand: " + Var.score, 20, Var.height - (40 + Var.width / 30 * 2), Var.fontColor, Var.width / 40, "Comic Sans MS", g);
-                DrawHelper.drawText("Linien: " + Var.linecounter, 20, Var.height - (40 + Var.width / 30 * 2) + Var.width / 30, Var.fontColor, Var.width / 40, "Comic Sans MS", g);
-                DrawHelper.drawText("Level " + Var.level, 20, Var.height - (40 + Var.width / 30 * 2) + Var.width / 30 * 2, Var.fontColor, Var.width / 40, "Comic Sans MS", g);
+                DrawHelper.drawText("Punktestand: " + Var.score, 20, Var.height - (40 + Var.width / 30 * 2), Var.fontColor, Var.width / 45, "Consolas", g);
+                DrawHelper.drawText("Linien: " + Var.linecounter, 20, Var.height - (40 + Var.width / 30 * 2) + Var.width / 30, Var.fontColor, Var.width / 45, "Consolas", g);
+                DrawHelper.drawText("Level " + Var.level, 20, Var.height - (40 + Var.width / 30 * 2) + Var.width / 30 * 2, Var.fontColor, Var.width / 45, "Consolas", g);
 
                 // Draw Board
                 DrawHelper.drawBackgroundTiles(Var.tilesX, Var.tilesY, Var.padding, g);
@@ -93,8 +93,8 @@ public class Label extends JLabel implements ActionListener {
                 // Draw Pausescreen
                 if (Var.gameState.equals("pause")) {
                     DrawHelper.drawBackgroundImage("Pausescreen", g);
-                    DrawHelper.restartButton.drawButton("restart", null, 400, Var.width / 2, (Var.height / 20) * 10, g);
-                    DrawHelper.resButton.drawButton("gamestate", "singleplayer", 400, Var.width / 2, (Var.height / 20) * 14, g);
+                    DrawHelper.resButton.drawButton("gamestate", "singleplayer", 400, Var.width / 2, (Var.height / 20) * 10, g);
+                    DrawHelper.restartButton.drawButton("restart", null, 400, Var.width / 2, (Var.height / 20) * 14, g);
                     DrawHelper.menuButton.drawButton("gamestate", "startup", 400, Var.width / 2, (Var.height / 20) * 18, g);
                 }
                 // Draw Gameover-screen
