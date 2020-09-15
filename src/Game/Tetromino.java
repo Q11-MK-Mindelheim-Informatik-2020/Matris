@@ -19,7 +19,7 @@ public class Tetromino {
         Move.showPreview();
     }
 
-    public static void spawnRandom() {
+    static void spawnRandom() {
         //Wenn die ArrayListe leer ist, werden die die 7 Tetrominos in zufälliger Reihenfolge hinzugefügt
         if (Var.bag.isEmpty()) {
             Var.bag = new LinkedList<>(Arrays.asList('I','O','T','S','Z','J','L'));
@@ -37,8 +37,8 @@ public class Tetromino {
     }
 
     /**
-     * Es wird überprüft, ob der Stein setzbar ist
-     * Falls nicht ist das Spiel "Gameover"
+     * Falls Blöcke an den angegebenen Positionen setzbar sind, werden sie gesetzt
+     * ansonsten "Gameover"
      */
     private static void setBlocks(int[][] blocks, char c, boolean bool) {
         for (int i = 0; i < 4; i++) {

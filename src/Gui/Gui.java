@@ -21,7 +21,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
     private static MediaPlayer leftrightSound;
 
     public Gui() {
-        Label lb;
+        //Label lb;
         setResizable(true);
         setTitle("justTetris");
         setIconImage(Var.images.get("Icon"));
@@ -30,7 +30,7 @@ public class Gui extends JFrame implements MouseListener, MouseMotionListener {
         setLocationRelativeTo(null);
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        setUndecorated(true);
-        lb = new Label();
+        Label lb = new Label();
 
         addKeyBinding(lb, KeyEvent.VK_LEFT, "left", false, new String[]{"singleplayer"}, e -> {
             if (Move.left()) {

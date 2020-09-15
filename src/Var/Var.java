@@ -26,35 +26,45 @@ public class Var {
     public static int n = 10;
     public static boolean ghostmode = false;
     public static int volume = 50;
+    public static double ARR = 2, DAS = 12;
 
-    public static boolean test = false;
-    public static int currentid = 1; //ID des aktiven/fallenden Blöcken
-    public static String gameState = "startup";
-    public static boolean mouseClicked = false;
-    public static int mouseX = 0, mouseY = 0;
-    public static boolean tempCheckboxClick = false, tempSliderTouched = false, mouseDragged;
+    //Gui-Variabeln
+    public static int width = 1280, height = 720;
     public static int tilesX = n; //Anzahl der Felder in x Richtung
     public static int tilesY = m-4; //Anzahl der (sichtbaren) Felder in y Richtung
     public static int tilePadding = 3; //Felderabstand
     public static int itemBoxSize = 7, itemBoxCount = 5;
     public static double itemScalingFactor = 0.8;
     public static int padding = 5;
-    public static Box[][] spielfeld; //Spielfeld mit Box-Objekten
-    public static int width = 1280, height = 720;
+    public static boolean mouseClicked = false;
+    public static int mouseX = 0, mouseY = 0;
+    public static boolean tempCheckboxClick = false, tempSliderTouched = false, mouseDragged;
     public static Color backgroundColor = new Color(24, 21, 33), fontColor = new Color(22,96,170);
-    public static boolean stopSignal = false;
-    public static int linecounter = 0;
-    public static List<Character> bag = new ArrayList<>();
+    public static String gameState = "startup";
+    public static int currentBackgroundID = (int) (Math.random()*20);
+
+
+    //Spiel-Variabeln
+    public static int score, level, linecounter;
+    public static Box[][] spielfeld; //Spielfeld mit Box-Objekten
+    public static int currentid = 1; //ID des aktiven/fallenden Blöcken
+
     public static char storedTetromino = 'x';
     public static char currentTetrominoshape;
     public static boolean stored = false;
-    public static Timer timer = new Timer();
-    public static HashMap<String, BufferedImage> images = new HashMap<>();
+
     public static HashMap<Character, int[][]> Tetrominos = new HashMap<>();
+
+    public static List<Character> bag = new ArrayList<>();
+
+    public static Timer timer = new Timer();
+
+
+    //Medien-Objekte
+    public static HashMap<String, BufferedImage> images = new HashMap<>();
     public static HashMap<String, Media> sounds = new HashMap<>();
-    public static int score, level;
-    public static double ARR = 2, DAS = 12;
-    public static int currentBackgroundID = (int) (Math.random()*20);
+
+
 
     public Var() {
         //Open Images

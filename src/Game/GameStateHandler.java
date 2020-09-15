@@ -10,7 +10,6 @@ public class GameStateHandler {
 
     public static void changeGameState(String state) {
         Var.gameState = state;
-        Var.stopSignal = true;
         if (backgroundmusic != null && backgroundmusic.getStatus().equals(MediaPlayer.Status.PLAYING)) {
             backgroundmusic.pause();
         }

@@ -14,15 +14,20 @@ import java.net.URISyntaxException;
 public class Main {
 
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+
+        //Lade Screen
         JWindow window = new JWindow();
         window.getContentPane().add(
                 new JLabel("", new ImageIcon(Var.class.getResource("/loading.gif")), SwingConstants.CENTER));
-        window.setBounds(0, 0, 300, 200);
+        window.setBounds(0, 0, 350, 286);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+        //---
+
+
         try {
-            new JFXPanel();
-            new Var();
+            new JFXPanel(); //Initialisierung von JFX, damit die Soundlibary funktioniert
+            new Var(); //Initiierung der Variabeln
             Game.GameStateHandler.changeGameState("startup");
             EventQueue.invokeLater(() -> {
                 try {
@@ -43,7 +48,7 @@ public class Main {
                     .getCodeSource().getLocation()
                     .toURI().getPath()
                     .replace('/', File.separatorChar).substring(1) ;
-            if ( args.length == 0 && Runtime.getRuntime().maxMemory()<512*1024*1024) {
+            if (args.length == 0 && Runtime.getRuntime().maxMemory()<512*1024*1024) {
                 Process p = Runtime.getRuntime().exec("java -Xmx512m -jar \"" +currentPath+"\" restart");
                 //output redirect
                 new StreamGobbler(p.getInputStream()).start() ;

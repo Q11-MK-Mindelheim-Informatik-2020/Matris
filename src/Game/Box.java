@@ -30,7 +30,7 @@ public class Box {
         this.id = Var.currentid;
         this.rotationpoint = rotationpoint;
     }
-    public Box(int id) {
+    Box(int id) {
         this.tileTexture = null;
         this.id = id;
         this.rotationpoint = false;
