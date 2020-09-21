@@ -43,4 +43,4 @@ java -Xmx512m -jar Matris.jar
 
 Dabei muss der Befehl im selben Verzeichnis ausgeführt werden, in der sich auch die "Matris.jar" Datei befindet.
 
-Falls jedoch immer noch Probleme auftreten, dann wende dich an den Entwickler mit den entsprechenden Fehler.
+Falls jedoch immer noch Probleme auftreten, dann wende dich an den Entwickler mit dem entsprechenden Fehler.
