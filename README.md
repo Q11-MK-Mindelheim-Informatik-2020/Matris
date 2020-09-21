@@ -33,7 +33,7 @@ andere Kursteilnehmer - Spieltests und Fehlersuche
 # Bei Startschwierigkeiten
 
 Falls sich das Spiel nicht starten lässt, sollte zunächst überprüft werden ob die aktuelle Version von Java installiert ist und ordnungsmäßig funktioniert.
-Zudem sollte überprüft werden, dass man die neueste Version von Matris hat (momentan 1.2).
+Zudem sollte überprüft werden, ob man die neueste Version von Matris hat (momentan 1.2).
 
 Falls es immer noch Probleme gibt, kann versucht werden das Spiel manuell per Konsole auszuführen und es mehr RAM zuzuweisen. Mit folgenden Befehl ist dies möglich:
 
